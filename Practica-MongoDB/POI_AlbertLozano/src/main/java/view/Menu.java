@@ -14,102 +14,56 @@ import java.util.ArrayList;
  */
 public class Menu {
     //Attributes
-    private Input input;
-    private POIControllerMongoDB controllerMongoDB = new POIControllerMongoDB();
-    private POIControllerMySQL controllerMySQL = new POIControllerMySQL();
-    private boolean firstBack = false;
-    private boolean secondBack = false;
-    private boolean thirdBack = false;
-    private boolean fourthBack = false;
-    private boolean run = true;
-    private String database;
+    private final POIControllerMongoDB controllerMongoDB = new POIControllerMongoDB();
+    private final POIControllerMySQL controllerMySQL = new POIControllerMySQL();
     
     //Getters and Setters
-    public boolean isFirstBack() {
-        return firstBack;
+    public POIControllerMongoDB getControllerMongoDB() {
+        return controllerMongoDB;
     }
 
-    public void setFirstBack(boolean firstBack) {
-        this.firstBack = firstBack;
+    public POIControllerMySQL getControllerMySQL() {
+        return controllerMySQL;
     }
 
-    public boolean isSecondBack() {
-        return secondBack;
-    }
-
-    public void setSecondBack(boolean secondBack) {
-        this.secondBack = secondBack;
-    }
-
-    public boolean isThirdBack() {
-        return thirdBack;
-    }
-
-    public void setThirdBack(boolean thirdBack) {
-        this.thirdBack = thirdBack;
-    }
-
-    public boolean isFourthBack() {
-        return fourthBack;
-    }
-
-    public void setFourthBack(boolean fourthBack) {
-        this.fourthBack = fourthBack;
-    }
-
-    public boolean isRun() {
-        return run;
-    }
-
-    public void setRun(boolean run) {
-        this.run = run;
-    }
-
-    public String getDatabase() {
-        return database;
-    }
-
-    public void setDatabase(String database) {
-        this.database = database;
-    }
-    
     //Constructor
     public Menu() {
         
     }
     
     //Methods
-    public void startMenu() {
-        System.out.println();
-        System.out.println(welcomeMessage());
-        System.out.println();
-        
-    }
+
+    //MESSAGES
+    //------------------------------------------------------------------------------------------------------------------
     
-    private String welcomeMessage() {
+    public String welcomeMessage() {
         ArrayList<String> welcomeMessages = new ArrayList<>();
-        welcomeMessages.add("Hola! Benvingut/da a l'aplicació de Java CRUD! Ara amb dos BBDD diferents!");
+        welcomeMessages.add("Hola! Benvingut/da a Java CRUD! Ara amb dos BBDD diferents!");
         welcomeMessages.add("Benvingut/da al CRUD de MySQL i MongoDB!");
         welcomeMessages.add("Hola caracola! Disfruta gestionant MySQL i MongoDB alhora!");
-        
         int randomNumber = (int) (Math.random() * 3);
 
-        return welcomeMessages.get(randomNumber) + "\nDesenvolupada per Albert Lozano.";
+        return welcomeMessages.get(randomNumber) + "\nAplicació desenvolupada per Albert Lozano.";
     }
     
     private String currentDatabase(String database, int currentItems) {
         return "Estas emprant la BBDD de " + database + ".\nActualment hi ha " + currentItems + " items." ;
     }
-    
-    private int currentItemsMongoDB() {
-        return controllerMongoDB.getCurrentItems();
+
+    public String goodbyeMessage() {
+        ArrayList<String> goodbyeMessages = new ArrayList<>();
+        goodbyeMessages.add("Adéu! Moltes gràcies per emprar la meua aplicació!");
+        goodbyeMessages.add("Un plaer! Espere que ens tornem a veure!");
+        goodbyeMessages.add("Fins després! Espere que t'haja agradat la meua aplicació!");
+        int randomNumber = (int) (Math.random() * 3);
+
+        return goodbyeMessages.get(randomNumber) + "\nAplicació desenvolupada per Albert Lozano.";
     }
+
+    //MAIN MENU
+    //------------------------------------------------------------------------------------------------------------------
     
-    private int currentItemsMySQL() {
-        return controllerMySQL.getCurrentItems();
-    }
-    
-    private void mainMenu() {
+    public void mainMenu() {
         System.out.println();
         System.out.println("Amb quina BBDD desitjes treballar?");
         System.out.println();
@@ -118,21 +72,79 @@ public class Menu {
         System.out.println("3. Eixir.");
         System.out.println();
     }
+
+    //DATABASE MENU
+    //------------------------------------------------------------------------------------------------------------------
     
-    private void mongoDBMenu() {
+    public void databaseMenu(int currentItems, boolean database) {
+        String databaseName;
+        if (database) {
+            databaseName = "MySQL";
+        } else {
+            databaseName = "MongoDB";
+        }
+        System.out.println("-----------------------------------------------------------------------------------------");
         System.out.println();
-        System.out.println(currentDatabase("MongoDB", currentItemsMongoDB()));
+        System.out.println(currentDatabase(databaseName, currentItems));
         System.out.println();
-        System.out.println("1. Inserir un element.");
-        System.out.println("2. Inserir varios elements.");
-        System.out.println("3. Llistar.");
-        System.out.println("4. Esborrar.");
-        System.out.println("5. Sincronitzar.");
-        System.out.println("6. Tornar.");
+        if (controllerMongoDB.getCurrentItems() != controllerMySQL.getCurrentItems()) {
+            System.out.println("0. Sincronitzar.");
+        }
+        if (database) {
+            System.out.println("1. Inserir varios elements.");
+            System.out.println("2. Llistar.");
+            System.out.println("3. Esborrar.");
+            System.out.println("4. Importar.");
+            System.out.println("5. Tornar.");
+            System.out.println();
+        } else {
+            System.out.println("1. Inserir un element.");
+            System.out.println("2. Inserir varios elements.");
+            System.out.println("3. Llistar.");
+            System.out.println("4. Esborrar.");
+            System.out.println("5. Importar.");
+            System.out.println("6. Tornar.");
+            System.out.println();
+        }
+    }
+
+    //SUBMENUS
+    //------------------------------------------------------------------------------------------------------------------
+
+    public void readSubmenu(Boolean database, int currentItems) {
+        String databaseName;
+        if (database) {
+            databaseName = "MySQL";
+        } else {
+            databaseName = "MongoDB";
+        }
+        System.out.println("-----------------------------------------------------------------------------------------");
+        System.out.println();
+        System.out.println(currentDatabase(databaseName, currentItems));
+        System.out.println();
+        System.out.println("1. Llistar per ID.");
+        System.out.println("2. Llistar per varios ID's.");
+        System.out.println("3. Llistar tots, ordenats per ID.");
+        System.out.println("4. Tornar.");
         System.out.println();
     }
-    
-    private void mySQLMenu() {
-        
+
+    public void deleteSubmenu(Boolean database, int currentItems) {
+        String databaseName;
+        if (database) {
+            databaseName = "MySQL";
+        } else {
+            databaseName = "MongoDB";
+        }
+        System.out.println("-----------------------------------------------------------------------------------------");
+        System.out.println();
+        System.out.println(currentDatabase(databaseName, currentItems));
+        System.out.println();
+        System.out.println("1. Esborrar tots.");
+        System.out.println("2. Esborrar per ID.");
+        System.out.println("3. Esborrar per varios ID's.");
+        System.out.println("4. Tornar.");
+        System.out.println();
     }
+
 }

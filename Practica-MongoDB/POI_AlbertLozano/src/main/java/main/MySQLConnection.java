@@ -9,5 +9,15 @@ package main;
  * @author alblozbla
  */
 public class MySQLConnection {
+    //Attributes
+
+    //Getters and Setters
+
+    //Constructor
+
+    //Methods
+    public boolean getConnection() {
+        return true;
+    }
     
 }

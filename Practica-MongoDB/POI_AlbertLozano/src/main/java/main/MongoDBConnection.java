@@ -9,5 +9,14 @@ package main;
  * @author alblozbla
  */
 public class MongoDBConnection {
-    
+    //Attributes
+
+    //Getters and Setters
+
+    //Constructor
+
+    //Methods
+    public boolean getConnection() {
+        return true;
+    }
 }
