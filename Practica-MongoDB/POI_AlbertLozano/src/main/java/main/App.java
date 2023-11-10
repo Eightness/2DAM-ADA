@@ -21,56 +21,16 @@ public class App {
     private Boolean crudSubmenu = false;  //Boolean to see if we are in a specific CRUD selection
 
     //Getters and Setters
-    public POIControllerMongoDB getControllerMongoDB() {
-        return controllerMongoDB;
-    }
-
-    public POIControllerMySQL getControllerMySQL() {
-        return controllerMySQL;
-    }
-
-    public MongoDBConnection getMongoDBConnection() {
-        return mongoDBConnection;
-    }
-
-    public MySQLConnection getMySQLConnection() {
-        return mySQLConnection;
-    }
-
-    public Menu getMenu() {
-        return menu;
-    }
-
-    public Input getInput() {
-        return input;
-    }
-
-    public Boolean getRunning() {
-        return running;
-    }
-
     public void setRunning(Boolean running) {
         this.running = running;
-    }
-
-    public Boolean getSubmenu() {
-        return submenu;
     }
 
     public void setSubmenu(Boolean submenu) {
         this.submenu = submenu;
     }
 
-    public Boolean getCrudSubmenu() {
-        return crudSubmenu;
-    }
-
     public void setCrudSubmenu(Boolean crudSubmenu) {
         this.crudSubmenu = crudSubmenu;
-    }
-
-    public Boolean getIsMySQL() {
-        return isMySQL;
     }
 
     public void setIsMySQL(Boolean isMySQL) {
@@ -90,7 +50,8 @@ public class App {
     public void run() {
         if (checkConnection()) {
             System.out.println();
-            System.out.println("[!] T'has conectat a les BBDD correctament. :)");
+            System.out.println("[!] T'has conectat a la BBDD correctament. :)");
+
 
             System.out.println();
             System.out.println(menu.welcomeMessage());
@@ -103,13 +64,13 @@ public class App {
             System.out.println(menu.goodbyeMessage());
         } else {
             System.out.println();
-            System.err.println("[!] No s'ha pogut conectar a les BBDD correctament. :(");
+            System.out.println("[!] No s'ha pogut conectar a les BBDD correctament. :(");
 
             System.out.println();
-            System.err.println("...");
+            System.out.println("...");
 
             System.out.println();
-            System.err.println("Finalitzant l'aplicació...");
+            System.out.println("Finalitzant l'aplicació...");
         }
     }
 
@@ -117,7 +78,8 @@ public class App {
     //------------------------------------------------------------------------------------------------------------------
 
     public boolean checkConnection() {
-        return mySQLConnection.getConnection() && mongoDBConnection.getConnection();
+        MySQLConnection.connectToMySQL();
+        return MySQLConnection.mySQLConnection != null;
     }
 
     //SWITCHES
@@ -155,19 +117,19 @@ public class App {
             case 0: //Synchronize
                 if (controllerMySQL.getCurrentItems() != controllerMongoDB.getCurrentItems()) {
                     if (isMySQL) {
-
+                        controllerMySQL.synchronizeDatabase();
                     } else {
-
+                        controllerMongoDB.synchronizeDatabase();
                     }
                 } else {
-                    break;
+                    System.out.println("No s'ha introduït una opció vàlida.");
                 }
                 break;
             case 1: //MongoDB: Create one       / MySQL: Create various
                 if (isMySQL) {
-
+                    controllerMySQL.insertVariousItems(input.createPOIs());
                 } else {
-
+                    controllerMongoDB.insertItem(input.createPOI());
                 }
                 break;
             case 2: //MongoDB: Create various   / MySQL: Read
@@ -177,7 +139,7 @@ public class App {
                         readSwitch();
                     }
                 } else {
-
+                    controllerMongoDB.insertVariousItems(input.createPOIs());
                 }
                 break;
             case 3: //MongoDB: Read             / MySQL: Delete
@@ -197,7 +159,7 @@ public class App {
                 break;
             case 4: //MongoDB: Delete           / MySQL: Import
                 if (isMySQL) {
-
+                    controllerMySQL.importItems();
                 } else {
                     setCrudSubmenu(true);
                     while(crudSubmenu) {
@@ -210,12 +172,12 @@ public class App {
                 if (isMySQL) {
                     setSubmenu(false);
                 } else {
-
+                    controllerMongoDB.importItems();
                 }
                 break;
             case 6: //MongoDB: Go back          / MySQL: Nothing
                 if (isMySQL) {
-
+                    System.out.println("No s'ha introduït una opció vàlida.");
                 } else {
                     setSubmenu(false);
                 }
@@ -225,27 +187,30 @@ public class App {
         }
     }
 
+    //SUBMENU SWITCHES
+    //------------------------------------------------------------------------------------------------------------------
+
     public void readSwitch() {
         switch(input.getInt("Elegeix una opció: ")) {
             case 1: //Read by ID
                 if (isMySQL) {
-
+                    controllerMySQL.getItemById(input.getInt("Introdueix un Id: "));
                 } else {
-
+                    controllerMongoDB.getItemById(input.getInt("Introdueix un Id: "));
                 }
                 break;
             case 2: //Read by various IDs
                 if (isMySQL) {
-
+                    controllerMySQL.getItemsById(input.getInts("Introdueix un Id: "));
                 } else {
-
+                    controllerMongoDB.getItemsById(input.getInts("Introdueix un Id: "));
                 }
                 break;
             case 3: //Read all, ordered by ID
                 if (isMySQL) {
-
+                    controllerMySQL.getAllItemsOrderedById();
                 } else {
-
+                    controllerMongoDB.getAllItemsOrderedById();
                 }
                 break;
             case 4: //Go back
@@ -260,23 +225,23 @@ public class App {
         switch(input.getInt("Elegeix una opció: ")) {
             case 1: //Delete all
                 if (isMySQL) {
-
+                    controllerMySQL.deleteAllItems();
                 } else {
-
+                    controllerMongoDB.deleteAllItems();
                 }
                 break;
             case 2: //Delete by ID
                 if (isMySQL) {
-
+                    controllerMySQL.deleteItemById(input.getInt("Introdueix un Id: "));
                 } else {
-
+                    controllerMongoDB.deleteItemById(input.getInt("Introdueix un Id: "));
                 }
                 break;
             case 3: //Delete by various IDs
                 if (isMySQL) {
-
+                    controllerMySQL.deleteItemsById(input.getInts("Introdueix un Id: "));
                 } else {
-
+                    controllerMongoDB.deleteItemsById(input.getInts("Introdueix un Id: "));
                 }
                 break;
             case 4: //Go back
@@ -286,7 +251,4 @@ public class App {
                 System.out.println("No s'ha introduït una opció vàlida.");
         }
     }
-
-    //------------------------------------------------------------------------------------------------------------------
-
 }

@@ -18,13 +18,6 @@ public class Menu {
     private final POIControllerMySQL controllerMySQL = new POIControllerMySQL();
     
     //Getters and Setters
-    public POIControllerMongoDB getControllerMongoDB() {
-        return controllerMongoDB;
-    }
-
-    public POIControllerMySQL getControllerMySQL() {
-        return controllerMySQL;
-    }
 
     //Constructor
     public Menu() {
@@ -65,6 +58,8 @@ public class Menu {
     
     public void mainMenu() {
         System.out.println();
+        System.out.println("-----------------------------------------------------------------------------------------");
+        System.out.println();
         System.out.println("Amb quina BBDD desitjes treballar?");
         System.out.println();
         System.out.println("1. MongoDB.");
@@ -83,6 +78,7 @@ public class Menu {
         } else {
             databaseName = "MongoDB";
         }
+        System.out.println();
         System.out.println("-----------------------------------------------------------------------------------------");
         System.out.println();
         System.out.println(currentDatabase(databaseName, currentItems));
@@ -118,6 +114,7 @@ public class Menu {
         } else {
             databaseName = "MongoDB";
         }
+        System.out.println();
         System.out.println("-----------------------------------------------------------------------------------------");
         System.out.println();
         System.out.println(currentDatabase(databaseName, currentItems));
@@ -136,6 +133,7 @@ public class Menu {
         } else {
             databaseName = "MongoDB";
         }
+        System.out.println();
         System.out.println("-----------------------------------------------------------------------------------------");
         System.out.println();
         System.out.println(currentDatabase(databaseName, currentItems));

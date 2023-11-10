@@ -10,4 +10,11 @@
         <maven.compiler.target>11</maven.compiler.target>
         <exec.mainClass>javacrud.poi_albertlozano.POI_AlbertLozano</exec.mainClass>
     </properties>
+    <dependencies>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.19 </version>
+        </dependency>
+    </dependencies>
 </project>

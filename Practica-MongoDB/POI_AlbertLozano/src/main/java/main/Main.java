@@ -5,8 +5,6 @@
 
 package main;
 
-import view.Menu;
-
 /**
  *
  * @author alblozbla
@@ -14,8 +12,6 @@ import view.Menu;
 public class Main {
     //Attributes
     private final static App app = new App();
-    private final static MongoDBConnection mongoDBConnection = new MongoDBConnection();
-    private final static MySQLConnection mySQLConnection = new MySQLConnection();
 
     //Main method
     public static void main(String[] args) {

@@ -1,6 +1,6 @@
 package model;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class POI {
     //Attributes
@@ -70,10 +70,6 @@ public class POI {
     }
 
     //Constructor
-    public POI() {
-
-    }
-
     public POI(int poid, double latitude, double longitude, String country, String city, String description, Date updated) {
         setPoid(poid);
         setLatitude(latitude);
