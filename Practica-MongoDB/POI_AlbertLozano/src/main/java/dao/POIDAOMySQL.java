@@ -66,8 +66,8 @@ public class POIDAOMySQL {
         System.out.println("S'ha/n insertat " + numInserted + " punt/s d'interés.");
     }
 
-    public void DAOgetAllItems() {
-
+    public ArrayList<POI> DAOgetAllItems() {
+        return null;
     }
 
     public void DAOgetAllItemsOrderedById() {
@@ -79,7 +79,7 @@ public class POIDAOMySQL {
     }
 
     public void DAOgetItemsById(ArrayList<Integer> poids) {
-
+        
     }
 
     public void DAOdeleteAllItems() {

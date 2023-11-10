@@ -30,7 +30,7 @@ public class POIControllerMySQL {
     }
 
     public void getAllItems() {
-
+        poiView.showPOIs(poidaoMySQL.DAOgetAllItems());
     }
 
     public void getAllItemsOrderedById() {
@@ -42,7 +42,7 @@ public class POIControllerMySQL {
     }
 
     public void getItemsById(ArrayList<Integer> poids) {
-
+          
     }
 
     public void deleteAllItems() {

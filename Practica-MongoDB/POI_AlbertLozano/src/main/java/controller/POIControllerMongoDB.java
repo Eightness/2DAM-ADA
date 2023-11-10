@@ -25,7 +25,7 @@ public class POIControllerMongoDB {
     
     //Methods
     public int getCurrentItems() {
-        return 0;
+        return 20;
     }
 
     public void insertItem(POI createdPOI) {

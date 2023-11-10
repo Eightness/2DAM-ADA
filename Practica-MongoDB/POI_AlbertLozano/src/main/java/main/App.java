@@ -46,7 +46,7 @@ public class App {
 
     //MAIN METHOD
     //------------------------------------------------------------------------------------------------------------------
-
+    
     public void run() {
         if (checkConnection()) {
             System.out.println();
@@ -136,6 +136,7 @@ public class App {
                 if (isMySQL) {
                     setCrudSubmenu(true);
                     while(crudSubmenu) {
+                        menu.readSubmenu(isMySQL, controllerMySQL.getCurrentItems());
                         readSwitch();
                     }
                 } else {
