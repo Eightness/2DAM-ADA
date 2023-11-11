@@ -12,7 +12,8 @@ import java.util.Scanner;
 
 /**
  *
- * @author alblozbla
+ * @author Albert Lozano Blasco
+ * @version 1.0
  */
 public class Input {
     //Attributes
@@ -21,18 +22,20 @@ public class Input {
     //Methods
 
     //GET INPUT
-    //------------------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     public int getInt(String message) {
         int num = 0;
         boolean validated = false;
         while(!validated) {
+            System.out.println();
             System.out.print(message);
             try {
                 num = scanner.nextInt();
                 validated = true;
             } catch (Exception e) {
-                System.out.println("No s'ha introduït un nombre enter.");
+                System.out.println();
+                System.out.println("[!] No s'ha introduït un nombre enter.");
                 scanner.nextLine();
             }
         }
@@ -43,7 +46,8 @@ public class Input {
     public ArrayList<Integer> getInts(String message) {
         ArrayList<Integer> nums = new ArrayList<>();
         boolean keepAsking = true;
-
+        
+        System.out.println();
         System.out.println("Quan vulgues parar, introdueix un -1.");
         while(keepAsking) {
             int num = getInt(message);
@@ -61,12 +65,14 @@ public class Input {
         double num = 0.0;
         boolean validated = false;
         while(!validated) {
+            System.out.println();
             System.out.print(message);
             try {
                 num = scanner.nextDouble();
                 validated = true;
             } catch (Exception e) {
-                System.out.println("No s'ha introduït un nombre.");
+                System.out.println();
+                System.out.println("[!] No s'ha introduït un nombre real.");
                 scanner.nextLine();
             }
         }
@@ -75,12 +81,13 @@ public class Input {
     }
 
     public String getString(String message) {
+        System.out.println();
         System.out.print(message);
         return scanner.nextLine();
     }
 
     //METHODS THAT REQUIRE USER'S INPUT
-    //------------------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     public ModelPOI createPOI() {
         System.out.println();

@@ -7,21 +7,17 @@ package controller;
 import dao.DAOMongoDB;
 import model.ModelPOI;
 import view.ViewPOI;
-
 import java.util.ArrayList;
 
 /**
  *
- * @author alblozbla
+ * @author Albert Lozano Blasco
+ * @version 1.0
  */
 public class ControllerMongoDB {
     //Attributes
-    private final DAOMongoDB poidaoMongoDB = new DAOMongoDB();
-    private final ViewPOI poiView = new ViewPOI();
-    
-    //Getters and Setters
-    
-    //Constructor
+    private final DAOMongoDB daoMongoDB = new DAOMongoDB();
+    private final ViewPOI viewPOI = new ViewPOI();
     
     //Methods
     public int getCurrentItems() {

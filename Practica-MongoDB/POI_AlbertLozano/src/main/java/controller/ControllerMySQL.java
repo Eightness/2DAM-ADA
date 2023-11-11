@@ -4,61 +4,64 @@
  */
 package controller;
 
-import dao.DAOMongoDB;
 import dao.DAOMySQL;
 import model.ModelPOI;
 import view.ViewPOI;
-
 import java.util.ArrayList;
 
 /**
  *
- * @author alblozbla
+ * @author Albert Lozano Blasco
+ * @version 1.0
  */
 public class ControllerMySQL {
     //Attributes
-    private final DAOMySQL poiDAOMySQL = new DAOMySQL();
-    private final ViewPOI poiView = new ViewPOI();
+    private final DAOMySQL daoMySQL = new DAOMySQL();
+    private final ViewPOI viewPOI = new ViewPOI();
     
     //Methods
     public int getCurrentItems() {
-        return poiDAOMySQL.DAOgetCurrentItems();
+        return daoMySQL.DAOgetCurrentItems();
+    }
+    
+    public void insertItem(ModelPOI createdPOI) {
+        daoMySQL.DAOinsertItem(createdPOI);
     }
 
     public void insertVariousItems(ArrayList<ModelPOI> createdPOIs) {
-        poiDAOMySQL.DAOinsertVariousItems(createdPOIs);
+        daoMySQL.DAOinsertVariousItems(createdPOIs);
     }
 
     public void getAllItems() {
-        poiView.showPOIs(poiDAOMySQL.DAOgetAllItems());
+        viewPOI.showPOIs(daoMySQL.DAOgetAllItems(false));
     }
 
     public void getAllItemsOrderedById() {
-
+        viewPOI.showPOIs(daoMySQL.DAOgetAllItems(true));
     }
 
     public void getItemById(int poid) {
-
+        viewPOI.showPOI(daoMySQL.DAOgetItemById(poid));
     }
 
     public void getItemsById(ArrayList<Integer> poids) {
-          
+        viewPOI.showPOIs(daoMySQL.DAOgetItemsById(poids));
     }
 
     public void deleteAllItems() {
-        poiDAOMySQL.DAOdeleteAllItems();
+        daoMySQL.DAOdeleteAllItems();
     }
 
     public void deleteItemById(int poid) {
-
+        daoMySQL.DAOdeleteItemById(poid);
     }
 
     public void deleteItemsById(ArrayList<Integer> poids) {
-
+        daoMySQL.DAOdeleteItemsById(poids);
     }
 
     public void synchronizeDatabase() {
-
+        daoMySQL.DAOsynchronizeDatabase();
     }
 
     public void importItems() {

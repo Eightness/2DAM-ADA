@@ -6,17 +6,18 @@ package main;
 
 /**
  *
- * @author alblozbla
+ * @author Albert Lozano Blasco
+ * @version 1.0
  */
 public class ConnectionMongoDB {
     //Attributes
 
-    //Getters and Setters
-
-    //Constructor
-
     //Methods
-    public boolean getConnection() {
-        return true;
+    public void connectToMongoDB() {
+        
+    }
+    
+    public void disconnectFromMongoDB() {
+        
     }
 }

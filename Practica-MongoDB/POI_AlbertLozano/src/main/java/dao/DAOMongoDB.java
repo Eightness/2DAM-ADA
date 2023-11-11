@@ -4,9 +4,15 @@
  */
 package dao;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+import static main.ConnectionMySQL.mySQLConnection;
+import model.ModelPOI;
+
 /**
  *
- * @author alblozbla
+ * @author Albert Lozano Blasco
+ * @version 1.0
  */
 public class DAOMongoDB {
     //Attributes
@@ -14,4 +20,69 @@ public class DAOMongoDB {
     //Getters and Setters
     
     //Methods
+    
+    //CHECKS
+    //--------------------------------------------------------------------------
+    private boolean DAOexistsPOI(int poid) {
+        return false;
+    }
+
+    public int DAOgetCurrentItems() {
+        return 0;
+    }
+    
+    //CRUD
+    //--------------------------------------------------------------------------
+    
+    //CREATE
+    //--------------------------------------------------------------------------
+    
+    public boolean DAOinsertItem(ModelPOI createdPOI) {
+        return true;
+    }
+
+    public void DAOinsertVariousItems(ArrayList<ModelPOI> createdPOIs) {
+        
+    }
+    
+    //READ
+    //--------------------------------------------------------------------------
+
+    public ArrayList<ModelPOI> DAOgetAllItems(Boolean ordered) {
+        ArrayList<ModelPOI> allItems = new ArrayList<>();
+
+        return allItems;
+    }
+
+    public ModelPOI DAOgetItemById(int poid) {
+        return null;
+    }
+
+    public ArrayList<ModelPOI> DAOgetItemsById(ArrayList<Integer> poids) {
+        ArrayList<ModelPOI> itemsById = new ArrayList<>();
+
+        return itemsById;
+    }
+    
+    //DELETE
+    //--------------------------------------------------------------------------
+
+    public void DAOdeleteAllItems() {
+        
+    }
+
+    public boolean DAOdeleteItemById(int poid) {
+        return true;
+    }
+
+    public void DAOdeleteItemsById(ArrayList<Integer> poids) {
+        
+    }
+    
+    //SYNCHRONIZE
+    //--------------------------------------------------------------------------
+
+    public void DAOsynchronizeDatabase() {
+        
+    }
 }

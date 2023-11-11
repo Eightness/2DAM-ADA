@@ -4,21 +4,14 @@
  */
 package view;
 
-import controller.ControllerMongoDB;
-import controller.ControllerMySQL;
 import java.util.ArrayList;
 
 /**
  *
- * @author alblozbla
+ * @author Albert Lozano Blasco
+ * @version 1.0
  */
 public class Menu {
-    //Attributes
-    private final ControllerMongoDB controllerMongoDB = new ControllerMongoDB();
-    private final ControllerMySQL controllerMySQL = new ControllerMySQL();
-    
-    //Getters and Setters
-
     //Constructor
     public Menu() {
         
@@ -65,13 +58,12 @@ public class Menu {
         System.out.println("1. MongoDB.");
         System.out.println("2. MySQL.");
         System.out.println("3. Eixir.");
-        System.out.println();
     }
 
     //DATABASE MENU
     //------------------------------------------------------------------------------------------------------------------
     
-    public void databaseMenu(int currentItems, boolean database) {
+    public void databaseMenu(int currentItems, boolean database, boolean canSynchronize) {
         String databaseName;
         if (database) {
             databaseName = "MySQL";
@@ -83,25 +75,15 @@ public class Menu {
         System.out.println();
         System.out.println(currentDatabase(databaseName, currentItems));
         System.out.println();
-        if (controllerMongoDB.getCurrentItems() != controllerMySQL.getCurrentItems()) {
+        if (canSynchronize) {
             System.out.println("0. Sincronitzar.");
         }
-        if (database) {
-            System.out.println("1. Inserir varios elements.");
-            System.out.println("2. Llistar.");
-            System.out.println("3. Esborrar.");
-            System.out.println("4. Importar.");
-            System.out.println("5. Tornar.");
-            System.out.println();
-        } else {
-            System.out.println("1. Inserir un element.");
-            System.out.println("2. Inserir varios elements.");
-            System.out.println("3. Llistar.");
-            System.out.println("4. Esborrar.");
-            System.out.println("5. Importar.");
-            System.out.println("6. Tornar.");
-            System.out.println();
-        }
+        System.out.println("1. Inserir un element.");
+        System.out.println("2. Inserir varios elements.");
+        System.out.println("3. Llistar.");
+        System.out.println("4. Esborrar.");
+        System.out.println("5. Importar.");
+        System.out.println("6. Tornar.");
     }
 
     //SUBMENUS
@@ -123,7 +105,6 @@ public class Menu {
         System.out.println("2. Llistar per varios ID's.");
         System.out.println("3. Llistar tots, ordenats per ID.");
         System.out.println("4. Tornar.");
-        System.out.println();
     }
 
     public void deleteSubmenu(Boolean database, int currentItems) {
@@ -142,7 +123,6 @@ public class Menu {
         System.out.println("2. Esborrar per ID.");
         System.out.println("3. Esborrar per varios ID's.");
         System.out.println("4. Tornar.");
-        System.out.println();
     }
 
 }

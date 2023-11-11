@@ -5,20 +5,23 @@ import controller.ControllerMySQL;
 import view.Input;
 import view.Menu;
 
+/**
+ *
+ * @author Albert Lozano Blasco
+ * @version 1.0
+ */
 public class App {
-    //Instances
+    //Own instances
     private final ControllerMongoDB controllerMongoDB = new ControllerMongoDB();
     private final ControllerMySQL controllerMySQL = new ControllerMySQL();
-    private final ConnectionMongoDB mongoDBConnection = new ConnectionMongoDB();
-    private final ConnectionMySQL mySQLConnection = new ConnectionMySQL();
     private final Menu menu = new Menu();
     private final Input input = new Input();
 
     //Attributes
-    private Boolean isMySQL;   //Boolean to see in which database are we in (true = MySQL, false = MongoDB)
-    private Boolean running = true;    //Boolean to check if the app is still running
-    private Boolean submenu = false; //Boolean to see if we are in a database submenu
-    private Boolean crudSubmenu = false;  //Boolean to see if we are in a specific CRUD selection
+    private boolean isMySQL;   //Boolean to see in which database are we in (true = MySQL, false = MongoDB)
+    private boolean running = true;    //Boolean to check if the app is still running
+    private boolean submenu = false; //Boolean to see if we are in a database submenu
+    private boolean crudSubmenu = false;  //Boolean to see if we are in a specific CRUD selection
 
     //Getters and Setters
     public void setRunning(Boolean running) {
@@ -52,7 +55,6 @@ public class App {
             System.out.println();
             System.out.println("[!] T'has conectat a la BBDD correctament. :)");
 
-
             System.out.println();
             System.out.println(menu.welcomeMessage());
 
@@ -74,12 +76,20 @@ public class App {
         }
     }
 
-    //CHECK CONNECTION
+    //UTILITY
     //------------------------------------------------------------------------------------------------------------------
 
     public boolean checkConnection() {
         ConnectionMySQL.connectToMySQL();
         return ConnectionMySQL.mySQLConnection != null;
+    }
+    
+    public boolean isSynchronizable() {
+        return controllerMySQL.getCurrentItems() != controllerMongoDB.getCurrentItems();
+    }
+    
+    public void pressToContinue() {
+        input.getString("Presiona 'Intro' per a finalitzar i tornar al menú anterior...");
     }
 
     //SWITCHES
@@ -92,7 +102,7 @@ public class App {
                 setSubmenu(true);
                 setIsMySQL(false); //Setting database to MongoDB
                 while (submenu) {
-                    menu.databaseMenu(controllerMongoDB.getCurrentItems(), isMySQL);
+                    menu.databaseMenu(controllerMongoDB.getCurrentItems(), isMySQL, isSynchronizable());
                     databaseSwitch();
                 }
                 break;
@@ -100,7 +110,7 @@ public class App {
                 setSubmenu(true);
                 setIsMySQL(true);  //Setting database to MySQL
                 while (submenu) {
-                    menu.databaseMenu(controllerMySQL.getCurrentItems(), isMySQL);
+                    menu.databaseMenu(controllerMySQL.getCurrentItems(), isMySQL, isSynchronizable());
                     databaseSwitch();
                 }
                 break;
@@ -115,40 +125,43 @@ public class App {
     public void databaseSwitch() {
         switch(input.getInt("Elegeix una opció: ")) {
             case 0: //Synchronize
-                if (controllerMySQL.getCurrentItems() != controllerMongoDB.getCurrentItems()) {
+                if (isSynchronizable()) {
                     if (isMySQL) {
                         controllerMySQL.synchronizeDatabase();
+                        pressToContinue();
                     } else {
                         controllerMongoDB.synchronizeDatabase();
+                        pressToContinue();
                     }
                 } else {
+                    System.out.println();
                     System.out.println("No s'ha introduït una opció vàlida.");
                 }
                 break;
-            case 1: //MongoDB: Create one       / MySQL: Create various
+            case 1: //Insert
                 if (isMySQL) {
-                    controllerMySQL.insertVariousItems(input.createPOIs());
+                    controllerMySQL.insertItem(input.createPOI());
+                    pressToContinue();
                 } else {
                     controllerMongoDB.insertItem(input.createPOI());
+                    pressToContinue();
                 }
                 break;
-            case 2: //MongoDB: Create various   / MySQL: Read
+            case 2: //Insert various
+                if (isMySQL) {
+                    controllerMySQL.insertVariousItems(input.createPOIs());
+                    pressToContinue();
+                } else {
+                    controllerMongoDB.insertVariousItems(input.createPOIs());
+                    pressToContinue();
+                }
+                break;
+            case 3: //Read
                 if (isMySQL) {
                     setCrudSubmenu(true);
                     while(crudSubmenu) {
                         menu.readSubmenu(isMySQL, controllerMySQL.getCurrentItems());
                         readSwitch();
-                    }
-                } else {
-                    controllerMongoDB.insertVariousItems(input.createPOIs());
-                }
-                break;
-            case 3: //MongoDB: Read             / MySQL: Delete
-                if (isMySQL) {
-                    setCrudSubmenu(true);
-                    while(crudSubmenu) {
-                        menu.deleteSubmenu(isMySQL, controllerMySQL.getCurrentItems());
-                        deleteSwitch();
                     }
                 } else {
                     setCrudSubmenu(true);
@@ -158,9 +171,13 @@ public class App {
                     }
                 }
                 break;
-            case 4: //MongoDB: Delete           / MySQL: Import
+            case 4: //Delete
                 if (isMySQL) {
-                    controllerMySQL.importItems();
+                    setCrudSubmenu(true);
+                    while(crudSubmenu) {
+                        menu.deleteSubmenu(isMySQL, controllerMySQL.getCurrentItems());
+                        deleteSwitch();
+                    }
                 } else {
                     setCrudSubmenu(true);
                     while(crudSubmenu) {
@@ -169,21 +186,20 @@ public class App {
                     }
                 }
                 break;
-            case 5: //MongoDB: Import           / MySQL: Go back
+            case 5: //Import
                 if (isMySQL) {
-                    setSubmenu(false);
+                    controllerMySQL.importItems();
+                    pressToContinue();
                 } else {
                     controllerMongoDB.importItems();
+                    pressToContinue();
                 }
                 break;
-            case 6: //MongoDB: Go back          / MySQL: Nothing
-                if (isMySQL) {
-                    System.out.println("No s'ha introduït una opció vàlida.");
-                } else {
-                    setSubmenu(false);
-                }
+            case 6: //Go back
+                setSubmenu(false);
                 break;
             default:
+                System.out.println();
                 System.out.println("No s'ha introduït una opció vàlida.");
         }
     }
@@ -196,28 +212,38 @@ public class App {
             case 1: //Read by ID
                 if (isMySQL) {
                     controllerMySQL.getItemById(input.getInt("Introdueix un Id: "));
+                    pressToContinue();
                 } else {
                     controllerMongoDB.getItemById(input.getInt("Introdueix un Id: "));
+                    pressToContinue();
                 }
+                setCrudSubmenu(false);
                 break;
             case 2: //Read by various IDs
                 if (isMySQL) {
                     controllerMySQL.getItemsById(input.getInts("Introdueix un Id: "));
+                    pressToContinue();
                 } else {
                     controllerMongoDB.getItemsById(input.getInts("Introdueix un Id: "));
+                    pressToContinue();
                 }
+                setCrudSubmenu(false);
                 break;
             case 3: //Read all, ordered by ID
                 if (isMySQL) {
                     controllerMySQL.getAllItemsOrderedById();
+                    pressToContinue();
                 } else {
                     controllerMongoDB.getAllItemsOrderedById();
+                    pressToContinue();
                 }
+                setCrudSubmenu(false);
                 break;
             case 4: //Go back
                 setCrudSubmenu(false);
                 break;
             default:
+                System.out.println();
                 System.out.println("No s'ha introduït una opció vàlida.");
         }
     }
@@ -227,28 +253,38 @@ public class App {
             case 1: //Delete all
                 if (isMySQL) {
                     controllerMySQL.deleteAllItems();
+                    pressToContinue();
                 } else {
                     controllerMongoDB.deleteAllItems();
+                    pressToContinue();
                 }
+                setCrudSubmenu(false);
                 break;
             case 2: //Delete by ID
                 if (isMySQL) {
                     controllerMySQL.deleteItemById(input.getInt("Introdueix un Id: "));
+                    pressToContinue();
                 } else {
                     controllerMongoDB.deleteItemById(input.getInt("Introdueix un Id: "));
+                    pressToContinue();
                 }
+                setCrudSubmenu(false);
                 break;
             case 3: //Delete by various IDs
                 if (isMySQL) {
                     controllerMySQL.deleteItemsById(input.getInts("Introdueix un Id: "));
+                    pressToContinue();
                 } else {
                     controllerMongoDB.deleteItemsById(input.getInts("Introdueix un Id: "));
+                    pressToContinue();
                 }
+                setCrudSubmenu(false);
                 break;
             case 4: //Go back
                 setCrudSubmenu(false);
                 break;
             default:
+                System.out.println();
                 System.out.println("No s'ha introduït una opció vàlida.");
         }
     }

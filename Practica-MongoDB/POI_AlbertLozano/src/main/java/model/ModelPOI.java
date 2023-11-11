@@ -2,6 +2,11 @@ package model;
 
 import java.sql.Date;
 
+/**
+ *
+ * @author Albert Lozano Blasco
+ * @version 1.0
+ */
 public class ModelPOI {
     //Attributes
     private int poid;

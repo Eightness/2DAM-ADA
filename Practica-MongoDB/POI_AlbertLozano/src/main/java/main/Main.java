@@ -7,7 +7,8 @@ package main;
 
 /**
  *
- * @author alblozbla
+ * @author Albert Lozano Blasco
+ * @version 1.0
  */
 public class Main {
     //Attributes

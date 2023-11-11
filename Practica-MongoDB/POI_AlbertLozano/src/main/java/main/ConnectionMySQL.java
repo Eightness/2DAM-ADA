@@ -10,7 +10,8 @@ import java.sql.SQLException;
 
 /**
  *
- * @author alblozbla
+ * @author Albert Lozano Blasco
+ * @version 1.0
  */
 public class ConnectionMySQL {
     //Attributes
