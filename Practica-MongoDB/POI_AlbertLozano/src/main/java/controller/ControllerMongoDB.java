@@ -4,9 +4,9 @@
  */
 package controller;
 
-import dao.POIDAOMongoDB;
-import model.POI;
-import view.POIView;
+import dao.DAOMongoDB;
+import model.ModelPOI;
+import view.ViewPOI;
 
 import java.util.ArrayList;
 
@@ -14,10 +14,10 @@ import java.util.ArrayList;
  *
  * @author alblozbla
  */
-public class POIControllerMongoDB {
+public class ControllerMongoDB {
     //Attributes
-    private final POIDAOMongoDB poidaoMongoDB = new POIDAOMongoDB();
-    private final POIView poiView = new POIView();
+    private final DAOMongoDB poidaoMongoDB = new DAOMongoDB();
+    private final ViewPOI poiView = new ViewPOI();
     
     //Getters and Setters
     
@@ -25,14 +25,14 @@ public class POIControllerMongoDB {
     
     //Methods
     public int getCurrentItems() {
-        return 20;
+        return 0;
     }
 
-    public void insertItem(POI createdPOI) {
+    public void insertItem(ModelPOI createdPOI) {
 
     }
 
-    public void insertVariousItems(ArrayList<POI> createdPOIs) {
+    public void insertVariousItems(ArrayList<ModelPOI> createdPOIs) {
 
     }
 

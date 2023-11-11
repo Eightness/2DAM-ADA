@@ -8,7 +8,7 @@ package main;
  *
  * @author alblozbla
  */
-public class MongoDBConnection {
+public class ConnectionMongoDB {
     //Attributes
 
     //Getters and Setters

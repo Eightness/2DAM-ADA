@@ -4,8 +4,8 @@
  */
 package view;
 
-import controller.POIControllerMongoDB;
-import controller.POIControllerMySQL;
+import controller.ControllerMongoDB;
+import controller.ControllerMySQL;
 import java.util.ArrayList;
 
 /**
@@ -14,8 +14,8 @@ import java.util.ArrayList;
  */
 public class Menu {
     //Attributes
-    private final POIControllerMongoDB controllerMongoDB = new POIControllerMongoDB();
-    private final POIControllerMySQL controllerMySQL = new POIControllerMySQL();
+    private final ControllerMongoDB controllerMongoDB = new ControllerMongoDB();
+    private final ControllerMySQL controllerMySQL = new ControllerMySQL();
     
     //Getters and Setters
 

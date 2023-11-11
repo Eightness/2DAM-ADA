@@ -12,7 +12,7 @@ import java.sql.SQLException;
  *
  * @author alblozbla
  */
-public class MySQLConnection {
+public class ConnectionMySQL {
     //Attributes
     public static String driver = "com.mysql.cj.jdbc.Driver";
     public static String database = "poidb";
@@ -20,7 +20,7 @@ public class MySQLConnection {
     public static String port = "3306";
     public static String url = "jdbc:mysql://" + hostname + ":" + port + "/" + database + "?useSSL=false&useTimezone=true&serverTimezone=UTC&allowPublicKeyRetrieval=true";
     public static String username = "root";
-    public static String password = "serpis";
+    public static String password = "root";
     public static Connection mySQLConnection = null;
 
     //Methods

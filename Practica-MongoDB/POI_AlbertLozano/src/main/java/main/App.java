@@ -1,16 +1,16 @@
 package main;
 
-import controller.POIControllerMongoDB;
-import controller.POIControllerMySQL;
+import controller.ControllerMongoDB;
+import controller.ControllerMySQL;
 import view.Input;
 import view.Menu;
 
 public class App {
     //Instances
-    private final POIControllerMongoDB controllerMongoDB = new POIControllerMongoDB();
-    private final POIControllerMySQL controllerMySQL = new POIControllerMySQL();
-    private final MongoDBConnection mongoDBConnection = new MongoDBConnection();
-    private final MySQLConnection mySQLConnection = new MySQLConnection();
+    private final ControllerMongoDB controllerMongoDB = new ControllerMongoDB();
+    private final ControllerMySQL controllerMySQL = new ControllerMySQL();
+    private final ConnectionMongoDB mongoDBConnection = new ConnectionMongoDB();
+    private final ConnectionMySQL mySQLConnection = new ConnectionMySQL();
     private final Menu menu = new Menu();
     private final Input input = new Input();
 
@@ -78,8 +78,8 @@ public class App {
     //------------------------------------------------------------------------------------------------------------------
 
     public boolean checkConnection() {
-        MySQLConnection.connectToMySQL();
-        return MySQLConnection.mySQLConnection != null;
+        ConnectionMySQL.connectToMySQL();
+        return ConnectionMySQL.mySQLConnection != null;
     }
 
     //SWITCHES

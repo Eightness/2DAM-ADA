@@ -8,7 +8,7 @@ package dao;
  *
  * @author alblozbla
  */
-public class POIDAOMongoDB {
+public class DAOMongoDB {
     //Attributes
     
     //Getters and Setters

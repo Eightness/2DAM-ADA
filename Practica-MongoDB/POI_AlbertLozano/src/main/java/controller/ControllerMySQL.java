@@ -4,10 +4,10 @@
  */
 package controller;
 
-import dao.POIDAOMongoDB;
-import dao.POIDAOMySQL;
-import model.POI;
-import view.POIView;
+import dao.DAOMongoDB;
+import dao.DAOMySQL;
+import model.ModelPOI;
+import view.ViewPOI;
 
 import java.util.ArrayList;
 
@@ -15,22 +15,22 @@ import java.util.ArrayList;
  *
  * @author alblozbla
  */
-public class POIControllerMySQL {
+public class ControllerMySQL {
     //Attributes
-    private final POIDAOMySQL poidaoMySQL = new POIDAOMySQL();
-    private final POIView poiView = new POIView();
+    private final DAOMySQL poiDAOMySQL = new DAOMySQL();
+    private final ViewPOI poiView = new ViewPOI();
     
     //Methods
     public int getCurrentItems() {
-        return 0;
+        return poiDAOMySQL.DAOgetCurrentItems();
     }
 
-    public void insertVariousItems(ArrayList<POI> createdPOIs) {
-        poidaoMySQL.DAOinsertVariousItems(createdPOIs);
+    public void insertVariousItems(ArrayList<ModelPOI> createdPOIs) {
+        poiDAOMySQL.DAOinsertVariousItems(createdPOIs);
     }
 
     public void getAllItems() {
-        poiView.showPOIs(poidaoMySQL.DAOgetAllItems());
+        poiView.showPOIs(poiDAOMySQL.DAOgetAllItems());
     }
 
     public void getAllItemsOrderedById() {
@@ -46,7 +46,7 @@ public class POIControllerMySQL {
     }
 
     public void deleteAllItems() {
-
+        poiDAOMySQL.DAOdeleteAllItems();
     }
 
     public void deleteItemById(int poid) {

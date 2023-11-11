@@ -4,7 +4,7 @@
  */
 package view;
 
-import model.POI;
+import model.ModelPOI;
 
 import java.util.ArrayList;
 import java.sql.Date;
@@ -82,7 +82,7 @@ public class Input {
     //METHODS THAT REQUIRE USER'S INPUT
     //------------------------------------------------------------------------------------------------------------------
 
-    public POI createPOI() {
+    public ModelPOI createPOI() {
         System.out.println();
         System.out.println("Creant un punt d'interés: ");
         int poid = getInt("Introdueix el ID: ");
@@ -97,17 +97,17 @@ public class Input {
         java.util.Date utilDate = new java.util.Date();
         Date updated = new Date(utilDate.getTime());
 
-        return new POI(poid, latitude, longitude, country, city, description, updated);
+        return new ModelPOI(poid, latitude, longitude, country, city, description, updated);
     }
 
-    public ArrayList<POI> createPOIs() {
-        ArrayList<POI> createdPOIs = new ArrayList<>();
+    public ArrayList<ModelPOI> createPOIs() {
+        ArrayList<ModelPOI> createdPOIs = new ArrayList<>();
         boolean keepCreating = true;
 
         System.out.println();
         System.out.println("Quan vulgues parar, introdueix un 0 en el poid.");
         while(keepCreating) {
-            POI newPOI = createPOI();
+            ModelPOI newPOI = createPOI();
             if (newPOI == null) {
                 keepCreating = false;
             } else {

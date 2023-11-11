@@ -2,7 +2,7 @@ package model;
 
 import java.sql.Date;
 
-public class POI {
+public class ModelPOI {
     //Attributes
     private int poid;
     private double latitude;
@@ -70,7 +70,11 @@ public class POI {
     }
 
     //Constructor
-    public POI(int poid, double latitude, double longitude, String country, String city, String description, Date updated) {
+    public ModelPOI() {
+        
+    }
+    
+    public ModelPOI(int poid, double latitude, double longitude, String country, String city, String description, Date updated) {
         setPoid(poid);
         setLatitude(latitude);
         setLongitude(longitude);
