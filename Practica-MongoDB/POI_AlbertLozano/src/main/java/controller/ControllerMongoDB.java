@@ -5,6 +5,7 @@
 package controller;
 
 import dao.DAOMongoDB;
+import dao.DAOMySQL;
 import model.ModelPOI;
 import view.ViewPOI;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class ControllerMongoDB {
     //Attributes
     private final DAOMongoDB daoMongoDB = new DAOMongoDB();
     private final ViewPOI viewPOI = new ViewPOI();
+    private final DAOMySQL daoMySQL = new DAOMySQL();
     
     //Methods
     public int getCurrentItems() {

@@ -98,19 +98,19 @@ public class App {
     public void mainSwitch() {
         menu.mainMenu();
         switch(input.getInt("Elegeix una opció: ")) {
-            case 1: //MongoDB
+            case 1: //MySQL
                 setSubmenu(true);
-                setIsMySQL(false); //Setting database to MongoDB
+                setIsMySQL(true); //Setting database to MySQL
                 while (submenu) {
-                    menu.databaseMenu(controllerMongoDB.getCurrentItems(), isMySQL, isSynchronizable());
+                    menu.databaseMenu(controllerMySQL.getCurrentItems(), isMySQL, isSynchronizable());
                     databaseSwitch();
                 }
                 break;
-            case 2: //MySQL
+            case 2: //MongoDB
                 setSubmenu(true);
-                setIsMySQL(true);  //Setting database to MySQL
+                setIsMySQL(false);  //Setting database to MongoDB
                 while (submenu) {
-                    menu.databaseMenu(controllerMySQL.getCurrentItems(), isMySQL, isSynchronizable());
+                    menu.databaseMenu(controllerMongoDB.getCurrentItems(), isMySQL, isSynchronizable());
                     databaseSwitch();
                 }
                 break;
@@ -126,12 +126,15 @@ public class App {
         switch(input.getInt("Elegeix una opció: ")) {
             case 0: //Synchronize
                 if (isSynchronizable()) {
-                    if (isMySQL) {
-                        controllerMySQL.synchronizeDatabase();
-                        pressToContinue();
-                    } else {
-                        controllerMongoDB.synchronizeDatabase();
-                        pressToContinue();
+                    int decision = input.getInt("[!] Atenció! Vas a sincronitzar les dades amb l'altra BBDD. Es perdrà aquella informació exclusiva d'aquesta BBDD.\nContinuar? [Sí 1]/[No 0]: ", 1, 0);
+                    if (decision == 1) {    
+                        if (isMySQL) {
+                            controllerMySQL.synchronizeDatabase();
+                            pressToContinue();
+                        } else {
+                            controllerMongoDB.synchronizeDatabase();
+                            pressToContinue();
+                        }
                     }
                 } else {
                     System.out.println();
@@ -198,6 +201,13 @@ public class App {
             case 6: //Go back
                 setSubmenu(false);
                 break;
+            case 10:
+                if (isMySQL) {
+                    controllerMySQL.insertDefaultRows();
+                } else {
+                    
+                }
+                break;
             default:
                 System.out.println();
                 System.out.println("No s'ha introduït una opció vàlida.");
@@ -251,12 +261,15 @@ public class App {
     public void deleteSwitch() {
         switch(input.getInt("Elegeix una opció: ")) {
             case 1: //Delete all
-                if (isMySQL) {
-                    controllerMySQL.deleteAllItems();
-                    pressToContinue();
-                } else {
-                    controllerMongoDB.deleteAllItems();
-                    pressToContinue();
+                int decision = input.getInt("[!] Atenció! Vas a esborrar tots els items de la base de dades.\nContinuar? [Sí 1]/[No 0]: ", 1, 0);
+                if (decision == 1) {
+                    if (isMySQL) {
+                        controllerMySQL.deleteAllItems();
+                        pressToContinue();
+                    } else {
+                        controllerMongoDB.deleteAllItems();
+                        pressToContinue();
+                    }
                 }
                 setCrudSubmenu(false);
                 break;

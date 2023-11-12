@@ -4,6 +4,7 @@
  */
 package controller;
 
+import dao.DAOMongoDB;
 import dao.DAOMySQL;
 import model.ModelPOI;
 import view.ViewPOI;
@@ -18,6 +19,7 @@ public class ControllerMySQL {
     //Attributes
     private final DAOMySQL daoMySQL = new DAOMySQL();
     private final ViewPOI viewPOI = new ViewPOI();
+    private final DAOMongoDB daoMongoDB = new DAOMongoDB();
     
     //Methods
     public int getCurrentItems() {
@@ -59,12 +61,16 @@ public class ControllerMySQL {
     public void deleteItemsById(ArrayList<Integer> poids) {
         daoMySQL.DAOdeleteItemsById(poids);
     }
-
+    
     public void synchronizeDatabase() {
-        daoMySQL.DAOsynchronizeDatabase();
+        daoMySQL.DAOsynchronizeDatabase(daoMongoDB.DAOgetAllItems(true));
     }
 
     public void importItems() {
 
+    }
+    
+    public void insertDefaultRows() {
+        daoMySQL.DAOdefaultRows();
     }
 }

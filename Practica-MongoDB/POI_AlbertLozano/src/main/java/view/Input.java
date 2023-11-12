@@ -42,6 +42,30 @@ public class Input {
         scanner.nextLine();
         return num;
     }
+    
+    public int getInt(String message, int firstOption, int secondOption) {
+        int num = 0;
+        boolean validated = false;
+        while(!validated) {
+            System.out.println();
+            System.out.print(message);
+            try {
+                num = scanner.nextInt();
+                if (num == 1 || num == 0) {
+                    validated = true;
+                } else {
+                    System.out.println();
+                    System.out.println("Per favor, introdueix " + firstOption + " o " + secondOption + ".");
+                }
+            } catch (Exception e) {
+                System.out.println();
+                System.out.println("[!] No s'ha introduït un nombre enter.");
+                scanner.nextLine();
+            }
+        }
+        scanner.nextLine();
+        return num;
+    }
 
     public ArrayList<Integer> getInts(String message) {
         ArrayList<Integer> nums = new ArrayList<>();

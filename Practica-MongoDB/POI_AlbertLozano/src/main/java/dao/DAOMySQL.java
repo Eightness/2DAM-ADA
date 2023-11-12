@@ -4,6 +4,7 @@
  */
 package dao;
 
+import java.sql.Date;
 import model.ModelPOI;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -74,7 +75,7 @@ public class DAOMySQL {
     public boolean DAOinsertItem(ModelPOI createdPOI) {
         if (DAOexistsPOI(createdPOI.getPoid())) {
             System.out.println();
-            System.out.println("Ja existeix un punt d'interés amb el poid " + createdPOI.getPoid());
+            System.out.println("Ja existeix un punt d'interés amb el poid " + createdPOI.getPoid() + ".");
             return false;
         }
         try {
@@ -220,7 +221,7 @@ public class DAOMySQL {
         }
         
         try {
-            setQuery("DELETE FROM pois_a15");
+            setQuery("DELETE FROM pois_al15");
             ps = mySQLConnection.prepareStatement(query);
             ps.executeUpdate();
             System.out.println();
@@ -280,7 +281,30 @@ public class DAOMySQL {
     //SYNCHRONIZE
     //--------------------------------------------------------------------------
 
-    public void DAOsynchronizeDatabase() {
+    public void DAOsynchronizeDatabase(ArrayList<ModelPOI> newPOIs) {
+        DAOdeleteAllItems();
+        DAOinsertVariousItems(newPOIs);
+    }
+    
+    //DEFAULT
+    //--------------------------------------------------------------------------
+
+    public void DAOdefaultRows() {
+        ArrayList<ModelPOI> pois = new ArrayList<>();
+        java.util.Date utilDate = new java.util.Date();
+        Date updated = new Date(utilDate.getTime());
         
+        pois.add(new ModelPOI(1, 41.3851, 2.1734, "Spain", "Barcelona", "Sagrada Familia", updated));
+        pois.add(new ModelPOI(2, 48.8566, 2.3522, "France", "Paris", "Eiffel Tower", updated));
+        pois.add(new ModelPOI(3, 40.7128, -74.0060, "USA", "New York", "Statue of Liberty", updated));
+        pois.add(new ModelPOI(4, -34.6037, -58.3816, "Argentina", "Buenos Aires", "Obelisco", updated));
+        pois.add(new ModelPOI(5, 35.6895, 139.6917, "Japan", "Tokyo", "Tokyo Tower", updated));
+        pois.add(new ModelPOI(6, 51.5074, -0.1278, "UK", "London", "Big Ben", updated));
+        pois.add(new ModelPOI(7, 37.7749, -122.4194, "USA", "San Francisco", "Golden Gate Bridge", updated));
+        pois.add(new ModelPOI(8, -33.8688, 151.2093, "Australia", "Sydney", "Sydney Opera House", updated));
+        pois.add(new ModelPOI(9, 55.7558, 37.6176, "Russia", "Moscow", "Kremlin", updated));
+        pois.add(new ModelPOI(10, 35.6895, 139.6917, "Japan", "Tokyo", "Shibuya Crossing", updated));
+        
+        DAOinsertVariousItems(pois);
     }
 }

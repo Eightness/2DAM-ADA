@@ -55,8 +55,8 @@ public class Menu {
         System.out.println();
         System.out.println("Amb quina BBDD desitjes treballar?");
         System.out.println();
-        System.out.println("1. MongoDB.");
-        System.out.println("2. MySQL.");
+        System.out.println("1. MySQL.");
+        System.out.println("2. MongoDB.");
         System.out.println("3. Eixir.");
     }
 
