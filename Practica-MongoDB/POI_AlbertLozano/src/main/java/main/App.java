@@ -18,10 +18,10 @@ public class App {
     private final Input input = new Input();
 
     //Attributes
-    private boolean isMySQL;   //Boolean to see in which database are we in (true = MySQL, false = MongoDB)
-    private boolean running = true;    //Boolean to check if the app is still running
-    private boolean submenu = false; //Boolean to see if we are in a database submenu
-    private boolean crudSubmenu = false;  //Boolean to see if we are in a specific CRUD selection
+    private boolean isMySQL;                //Boolean to see in which database are we in (true = MySQL, false = MongoDB)
+    private boolean running = true;         //Boolean to check if the app is still running
+    private boolean submenu = false;        //Boolean to see if we are in a database submenu
+    private boolean crudSubmenu = false;    //Boolean to see if we are in a specific CRUD selection
 
     //Getters and Setters
     public void setRunning(Boolean running) {
@@ -51,14 +51,12 @@ public class App {
     //------------------------------------------------------------------------------------------------------------------
     
     public void run() {
-        
         //Disabling MongoDB log messages
         ConnectionMongoDB.disableMongoLogging();
         
         if (checkConnection()) {
             System.out.println();
             System.out.println("[!] T'has conectat a les BBDD correctament. :)");
-            
 
             System.out.println();
             System.out.println(menu.welcomeMessage());
@@ -92,8 +90,13 @@ public class App {
     //------------------------------------------------------------------------------------------------------------------
 
     public boolean checkConnection() {
+        //MySQL
         ConnectionMySQL.connectToMySQL();
+        //MongoDB
         ConnectionMongoDB.connectToMongoDB();
+        ConnectionMongoDB.getDatabase("db");
+        ConnectionMongoDB.getCollection("pois_al15");
+        
         return ConnectionMySQL.mySQLConnection != null && ConnectionMongoDB.mongoDBConnection != null;
     }
     

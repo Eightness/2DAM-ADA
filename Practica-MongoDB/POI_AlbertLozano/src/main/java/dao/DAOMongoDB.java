@@ -7,7 +7,6 @@ import com.mongodb.MongoWriteException;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
-import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Sorts;
 import main.ConnectionMongoDB;
 import model.ModelPOI;
@@ -22,23 +21,12 @@ import static com.mongodb.client.model.Filters.eq;
  */
 public class DAOMongoDB {
     //Attributes
-    private final MongoDatabase database = ConnectionMongoDB.getDatabase("db");
-    private final MongoCollection<Document> collection;
     private Document query;
-    {
-        assert database != null;
-        String collectionName = "pois_al15";
-        //Create collection (if not exists)
-        ConnectionMongoDB.createCollection(collectionName, database);
-        //Get collection
-        collection = database.getCollection(collectionName);
-    }
 
     //Setters and Getters
     public void setQuery(String key, Object value) {
         this.query = new Document(key, value);
     }
-
 
     //Methods
     
@@ -46,12 +34,12 @@ public class DAOMongoDB {
     //--------------------------------------------------------------------------
     private boolean DAOexistsPOI(int poid) {
         setQuery("poid", poid);
-        long count = collection.countDocuments(query);
+        long count = ConnectionMongoDB.collection.countDocuments(query);
         return count > 0;
     }
 
     public int DAOgetCurrentItems() {
-        return (int) collection.countDocuments();
+        return (int) ConnectionMongoDB.collection.countDocuments();
     }
 
     private ModelPOI documentToModelPOI(Document document) {
@@ -65,9 +53,12 @@ public class DAOMongoDB {
         String country = document.getString("country");
         String city = document.getString("city");
         String description = document.getString("description");
-        Date updated = document.getDate("updated");
+        
+        //Convert java.util.Date to java.sql.Date
+        Date utilDate = document.getDate("updated");
+        java.sql.Date updated = new java.sql.Date(utilDate.getTime());
 
-        return new ModelPOI(poid, latitude, longitude, country, city, description, (java.sql.Date) updated);
+        return new ModelPOI(poid, latitude, longitude, country, city, description, updated);
     }
     
     //CRUD
@@ -83,7 +74,7 @@ public class DAOMongoDB {
             return false;
         }
         try {
-            collection.insertOne(createdPOI.toDocument());
+            ConnectionMongoDB.collection.insertOne(createdPOI.toDocument());
 
             System.out.println();
             System.out.println("[!] S'ha inserit el nou item amb èxit.");
@@ -122,9 +113,9 @@ public class DAOMongoDB {
         }
 
         if (ordered) {
-            cursor = collection.find().sort(Sorts.ascending("poid"));
+            cursor = ConnectionMongoDB.collection.find().sort(Sorts.ascending("poid"));
         } else {
-            cursor = collection.find();
+            cursor = ConnectionMongoDB.collection.find();
         }
 
         try (MongoCursor<Document> iterator = cursor.iterator()){
@@ -150,7 +141,7 @@ public class DAOMongoDB {
         }
 
         Bson filter = new Document("poid", poid);
-        FindIterable<Document> result = collection.find(filter).limit(1);
+        FindIterable<Document> result = ConnectionMongoDB.collection.find(filter).limit(1);
 
         return documentToModelPOI(result.first());
     }
@@ -181,7 +172,7 @@ public class DAOMongoDB {
         }
 
         try {
-            collection.deleteMany(new Document());
+            ConnectionMongoDB.collection.deleteMany(new Document());
             System.out.println();
             System.out.println("[!] S'ha/n esborrat " + numDeleted + " item/s de la base de dades.");
         } catch(MongoException e) {
@@ -202,7 +193,7 @@ public class DAOMongoDB {
         }
 
         try {
-            collection.deleteOne(eq("poid", poid));
+            ConnectionMongoDB.collection.deleteOne(eq("poid", poid));
 
             System.out.println();
             System.out.println("[!] S'ha esborrat l'item amb Id " + poid + ".");

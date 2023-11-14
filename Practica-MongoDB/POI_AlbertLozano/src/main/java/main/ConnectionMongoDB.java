@@ -3,8 +3,10 @@ package main;
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.LoggerContext;
 import com.mongodb.MongoClient;
+import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.MongoIterable;
+import org.bson.Document;
 import org.slf4j.LoggerFactory;
 
 /**
@@ -16,6 +18,7 @@ public class ConnectionMongoDB {
     //Attributes
     public static MongoClient mongoDBConnection = null;
     public static MongoDatabase mongoDBDatabase = null;
+    public static MongoCollection<Document> collection = null;
     
     //Methods
     public static void connectToMongoDB() {
@@ -62,6 +65,15 @@ public class ConnectionMongoDB {
             System.out.println();
             System.out.println("[!] No s'ha pogut crear la col·lecció.");
             e.printStackTrace();
+        }
+    }
+    
+    public static void getCollection(String collectionName) {
+        try {
+            collection = mongoDBDatabase.getCollection(collectionName);
+        } catch (Exception e) {
+            System.out.println();
+            System.out.println("[!] No s'ha pogut obtindre la col·lecció.");
         }
     }
     
