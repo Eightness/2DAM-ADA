@@ -1,7 +1,6 @@
 package model;
 
 import org.bson.Document;
-
 import java.sql.Date;
 
 /**
