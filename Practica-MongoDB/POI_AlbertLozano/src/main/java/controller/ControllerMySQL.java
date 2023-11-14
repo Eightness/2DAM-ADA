@@ -63,7 +63,7 @@ public class ControllerMySQL {
     }
     
     public void synchronizeDatabase() {
-        daoMySQL.DAOsynchronizeDatabase(daoMongoDB.DAOgetAllItems(true));
+        daoMongoDB.DAOsynchronizeDatabase(daoMySQL.DAOgetAllItems(true));
     }
 
     public void importItems() {

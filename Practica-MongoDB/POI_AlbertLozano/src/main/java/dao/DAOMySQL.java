@@ -141,7 +141,7 @@ public class DAOMySQL {
                 ModelPOI poi = new ModelPOI();
                 poi.setPoid(rs.getInt("poid"));
                 poi.setLatitude(rs.getDouble("latitude"));
-                poi.setLongitude(rs.getDouble("latitude"));
+                poi.setLongitude(rs.getDouble("longitude"));
                 poi.setCountry(rs.getString("country"));
                 poi.setCity(rs.getString("city"));
                 poi.setDescription(rs.getString("description"));
@@ -281,9 +281,9 @@ public class DAOMySQL {
     //SYNCHRONIZE
     //--------------------------------------------------------------------------
 
-    public void DAOsynchronizeDatabase(ArrayList<ModelPOI> newPOIs) {
+    public void DAOsynchronizeDatabase(ArrayList<ModelPOI> mongoPOIs) {
         DAOdeleteAllItems();
-        DAOinsertVariousItems(newPOIs);
+        DAOinsertVariousItems(mongoPOIs);
     }
     
     //DEFAULT
@@ -294,16 +294,16 @@ public class DAOMySQL {
         java.util.Date utilDate = new java.util.Date();
         Date updated = new Date(utilDate.getTime());
         
-        pois.add(new ModelPOI(1, 41.3851, 2.1734, "Spain", "Barcelona", "Sagrada Familia", updated));
-        pois.add(new ModelPOI(2, 48.8566, 2.3522, "France", "Paris", "Eiffel Tower", updated));
-        pois.add(new ModelPOI(3, 40.7128, -74.0060, "USA", "New York", "Statue of Liberty", updated));
-        pois.add(new ModelPOI(4, -34.6037, -58.3816, "Argentina", "Buenos Aires", "Obelisco", updated));
-        pois.add(new ModelPOI(5, 35.6895, 139.6917, "Japan", "Tokyo", "Tokyo Tower", updated));
+        pois.add(new ModelPOI(1, 41.3851, 21.1734, "Espanya", "Madrid", "Sagrada Familia", updated));
+        pois.add(new ModelPOI(2, 48.8566, 244.352, "França", "Paris", "Eiffel Tower", updated));
+        pois.add(new ModelPOI(3, 40.7128, -74.060, "USA", "New York", "Estatua llibertat", updated));
+        pois.add(new ModelPOI(4, -34.603, -58.381, "Perú", "Lima", "Obelisco", updated));
+        pois.add(new ModelPOI(5, 35.6895, 19.6917, "Japan", "Tokyo", "Tokyo Tower", updated));
         pois.add(new ModelPOI(6, 51.5074, -0.1278, "UK", "London", "Big Ben", updated));
-        pois.add(new ModelPOI(7, 37.7749, -122.4194, "USA", "San Francisco", "Golden Gate Bridge", updated));
-        pois.add(new ModelPOI(8, -33.8688, 151.2093, "Australia", "Sydney", "Sydney Opera House", updated));
-        pois.add(new ModelPOI(9, 55.7558, 37.6176, "Russia", "Moscow", "Kremlin", updated));
-        pois.add(new ModelPOI(10, 35.6895, 139.6917, "Japan", "Tokyo", "Shibuya Crossing", updated));
+        pois.add(new ModelPOI(7, 37.7745, -22.419, "USA", "Washington", "White House", updated));
+        pois.add(new ModelPOI(8, -33.868, 15.2093, "Xina", "Hong Kong", "Temple xinés", updated));
+        pois.add(new ModelPOI(9, 55.7558, 37.6176, "India", "Delhi", "Qutub Minar", updated));
+        pois.add(new ModelPOI(10, 35.6856, 39.6917, "Japan", "Tokyo", "Tokyo Tower", updated));
         
         DAOinsertVariousItems(pois);
     }

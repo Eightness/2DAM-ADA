@@ -23,47 +23,47 @@ public class ControllerMongoDB {
     
     //Methods
     public int getCurrentItems() {
-        return 0;
+        return daoMongoDB.DAOgetCurrentItems();
     }
 
     public void insertItem(ModelPOI createdPOI) {
-
+        daoMongoDB.DAOinsertItem(createdPOI);
     }
 
     public void insertVariousItems(ArrayList<ModelPOI> createdPOIs) {
-
+        daoMongoDB.DAOinsertVariousItems(createdPOIs);
     }
 
     public void getAllItems() {
-
+        daoMongoDB.DAOgetAllItems(false);
     }
 
     public void getAllItemsOrderedById() {
-
+        daoMongoDB.DAOgetAllItems(true);
     }
 
     public void getItemById(int poid) {
-
+        daoMongoDB.DAOgetItemById(poid);
     }
 
     public void getItemsById(ArrayList<Integer> poids) {
-
+        daoMongoDB.DAOdeleteItemsById(poids);
     }
 
     public void deleteAllItems() {
-
+        daoMongoDB.DAOdeleteAllItems();
     }
 
     public void deleteItemById(int poid) {
-
+        daoMongoDB.DAOdeleteItemById(poid);
     }
 
     public void deleteItemsById(ArrayList<Integer> poids) {
-
+        daoMongoDB.DAOdeleteItemsById(poids);
     }
 
     public void synchronizeDatabase() {
-
+        daoMySQL.DAOsynchronizeDatabase(daoMongoDB.DAOgetAllItems(true));
     }
 
     public void importItems() {

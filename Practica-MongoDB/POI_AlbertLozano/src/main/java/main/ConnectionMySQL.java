@@ -21,7 +21,7 @@ public class ConnectionMySQL {
     public static String port = "3306";
     public static String url = "jdbc:mysql://" + hostname + ":" + port + "/" + database + "?useSSL=false&useTimezone=true&serverTimezone=UTC&allowPublicKeyRetrieval=true";
     public static String username = "root";
-    public static String password = "root"; //root/serpis
+    public static String password = "serpis"; //root/serpis
     public static Connection mySQLConnection = null;
 
     //Methods
@@ -29,10 +29,11 @@ public class ConnectionMySQL {
         try {
             Class.forName(driver);
             mySQLConnection = DriverManager.getConnection(url, username, password);
+            return mySQLConnection;
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
-        return mySQLConnection;
+        return null;
     }
     
     public static void disconnectFromMySQL() {

@@ -51,9 +51,14 @@ public class App {
     //------------------------------------------------------------------------------------------------------------------
     
     public void run() {
+        
+        //Disabling MongoDB log messages
+        ConnectionMongoDB.disableMongoLogging();
+        
         if (checkConnection()) {
             System.out.println();
-            System.out.println("[!] T'has conectat a la BBDD correctament. :)");
+            System.out.println("[!] T'has conectat a les BBDD correctament. :)");
+            
 
             System.out.println();
             System.out.println(menu.welcomeMessage());
@@ -65,8 +70,15 @@ public class App {
             System.out.println();
             System.out.println(menu.goodbyeMessage());
         } else {
-            System.out.println();
-            System.out.println("[!] No s'ha pogut conectar a les BBDD correctament. :(");
+            if (ConnectionMySQL.mySQLConnection == null) {
+                System.out.println();
+                System.out.println("[!] No s'ha pogut conectar a la BBDD de MySQL correctament. :(");
+            }
+            
+            if (ConnectionMongoDB.mongoDBConnection == null) {
+                System.out.println();
+                System.out.println("[!] No s'ha pogut conectar a la BBDD de MongoDB correctament. :(");
+            }
 
             System.out.println();
             System.out.println("...");
@@ -81,7 +93,8 @@ public class App {
 
     public boolean checkConnection() {
         ConnectionMySQL.connectToMySQL();
-        return ConnectionMySQL.mySQLConnection != null;
+        ConnectionMongoDB.connectToMongoDB();
+        return ConnectionMySQL.mySQLConnection != null && ConnectionMongoDB.mongoDBConnection != null;
     }
     
     public boolean isSynchronizable() {
@@ -126,7 +139,7 @@ public class App {
         switch(input.getInt("Elegeix una opció: ")) {
             case 0: //Synchronize
                 if (isSynchronizable()) {
-                    int decision = input.getInt("[!] Atenció! Vas a sincronitzar les dades amb l'altra BBDD. Es perdrà aquella informació exclusiva d'aquesta BBDD.\nContinuar? [Sí 1]/[No 0]: ", 1, 0);
+                    int decision = input.getInt("[!] Atenció! Vas a sincronitzar les dades amb l'altra BBDD. Es perdrà aquella informació exclusiva de l'altra BBDD.\nContinuar? [Sí 1]/[No 0]: ", 1, 0);
                     if (decision == 1) {    
                         if (isMySQL) {
                             controllerMySQL.synchronizeDatabase();

@@ -31,6 +31,7 @@ public class ViewPOI {
                 input.getString("Presiona 'Intro' per a continuar... ");
             }
             System.out.println();
+            System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------");
             System.out.println("Punt d'interés " + (i + 1) + ":");
             showPOI(pois.get(i));
         }

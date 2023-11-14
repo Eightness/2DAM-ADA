@@ -4,10 +4,10 @@
  */
 package dao;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
-import static main.ConnectionMySQL.mySQLConnection;
 import model.ModelPOI;
+import static main.ConnectionMongoDB.mongoDBConnection;
+import static main.ConnectionMongoDB.mongoDBDatabase;
 
 /**
  *
@@ -82,7 +82,14 @@ public class DAOMongoDB {
     //SYNCHRONIZE
     //--------------------------------------------------------------------------
 
-    public void DAOsynchronizeDatabase() {
+    public void DAOsynchronizeDatabase(ArrayList<ModelPOI> mySQLPOIs) {
+        
+    }
+    
+    //DEFAULT
+    //--------------------------------------------------------------------------
+    
+    public void DAOdefaultCollection() {
         
     }
 }

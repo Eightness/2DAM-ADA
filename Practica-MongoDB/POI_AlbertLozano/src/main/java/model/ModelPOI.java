@@ -89,15 +89,20 @@ public class ModelPOI {
         setUpdated(updated);
     }
 
-    //Methods
+    //Methods  
+    @Override
     public String toString() {
-        return "ID: " + getPoid() +
-        "\nLatitud: " + getLatitude() +
-        "\nLongitud: " + getLongitude() +
-        "\nPaïs: " + getCountry() +
-        "\nCiutat: " + getCity() +
-        "\nDescripció: " + getDescription() +
-        "\nActualitzat: " + getUpdated();
+        return String. format(
+        "Columnes\tValors" +
+        "\n" +
+        "\nId:\t\t" + getPoid() +
+        "\nLatitud:\t" + getLatitude() +
+        "\nLongitud:\t" + getLongitude() +
+        "\nPaïs:\t\t" + getCountry() +
+        "\nCiutat:\t\t" + getCity() +
+        "\nDescripció:\t" + getDescription() +
+        "\nActualitzat:\t" + getUpdated()
+        );
     }
-
+   
 }
