@@ -22,11 +22,6 @@ public class DAOMySQL {
     private String query;
     private PreparedStatement ps;
     private ResultSet rs;
-    
-    //Getters and Setters
-    public String getQuery() {
-        return query;
-    }
 
     public void setQuery(String query) {
         this.query = query;
@@ -75,7 +70,7 @@ public class DAOMySQL {
     public boolean DAOinsertItem(ModelPOI createdPOI) {
         if (DAOexistsPOI(createdPOI.getPoid())) {
             System.out.println();
-            System.out.println("Ja existeix un punt d'interés amb el poid " + createdPOI.getPoid() + ".");
+            System.out.println("[!] Ja existeix un punt d'interés amb el poid " + createdPOI.getPoid() + ".");
             return false;
         }
         try {
@@ -93,7 +88,7 @@ public class DAOMySQL {
             ps.executeUpdate();
             
             System.out.println();
-            System.out.println("S'ha inserit el nou item amb èxit.");
+            System.out.println("[!] S'ha inserit el nou item amb èxit.");
             
             return true;
         } catch (SQLException e) {
@@ -105,15 +100,15 @@ public class DAOMySQL {
 
     public void DAOinsertVariousItems(ArrayList<ModelPOI> createdPOIs) {
         int numInserted = 0;
-        
-        for (int i = 0; i < createdPOIs.size(); i++) {
-            if(DAOinsertItem(createdPOIs.get(i))) {
+
+        for (ModelPOI poi : createdPOIs) {
+            if (DAOinsertItem(poi)) {
                 numInserted++;
             }
         }
         
         System.out.println();
-        System.out.println("S'ha/n insertat " + numInserted + " punt/s d'interés.");
+        System.out.println("[!] S'ha/n insertat " + numInserted + " punt/s d'interés.");
     }
     
     //READ
@@ -197,9 +192,9 @@ public class DAOMySQL {
 
     public ArrayList<ModelPOI> DAOgetItemsById(ArrayList<Integer> poids) {
         ArrayList<ModelPOI> itemsById = new ArrayList<>();
-        
-        for (int i = 0; i < poids.size(); i++) {
-            ModelPOI poi = DAOgetItemById(poids.get(i));
+
+        for (Integer poid : poids) {
+            ModelPOI poi = DAOgetItemById(poid);
             if (poi != null) {
                 itemsById.add(poi);
             }
@@ -225,7 +220,7 @@ public class DAOMySQL {
             ps = mySQLConnection.prepareStatement(query);
             ps.executeUpdate();
             System.out.println();
-            System.out.println("S'ha/n esborrat " + numDeleted + " item/s de la base de dades.");
+            System.out.println("[!] S'ha/n esborrat " + numDeleted + " item/s de la base de dades.");
         } catch (SQLException e) {
             System.out.println();
             System.out.println("[!] No s'han pogut esborrar els items de la base de dades.");
@@ -250,32 +245,32 @@ public class DAOMySQL {
             ps.executeUpdate();
             
             System.out.println();
-            System.out.println("S'ha esborrat l'item amb Id " + poid + ".");
+            System.out.println("[!] S'ha esborrat l'item amb Id " + poid + ".");
             return true;
         } catch (SQLException e) {
             System.out.println();
-            System.out.println("[!] No s'ha pogut esborrar l'item de la base de dades amb Id " + poid + "." );
+            System.out.println("[!] No s'ha pogut esborrar l'item de la base de dades amb Id " + poid + ".");
             return false;
         }
     }
 
     public void DAOdeleteItemsById(ArrayList<Integer> poids) {
-        int numDeleted = poids.size();
+        int numDeleted = 0;
         
         if (DAOgetCurrentItems() == 0) {
             System.out.println();
             System.out.println("[!] Atenció! No hi ha items en la base de dades.");
             return;
         }
-        
-        for (int i = 0; i < poids.size(); i++) {
-            if(!DAOdeleteItemById(poids.get(i))) {
-                numDeleted--;
+
+        for (Integer poid : poids) {
+            if (DAOexistsPOI(poid) && DAOdeleteItemById(poid)) {
+                numDeleted++;
             }
         }
         
         System.out.println();
-        System.out.println("S'han esborrat un total de " + numDeleted + " d'items.");
+        System.out.println("[!] S'han esborrat un total de " + numDeleted + " d'items.");
     }
     
     //SYNCHRONIZE
@@ -293,18 +288,18 @@ public class DAOMySQL {
         ArrayList<ModelPOI> pois = new ArrayList<>();
         java.util.Date utilDate = new java.util.Date();
         Date updated = new Date(utilDate.getTime());
-        
-        pois.add(new ModelPOI(1, 41.3851, 21.1734, "Espanya", "Madrid", "Sagrada Familia", updated));
-        pois.add(new ModelPOI(2, 48.8566, 244.352, "França", "Paris", "Eiffel Tower", updated));
-        pois.add(new ModelPOI(3, 40.7128, -74.060, "USA", "New York", "Estatua llibertat", updated));
-        pois.add(new ModelPOI(4, -34.603, -58.381, "Perú", "Lima", "Obelisco", updated));
-        pois.add(new ModelPOI(5, 35.6895, 19.6917, "Japan", "Tokyo", "Tokyo Tower", updated));
-        pois.add(new ModelPOI(6, 51.5074, -0.1278, "UK", "London", "Big Ben", updated));
-        pois.add(new ModelPOI(7, 37.7745, -22.419, "USA", "Washington", "White House", updated));
-        pois.add(new ModelPOI(8, -33.868, 15.2093, "Xina", "Hong Kong", "Temple xinés", updated));
-        pois.add(new ModelPOI(9, 55.7558, 37.6176, "India", "Delhi", "Qutub Minar", updated));
-        pois.add(new ModelPOI(10, 35.6856, 39.6917, "Japan", "Tokyo", "Tokyo Tower", updated));
-        
+
+        pois.add(new ModelPOI(21, 48.8566, 2.3522, "França", "París", "Louvre", updated));
+        pois.add(new ModelPOI(22, -37.8136, 144.9631, "Austràlia", "Melbourne", "Great Ocean Road", updated));
+        pois.add(new ModelPOI(23, 51.1657, 10.4515, "Alemanya", "Erfurt", "Domplatz", updated));
+        pois.add(new ModelPOI(24, -22.9519, -43.2106, "Brasil", "Río de Janeiro", "Pão de Açúcar", updated));
+        pois.add(new ModelPOI(25, 51.5099, -0.1337, "Regne Unit", "Londres", "Tower Bridge", updated));
+        pois.add(new ModelPOI(26, -33.4489, -70.6693, "Xile", "Santiago", "Cerro San Cristóbal", updated));
+        pois.add(new ModelPOI(27, 55.7558, 37.6176, "Rússia", "Moscou", "Kremlin", updated));
+        pois.add(new ModelPOI(28, 40.7128, -74.0060, "Estats Units", "Nova York", "Statue of Liberty", updated));
+        pois.add(new ModelPOI(29, 35.6895, 139.6917, "Japó", "Tòquio", "Meiji Shrine", updated));
+        pois.add(new ModelPOI(30, 37.7749, -122.4194, "Estats Units", "San Francisco", "Golden Gate Bridge", updated));
+
         DAOinsertVariousItems(pois);
     }
 }

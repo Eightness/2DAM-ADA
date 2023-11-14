@@ -22,7 +22,7 @@ public class ViewPOI {
             return;
         }
         System.out.println();
-        System.out.println(poi.toString());
+        System.out.println(poi);
     }
 
     public void showPOIs(ArrayList<ModelPOI> pois) {

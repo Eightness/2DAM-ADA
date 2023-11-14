@@ -128,6 +128,8 @@ public class App {
                 }
                 break;
             case 3: //Exit
+                ConnectionMySQL.disconnectFromMySQL();
+                ConnectionMongoDB.disconnectFromMongoDB();
                 setRunning(false);
                 break;
             default:
@@ -218,7 +220,7 @@ public class App {
                 if (isMySQL) {
                     controllerMySQL.insertDefaultRows();
                 } else {
-                    
+                    controllerMongoDB.insertDefaultCollection();
                 }
                 break;
             default:
@@ -254,10 +256,10 @@ public class App {
                 break;
             case 3: //Read all, ordered by ID
                 if (isMySQL) {
-                    controllerMySQL.getAllItemsOrderedById();
+                    controllerMySQL.getAllItems(true);
                     pressToContinue();
                 } else {
-                    controllerMongoDB.getAllItemsOrderedById();
+                    controllerMongoDB.getAllItems(true);
                     pressToContinue();
                 }
                 setCrudSubmenu(false);

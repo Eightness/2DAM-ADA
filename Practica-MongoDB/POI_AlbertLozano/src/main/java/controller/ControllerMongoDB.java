@@ -34,20 +34,16 @@ public class ControllerMongoDB {
         daoMongoDB.DAOinsertVariousItems(createdPOIs);
     }
 
-    public void getAllItems() {
-        daoMongoDB.DAOgetAllItems(false);
-    }
-
-    public void getAllItemsOrderedById() {
-        daoMongoDB.DAOgetAllItems(true);
+    public void getAllItems(Boolean ordered) {
+        viewPOI.showPOIs(daoMongoDB.DAOgetAllItems(ordered));
     }
 
     public void getItemById(int poid) {
-        daoMongoDB.DAOgetItemById(poid);
+        viewPOI.showPOI(daoMongoDB.DAOgetItemById(poid));
     }
 
     public void getItemsById(ArrayList<Integer> poids) {
-        daoMongoDB.DAOdeleteItemsById(poids);
+        viewPOI.showPOIs(daoMongoDB.DAOgetItemsById(poids));
     }
 
     public void deleteAllItems() {
@@ -68,5 +64,9 @@ public class ControllerMongoDB {
 
     public void importItems() {
 
+    }
+
+    public void insertDefaultCollection() {
+        daoMongoDB.DAOinsertDefaultCollection();
     }
 }

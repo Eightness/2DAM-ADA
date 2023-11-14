@@ -1,5 +1,7 @@
 package model;
 
+import org.bson.Document;
+
 import java.sql.Date;
 
 /**
@@ -104,5 +106,18 @@ public class ModelPOI {
         "\nActualitzat:\t" + getUpdated()
         );
     }
-   
+
+    public Document toDocument() {
+        Document document = new Document();
+
+        document.append("poid", this.poid);
+        document.append("latitude", this.latitude);
+        document.append("longitude", this.longitude);
+        document.append("country", this.country);
+        document.append("city", this.city);
+        document.append("description", this.description);
+        document.append("updated", this.updated);
+
+        return document;
+    }
 }

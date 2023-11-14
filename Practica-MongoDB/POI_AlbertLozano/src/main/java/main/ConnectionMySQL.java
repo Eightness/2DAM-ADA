@@ -25,15 +25,13 @@ public class ConnectionMySQL {
     public static Connection mySQLConnection = null;
 
     //Methods
-    public static Connection connectToMySQL() {
+    public static void connectToMySQL() {
         try {
             Class.forName(driver);
             mySQLConnection = DriverManager.getConnection(url, username, password);
-            return mySQLConnection;
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
-        return null;
     }
     
     public static void disconnectFromMySQL() {

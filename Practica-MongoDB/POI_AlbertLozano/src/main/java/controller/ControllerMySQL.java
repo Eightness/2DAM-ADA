@@ -34,12 +34,8 @@ public class ControllerMySQL {
         daoMySQL.DAOinsertVariousItems(createdPOIs);
     }
 
-    public void getAllItems() {
-        viewPOI.showPOIs(daoMySQL.DAOgetAllItems(false));
-    }
-
-    public void getAllItemsOrderedById() {
-        viewPOI.showPOIs(daoMySQL.DAOgetAllItems(true));
+    public void getAllItems(Boolean ordered) {
+        viewPOI.showPOIs(daoMySQL.DAOgetAllItems(ordered));
     }
 
     public void getItemById(int poid) {
