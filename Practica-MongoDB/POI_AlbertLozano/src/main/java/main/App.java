@@ -2,6 +2,10 @@ package main;
 
 import controller.ControllerMongoDB;
 import controller.ControllerMySQL;
+import java.util.ArrayList;
+import java.util.List;
+import model.ModelPOI;
+import model.ModelPOIList;
 import view.Input;
 import view.Menu;
 
@@ -67,6 +71,9 @@ public class App {
 
             System.out.println();
             System.out.println(menu.goodbyeMessage());
+            
+            ConnectionMySQL.disconnectFromMySQL();
+            ConnectionMongoDB.disconnectFromMongoDB();
         } else {
             if (ConnectionMySQL.mySQLConnection == null) {
                 System.out.println();
@@ -94,7 +101,7 @@ public class App {
         ConnectionMySQL.connectToMySQL();
         //MongoDB
         ConnectionMongoDB.connectToMongoDB();
-        ConnectionMongoDB.getDatabase("db");
+        ConnectionMongoDB.getDatabase("poidb");
         ConnectionMongoDB.getCollection("pois_al15");
         
         return ConnectionMySQL.mySQLConnection != null && ConnectionMongoDB.mongoDBConnection != null;
@@ -112,7 +119,7 @@ public class App {
     //------------------------------------------------------------------------------------------------------------------
 
     public void mainSwitch() {
-        menu.mainMenu();
+        menu.mainMenu(controllerMySQL.getCurrentItems(), controllerMongoDB.getCurrentItems());
         switch(input.getInt("Elegeix una opció: ")) {
             case 1: //MySQL
                 setSubmenu(true);
@@ -131,8 +138,6 @@ public class App {
                 }
                 break;
             case 3: //Exit
-                ConnectionMySQL.disconnectFromMySQL();
-                ConnectionMongoDB.disconnectFromMongoDB();
                 setRunning(false);
                 break;
             default:
@@ -209,10 +214,12 @@ public class App {
                 break;
             case 5: //Import
                 if (isMySQL) {
-                    controllerMySQL.importItems();
+                    ModelPOIList poisFromXML = XMLReader.readXML("C:\\Users\\Albert\\Desktop\\Github\\2DAM-ADA\\Practica-MongoDB\\POI_AlbertLozano\\src\\main\\resources\\items.xml");
+                    controllerMySQL.importItems(poisFromXML.getPoisToArrayList());
                     pressToContinue();
                 } else {
-                    controllerMongoDB.importItems();
+                    ModelPOIList poisFromXML = XMLReader.readXML("C:\\Users\\Albert\\Desktop\\Github\\2DAM-ADA\\Practica-MongoDB\\POI_AlbertLozano\\src\\main\\resources\\items.xml");
+                    controllerMongoDB.importItems(poisFromXML.getPoisToArrayList());
                     pressToContinue();
                 }
                 break;

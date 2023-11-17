@@ -1,0 +1,92 @@
+<modelPOIs>
+    <modelPOI>
+        <poid>1</poid>
+        <latitude>41.3851</latitude>
+        <longitude>2.1734</longitude>
+        <country>Espanya</country>
+        <city>Barcelona</city>
+        <description>Sagrada Familia</description>
+        <updated>2023-11-11</updated>
+    </modelPOI>
+    <modelPOI>
+        <poid>2</poid>
+        <latitude>48.8566</latitude>
+        <longitude>2.3522</longitude>
+        <country>França</country>
+        <city>Paris</city>
+        <description>Torre Eiffel</description>
+        <updated>2023-11-11</updated>
+    </modelPOI>
+    <modelPOI>
+        <poid>3</poid>
+        <latitude>40.7128</latitude>
+        <longitude>-74.006</longitude>
+        <country>USA</country>
+        <city>New York</city>
+        <description>Estatua de la Libertad</description>
+        <updated>2023-11-11</updated>
+    </modelPOI>
+    <modelPOI>
+        <poid>4</poid>
+        <latitude>-34.6037</latitude>
+        <longitude>-58.3816</longitude>
+        <country>Argentina</country>
+        <city>Buenos Aires</city>
+        <description>Obelisco</description>
+        <updated>2023-11-11</updated>
+    </modelPOI>
+    <modelPOI>
+        <poid>5</poid>
+        <latitude>35.6895</latitude>
+        <longitude>139.6917</longitude>
+        <country>Japan</country>
+        <city>Tokyo</city>
+        <description>Tokyo Tower</description>
+        <updated>2023-11-11</updated>
+    </modelPOI>
+    <modelPOI>
+        <poid>6</poid>
+        <latitude>51.5074</latitude>
+        <longitude>-0.1278</longitude>
+        <country>UK</country>
+        <city>London</city>
+        <description>Big Ben</description>
+        <updated>2023-11-11</updated>
+    </modelPOI>
+    <modelPOI>
+        <poid>7</poid>
+        <latitude>37.7749</latitude>
+        <longitude>-122.4194</longitude>
+        <country>USA</country>
+        <city>San Francisco</city>
+        <description>Golden Gate Bridge</description>
+        <updated>2023-11-11</updated>
+    </modelPOI>
+    <modelPOI>
+        <poid>8</poid>
+        <latitude>-33.8688</latitude>
+        <longitude>151.2093</longitude>
+        <country>Australia</country>
+        <city>Sydney</city>
+        <description>Opera House</description>
+        <updated>2023-11-11</updated>
+    </modelPOI>
+    <modelPOI>
+        <poid>9</poid>
+        <latitude>55.7558</latitude>
+        <longitude>37.6176</longitude>
+        <country>Russia</country>
+        <city>Moscow</city>
+        <description>Kremlin</description>
+        <updated>2023-11-11</updated>
+    </modelPOI>
+    <modelPOI>
+        <poid>10</poid>
+        <latitude>-22.9083</latitude>
+        <longitude>-43.1964</longitude>
+        <country>Brazil</country>
+        <city>Rio de Janeiro</city>
+        <description>Christ the Redeemer</description>
+        <updated>2023-11-11</updated>
+    </modelPOI>
+</modelPOIs>

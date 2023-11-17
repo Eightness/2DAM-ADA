@@ -45,9 +45,13 @@ public class Menu {
     //MAIN MENU
     //------------------------------------------------------------------------------------------------------------------
     
-    public void mainMenu() {
+    public void mainMenu(int currentItemsMySQL, int currentItemsMongoDB) {
         System.out.println();
         System.out.println("-----------------------------------------------------------------------------------------");
+        System.out.println();
+        System.out.println("Items actuals en les BBDD:");
+        System.out.println("MySQL: " + currentItemsMySQL);
+        System.out.println("MongoDB: " + currentItemsMongoDB);
         System.out.println();
         System.out.println("Amb quina BBDD desitjes treballar?");
         System.out.println();

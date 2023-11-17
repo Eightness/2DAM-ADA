@@ -1,12 +1,14 @@
 controller\ControllerMySQL.class
 dao\DAOMongoDB.class
 dao\DAOMySQL.class
-main\App.class
 model\ModelPOI.class
 view\Menu.class
-main\ConnectionMongoDB.class
 view\ViewPOI.class
 view\Input.class
 main\Main.class
 controller\ControllerMongoDB.class
+main\XMLReader.class
+main\App.class
+main\ConnectionMongoDB.class
+model\ModelPOIList.class
 main\ConnectionMySQL.class

@@ -34,5 +34,17 @@
             <artifactId>logback-classic</artifactId>
             <version>1.2.3</version>
         </dependency>
+           <!-- Dependencia de JAXB API -->
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+        <!-- Dependencia de la implementación de JAXB (usamos la implementación de referencia que está disponible en Java 11) -->
+        <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+            <version>2.3.1</version>
+        </dependency>
     </dependencies>
 </project>

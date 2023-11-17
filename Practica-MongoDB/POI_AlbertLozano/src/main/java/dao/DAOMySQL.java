@@ -64,6 +64,10 @@ public class DAOMySQL {
     //--------------------------------------------------------------------------
     
     public boolean DAOinsertItem(ModelPOI createdPOI) {
+        if (createdPOI == null) {
+            System.out.println();
+            System.out.println("[!] Atenció! No es pot inserir un item buit. (Necessites introduir una clau primària!!)");
+        }
         if (DAOexistsPOI(createdPOI.getPoid())) {
             System.out.println();
             System.out.println("[!] Ja existeix un punt d'interés amb el poid " + createdPOI.getPoid() + ".");
@@ -79,7 +83,9 @@ public class DAOMySQL {
             ps.setString(4, createdPOI.getCountry());
             ps.setString(5, createdPOI.getCity());
             ps.setString(6, createdPOI.getDescription());
-            ps.setDate(7, createdPOI.getUpdated());
+            java.util.Date utilDate = createdPOI.getUpdated();
+            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+            ps.setDate(7, sqlDate);
             
             ps.executeUpdate();
             

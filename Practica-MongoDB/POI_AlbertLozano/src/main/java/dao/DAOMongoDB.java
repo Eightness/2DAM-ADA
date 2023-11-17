@@ -68,6 +68,10 @@ public class DAOMongoDB {
     //--------------------------------------------------------------------------
     
     public boolean DAOinsertItem(ModelPOI createdPOI) {
+        if (createdPOI == null) {
+            System.out.println();
+            System.out.println("[!] Atenció! No es pot inserir un item buit. (Necessites introduir una clau primària!!)");
+        }
         if (DAOexistsPOI(createdPOI.getPoid())) {
             System.out.println();
             System.out.println("[!] Ja existeix un punt d'interés amb el poid " + createdPOI.getPoid() + ".");

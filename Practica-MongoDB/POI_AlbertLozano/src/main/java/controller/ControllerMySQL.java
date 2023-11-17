@@ -58,8 +58,13 @@ public class ControllerMySQL {
         daoMongoDB.DAOsynchronizeDatabase(daoMySQL.DAOgetAllItems(true));
     }
 
-    public void importItems() {
-
+    public void importItems(ArrayList<ModelPOI> poisFromXML) {
+        if (poisFromXML == null) {
+            System.out.println();
+            System.out.println("[!] Atenció! No s'han pogut importar els items.");
+            return;
+        }
+        daoMySQL.DAOinsertVariousItems(poisFromXML);
     }
     
     public void insertDefaultRows() {
