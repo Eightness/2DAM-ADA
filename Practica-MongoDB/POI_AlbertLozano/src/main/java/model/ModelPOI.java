@@ -2,15 +2,12 @@ package model;
 
 import org.bson.Document;
 import java.util.Date;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Albert Lozano Blasco
  * @version 1.0
  */
-@XmlRootElement(name = "modelPOI")
 public class ModelPOI {
     //Attributes
     private int poid;
@@ -22,7 +19,6 @@ public class ModelPOI {
     private Date updated;
 
     //Getters and Setters
-    @XmlElement
     public int getPoid() {
         return poid;
     }
@@ -30,7 +26,7 @@ public class ModelPOI {
     public void setPoid(int poid) {
         this.poid = poid;
     }
-    @XmlElement
+
     public double getLatitude() {
         return latitude;
     }
@@ -38,7 +34,7 @@ public class ModelPOI {
     public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
-    @XmlElement
+
     public double getLongitude() {
         return longitude;
     }
@@ -46,7 +42,7 @@ public class ModelPOI {
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
-    @XmlElement
+
     public String getCountry() {
         return country;
     }
@@ -54,7 +50,7 @@ public class ModelPOI {
     public void setCountry(String country) {
         this.country = country;
     }
-    @XmlElement
+
     public String getCity() {
         return city;
     }
@@ -62,7 +58,7 @@ public class ModelPOI {
     public void setCity(String city) {
         this.city = city;
     }
-    @XmlElement
+
     public String getDescription() {
         return description;
     }
@@ -70,7 +66,7 @@ public class ModelPOI {
     public void setDescription(String description) {
         this.description = description;
     }
-    @XmlElement
+
     public Date getUpdated() {
         return updated;
     }

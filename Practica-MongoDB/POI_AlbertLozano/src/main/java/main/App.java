@@ -5,7 +5,6 @@ import controller.ControllerMySQL;
 import java.util.ArrayList;
 import java.util.List;
 import model.ModelPOI;
-import model.ModelPOIList;
 import view.Input;
 import view.Menu;
 
@@ -214,12 +213,12 @@ public class App {
                 break;
             case 5: //Import
                 if (isMySQL) {
-                    ModelPOIList poisFromXML = XMLReader.readXML("C:\\Users\\Albert\\Desktop\\Github\\2DAM-ADA\\Practica-MongoDB\\POI_AlbertLozano\\src\\main\\resources\\items.xml");
-                    controllerMySQL.importItems(poisFromXML.getPoisToArrayList());
+                    ArrayList<ModelPOI> poisFromXML = XMLReader.readXML();
+                    controllerMySQL.importItems(poisFromXML);
                     pressToContinue();
                 } else {
-                    ModelPOIList poisFromXML = XMLReader.readXML("C:\\Users\\Albert\\Desktop\\Github\\2DAM-ADA\\Practica-MongoDB\\POI_AlbertLozano\\src\\main\\resources\\items.xml");
-                    controllerMongoDB.importItems(poisFromXML.getPoisToArrayList());
+                    ArrayList<ModelPOI> poisFromXML = XMLReader.readXML();
+                    controllerMongoDB.importItems(poisFromXML);
                     pressToContinue();
                 }
                 break;
