@@ -15,7 +15,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -27,11 +26,8 @@ import model.ModelPOI;
  */
 public class XMLReader {
     
-    //Change filePath if needed
-    private static final String filePath = "/home/alblozbla/Escriptori/2DAM-ADA/Practica-MongoDB/POI_AlbertLozano/src/main/resources/items.xml";  
-    
     //Method to get an array of ModelPOIs
-    public static ArrayList<ModelPOI> readXML() {
+    public static ArrayList<ModelPOI> readXML(String filePath) {
         //Instantiate the ModelPOI ArrayList
         ArrayList<ModelPOI> poisFromXML = new ArrayList<>();
         //Instantiate the Factory
@@ -45,11 +41,11 @@ public class XMLReader {
             //Optional, but recommended (normalization in dom parsing)
             doc.getDocumentElement().normalize();
             
-            //get a list of <modelPOI>
+            //Get a list of <modelPOI>
             NodeList list = doc.getElementsByTagName("modelPOI");
             
             for (int i = 0; i < list.getLength(); i++) {
-                //get a single node of <modelPOI>
+                //Get a single node of <modelPOI>
                 Node node = list.item(i); 
                 
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
@@ -74,7 +70,7 @@ public class XMLReader {
         } catch (ParserConfigurationException | SAXException | IOException | ParseException e) {
             System.out.println();
             System.out.println("[!] Atenció! No s'ha pogut llegir l'arxiu XML.");
-            e.printStackTrace();
+            System.out.println("[!] Pista: Comprova si la ruta de l'arxiu és la correcta.");
         }
         
         return poisFromXML;

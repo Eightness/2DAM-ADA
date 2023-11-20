@@ -66,6 +66,10 @@ public class ControllerMongoDB {
         }
         daoMongoDB.DAOinsertVariousItems(poisFromXML);
     }
+    
+    public void upsert(ModelPOI poi) {
+        daoMongoDB.DAOupsert(poi);
+    }
 
     public void insertDefaultCollection() {
         daoMongoDB.DAOinsertDefaultCollection();

@@ -110,8 +110,14 @@ public class Menu {
         System.out.println("2. Inserir varios elements.");
         System.out.println("3. Llistar.");
         System.out.println("4. Esborrar.");
-        System.out.println("5. Importar.");
-        System.out.println("6. Tornar.");
+        if (database) {
+            System.out.println("5. Importar.");
+            System.out.println("6. Tornar.");
+        } else {
+            System.out.println("5. Upsert.");
+            System.out.println("6. Importar.");
+            System.out.println("7. Tornar.");
+        }
     }
     
     //SUBMENUS

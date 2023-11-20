@@ -67,6 +67,7 @@ public class DAOMySQL {
         if (createdPOI == null) {
             System.out.println();
             System.out.println("[!] Atenció! No es pot inserir un item buit. (Necessites introduir una clau primària!!)");
+            return false;
         }
         if (DAOexistsPOI(createdPOI.getPoid())) {
             System.out.println();

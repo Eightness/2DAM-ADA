@@ -12,6 +12,7 @@ import model.ModelPOI;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import static com.mongodb.client.model.Filters.eq;
+import com.mongodb.client.model.UpdateOptions;
 
 /**
  *
@@ -256,5 +257,19 @@ public class DAOMongoDB {
         pois.add(new ModelPOI(10, 30.0444, 31.2357, "Egipte", "Caire", "Piràmides de Giza", updated));
 
         DAOinsertVariousItems(pois);
+    }
+
+    public void DAOupsert(ModelPOI poi) {
+        Document document = new Document("poid", poi.getPoid())
+            .append("latitude", poi.getLatitude())
+            .append("longitude", poi.getLongitude())
+            .append("country", poi.getCountry())
+            .append("city", poi.getCity())
+            .append("description", poi.getDescription())
+            .append("updated", poi.getUpdated());
+
+        Document filter = new Document("poid", poi.getPoid());
+
+        ConnectionMongoDB.collection.replaceOne(filter, document, new UpdateOptions().upsert(true));
     }
 }

@@ -2,8 +2,6 @@ package main;
 
 import controller.ControllerMongoDB;
 import controller.ControllerMySQL;
-import java.util.ArrayList;
-import model.ModelPOI;
 import view.Input;
 import view.Menu;
 
@@ -18,6 +16,7 @@ public class App {
     private final ControllerMySQL controllerMySQL = new ControllerMySQL();
     private final Menu menu = new Menu();
     private final Input input = new Input();
+    private final String filePath = "C:\\Users\\Albert\\Desktop\\Github\\2DAM-ADA\\Practica-MongoDB\\POI_AlbertLozano\\src\\main\\resources\\items.xml";    //Change filePath if needed
 
     //Attributes
     private boolean isMySQL;                //Boolean to see in which database are we in (true = MySQL, false = MongoDB)
@@ -59,15 +58,15 @@ public class App {
         if (checkConnection()) {
             
             System.out.println();
-            System.out.println("////////////////////////////////////////////////////////////////");
-            System.out.println(menu.coolASCII());
-            System.out.println("////////////////////////////////////////////////////////////////");
-            
-            System.out.println();
             System.out.println("[!] T'has conectat a les BBDD correctament. :)");
 
             System.out.println();
             System.out.println(menu.welcomeMessage());
+            
+            System.out.println();
+            System.out.println("////////////////////////////////////////////////////////////////");
+            System.out.println(menu.coolASCII());
+            System.out.println("////////////////////////////////////////////////////////////////");
 
             while (running) {
                 mainSwitch();
@@ -222,19 +221,30 @@ public class App {
                     }
                 }
                 break;
-            case 5: //Import
+            case 5: //Import - Upsert
                 if (isMySQL) {
-                    ArrayList<ModelPOI> poisFromXML = XMLReader.readXML();
-                    controllerMySQL.importItems(poisFromXML);
+                    controllerMySQL.importItems(XMLReader.readXML(filePath));
                     pressToContinue();
                 } else {
-                    ArrayList<ModelPOI> poisFromXML = XMLReader.readXML();
-                    controllerMongoDB.importItems(poisFromXML);
+                    controllerMongoDB.upsert(input.createPOI());
                     pressToContinue();
                 }
                 break;
-            case 6: //Go back
-                setSubmenu(false);
+            case 6: //Go back - Import
+                if (isMySQL) {
+                    setSubmenu(false);
+                } else {
+                    controllerMongoDB.importItems(XMLReader.readXML(filePath));
+                    pressToContinue();
+                }
+                break;
+            case 7://Nothing - Go back
+                if (isMySQL) {
+                    System.out.println();
+                    System.out.println("No s'ha introduït una opció vàlida.");
+                } else {
+                    setSubmenu(false);
+                }
                 break;
             case 10:
                 if (isMySQL) {

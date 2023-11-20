@@ -113,6 +113,8 @@ public class Input {
         System.out.println("Creant un punt d'interés: ");
         int poid = getInt("Introdueix el ID: ");
         if (poid == 0) {
+            System.out.println();
+            System.out.println("[!] S'ha cancelat la creació del POI (S'ha introduït un 0 al poid).");
             return null;
         }
         double latitude = getDouble("Introdueix la latitud: ");
@@ -131,7 +133,7 @@ public class Input {
         boolean keepCreating = true;
 
         System.out.println();
-        System.out.println("Quan vulgues parar, introdueix un 0 en el poid.");
+        System.out.println("[!] Quan vulgues parar, introdueix un 0 en el poid.");
         while(keepCreating) {
             ModelPOI newPOI = createPOI();
             if (newPOI == null) {
