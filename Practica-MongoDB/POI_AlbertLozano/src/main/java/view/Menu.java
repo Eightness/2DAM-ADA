@@ -18,12 +18,31 @@ public class Menu {
     //MESSAGES
     //------------------------------------------------------------------------------------------------------------------
     
+    public String coolASCII() {
+        return " ________  ___       ________  _______   ________  _________   \n" +
+        "|\\   __  \\|\\  \\     |\\   __  \\|\\  ___ \\ |\\   __  \\|\\___   ___\\ \n" +
+        "\\ \\  \\|\\  \\ \\  \\    \\ \\  \\|\\ /\\ \\   __/|\\ \\  \\|\\  \\|___ \\  \\_| \n" +
+        " \\ \\   __  \\ \\  \\    \\ \\   __  \\ \\  \\_|/_\\ \\   _  _\\   \\ \\  \\  \n" +
+        "  \\ \\  \\ \\  \\ \\  \\____\\ \\  \\|\\  \\ \\  \\_|\\ \\ \\  \\\\  \\|   \\ \\  \\ \n" +
+        "   \\ \\__\\ \\__\\ \\_______\\ \\_______\\ \\_______\\ \\__\\\\ _\\    \\ \\__\\\n" +
+        "    \\|__|\\|__|\\|_______|\\|_______|\\|_______|\\|__|\\|__|    \\|__|\n";
+    }
+    
     public String welcomeMessage() {
         ArrayList<String> welcomeMessages = new ArrayList<>();
         welcomeMessages.add("Hola! Benvingut/da a Java CRUD! Ara amb dos BBDD diferents!");
         welcomeMessages.add("Benvingut/da al CRUD de MySQL i MongoDB!");
         welcomeMessages.add("Hola caracola! Disfruta gestionant MySQL i MongoDB alhora!");
-        int randomNumber = (int) (Math.random() * 3);
+
+        welcomeMessages.add("Benvingut/da a la nostra aplicació de gestió de dades en Java!");
+        welcomeMessages.add("Salut! Et donem la benvinguda a la plataforma de gestió de bases de dades!");
+        welcomeMessages.add("Hola amic/ga! Inicia la teva jornada amb el nostre sistema de CRUD!");
+
+        welcomeMessages.add("Bon dia! Benvingut/da a l'eïna de gestió de dades en Java!");
+        welcomeMessages.add("Salutacions! Comença la teva experiència amb la meua aplicació de CRUD!");
+        welcomeMessages.add("Hola usuari! Gaudeix de la gestió simultània de MySQL i MongoDB!");
+
+        int randomNumber = (int) (Math.random() * welcomeMessages.size());
 
         return welcomeMessages.get(randomNumber) + "\nAplicació desenvolupada per Albert Lozano.";
     }
@@ -37,7 +56,16 @@ public class Menu {
         goodbyeMessages.add("Adéu! Moltes gràcies per emprar la meua aplicació!");
         goodbyeMessages.add("Un plaer! Espere que ens tornem a veure!");
         goodbyeMessages.add("Fins després! Espere que t'haja agradat la meua aplicació!");
-        int randomNumber = (int) (Math.random() * 3);
+        
+        goodbyeMessages.add("Adéu i fins aviat! Que tingues un bon dia!");
+        goodbyeMessages.add("Fins la propera vegada! Gràcies per utilitzar la meua aplicació!");
+        goodbyeMessages.add("Adéu amic/ga! Espere veure't de nou prompte!");
+        
+        goodbyeMessages.add("Que la passes bé! Fins després!");
+        goodbyeMessages.add("Fins aviat! No t'oblides de tornar!");
+        goodbyeMessages.add("Adéu per ara! Gràcies per la teua preferència!");
+        
+        int randomNumber = (int) (Math.random() * goodbyeMessages.size());
 
         return goodbyeMessages.get(randomNumber) + "\nAplicació desenvolupada per Albert Lozano.";
     }
@@ -85,7 +113,7 @@ public class Menu {
         System.out.println("5. Importar.");
         System.out.println("6. Tornar.");
     }
-
+    
     //SUBMENUS
     //------------------------------------------------------------------------------------------------------------------
 

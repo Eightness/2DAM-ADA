@@ -5,7 +5,6 @@ import java.util.Date;
 import com.mongodb.MongoException;
 import com.mongodb.MongoWriteException;
 import com.mongodb.client.FindIterable;
-import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.model.Sorts;
 import main.ConnectionMongoDB;
@@ -71,6 +70,7 @@ public class DAOMongoDB {
         if (createdPOI == null) {
             System.out.println();
             System.out.println("[!] Atenció! No es pot inserir un item buit. (Necessites introduir una clau primària!!)");
+            return false;
         }
         if (DAOexistsPOI(createdPOI.getPoid())) {
             System.out.println();

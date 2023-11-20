@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * @author Albert Lozano Blasco
  * @version 1.0
  */
-public class ViewPOI {
+public class ViewPOI { 
     //Attributes
     private final Input input = new Input();
 
@@ -17,8 +17,9 @@ public class ViewPOI {
         if (poi == null) {
             return;
         }
-        System.out.println();
-        System.out.println(poi);
+        //System.out.println();
+        //System.out.println(poi);
+        poi.goodFormat();
     }
 
     public void showPOIs(ArrayList<ModelPOI> pois) {

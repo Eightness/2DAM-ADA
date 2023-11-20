@@ -105,6 +105,25 @@ public class ModelPOI {
         "\nActualitzat:\t" + getUpdated()
         );
     }
+    
+    public void goodFormat() {
+        // Format like csv
+        System.out.println();
+        System.out.println("+-------+-----------+------------+----------------------+----------------------+----------------------+----------------------+");
+        System.out.println("| POID  | Latitude  | Longitude  |       Country        |         City         |      Description     |       Updated        |");
+        System.out.println("+-------+-----------+------------+----------------------+----------------------+----------------------+----------------------+");
+        System.out.printf("| %-5d | %-9.6f | %-10.6f | %-20s | %-20s | %-20s | %-20s |\n",
+                    this.poid,
+                    this.latitude,
+                    this.longitude,
+                    this.country,
+                    this.city,
+                    this.description,
+                    this.updated);
+        
+        System.out.println("+-------+-----------+------------+----------------------+----------------------+----------------------+----------------------+");
+        System.out.println();
+    }
 
     public Document toDocument() {
         Document document = new Document();

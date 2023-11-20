@@ -3,7 +3,6 @@ package main;
 import controller.ControllerMongoDB;
 import controller.ControllerMySQL;
 import java.util.ArrayList;
-import java.util.List;
 import model.ModelPOI;
 import view.Input;
 import view.Menu;
@@ -58,6 +57,12 @@ public class App {
         ConnectionMongoDB.disableMongoLogging();
         
         if (checkConnection()) {
+            
+            System.out.println();
+            System.out.println("////////////////////////////////////////////////////////////////");
+            System.out.println(menu.coolASCII());
+            System.out.println("////////////////////////////////////////////////////////////////");
+            
             System.out.println();
             System.out.println("[!] T'has conectat a les BBDD correctament. :)");
 
@@ -71,8 +76,14 @@ public class App {
             System.out.println();
             System.out.println(menu.goodbyeMessage());
             
+            System.out.println();
+            System.out.println("////////////////////////////////////////////////////////////////");
+            System.out.println(menu.coolASCII());
+            System.out.println("////////////////////////////////////////////////////////////////");
+            
             ConnectionMySQL.disconnectFromMySQL();
             ConnectionMongoDB.disconnectFromMongoDB();
+            
         } else {
             if (ConnectionMySQL.mySQLConnection == null) {
                 System.out.println();
