@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a2e07742-8c18-427c-904c-9710b3ff9087" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/serpis/main/AgendaJPA.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/serpis/model/Person.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/log4j2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/PersonTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Practica-MongoDB/POI_AlbertLozano/nb-configuration.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Practica-MongoDB/POI_AlbertLozano/nb-configuration.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Practica-MongoDB/POI_AlbertLozano/src/main/java/main/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Practica-MongoDB/POI_AlbertLozano/src/main/java/main/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Practica-MongoDB/POI_AlbertLozano/target/classes/controller/ControllerMongoDB.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../Practica-MongoDB/POI_AlbertLozano/target/classes/controller/ControllerMongoDB.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Practica-MongoDB/POI_AlbertLozano/target/classes/controller/ControllerMySQL.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../Practica-MongoDB/POI_AlbertLozano/target/classes/controller/ControllerMySQL.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Practica-MongoDB/POI_AlbertLozano/target/classes/dao/DAOMongoDB.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../Practica-MongoDB/POI_AlbertLozano/target/classes/dao/DAOMongoDB.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Practica-MongoDB/POI_AlbertLozano/target/classes/dao/DAOMySQL.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../Practica-MongoDB/POI_AlbertLozano/target/classes/dao/DAOMySQL.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Practica-MongoDB/POI_AlbertLozano/target/classes/main/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../Practica-MongoDB/POI_AlbertLozano/target/classes/main/App.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Practica-MongoDB/POI_AlbertLozano/target/classes/main/ConnectionMongoDB.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../Practica-MongoDB/POI_AlbertLozano/target/classes/main/ConnectionMongoDB.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Practica-MongoDB/POI_AlbertLozano/target/classes/main/ConnectionMySQL.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../Practica-MongoDB/POI_AlbertLozano/target/classes/main/ConnectionMySQL.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Practica-MongoDB/POI_AlbertLozano/target/classes/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../Practica-MongoDB/POI_AlbertLozano/target/classes/main/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Practica-MongoDB/POI_AlbertLozano/target/classes/main/XMLReader.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../Practica-MongoDB/POI_AlbertLozano/target/classes/main/XMLReader.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Practica-MongoDB/POI_AlbertLozano/target/classes/model/ModelPOI.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../Practica-MongoDB/POI_AlbertLozano/target/classes/model/ModelPOI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Practica-MongoDB/POI_AlbertLozano/target/classes/view/Input.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../Practica-MongoDB/POI_AlbertLozano/target/classes/view/Input.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Practica-MongoDB/POI_AlbertLozano/target/classes/view/Menu.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../Practica-MongoDB/POI_AlbertLozano/target/classes/view/Menu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Practica-MongoDB/POI_AlbertLozano/target/classes/view/ViewPOI.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../Practica-MongoDB/POI_AlbertLozano/target/classes/view/ViewPOI.class" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 3
+}]]></component>
+  <component name="ProjectId" id="2YtQKWVlbfkoSwgCEixvqf8c6aA" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.test.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="test" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="PersonTest" />
+      <module name="testADA" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-21.0.1-openjdk-21.0.1-8336523bb0d9-cc9f59e6" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a2e07742-8c18-427c-904c-9710b3ff9087" name="Changes" comment="" />
+      <created>1701342334659</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1701342334659</updated>
+    </task>
+    <servers />
+  </component>
+</project>

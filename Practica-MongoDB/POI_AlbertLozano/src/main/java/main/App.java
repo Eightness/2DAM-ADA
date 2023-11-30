@@ -16,7 +16,7 @@ public class App {
     private final ControllerMySQL controllerMySQL = new ControllerMySQL();
     private final Menu menu = new Menu();
     private final Input input = new Input();
-    private final String filePath = "C:\\Users\\Albert\\Desktop\\Github\\2DAM-ADA\\Practica-MongoDB\\POI_AlbertLozano\\src\\main\\resources\\items.xml";    //Change filePath if needed
+    private final String filePath = "/home/alblozbla/Escriptori/2DAM-ADA/Practica-MongoDB/POI_AlbertLozano/src/main/resources/items.xml";    //Change filePath if needed
 
     //Attributes
     private boolean isMySQL;                //Boolean to see in which database are we in (true = MySQL, false = MongoDB)
