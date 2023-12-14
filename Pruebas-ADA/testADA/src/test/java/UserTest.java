@@ -5,14 +5,14 @@
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.serpis.model.Person;
+import org.serpis.model.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-public class PersonTest {
+public class UserTest {
     //Logger creation.
     static Logger log = LogManager.getRootLogger();
 
@@ -26,11 +26,11 @@ public class PersonTest {
         tx.begin();
 
         //Persistence object.
-        Person person = new Person("Sergi", "Rua Valiente", "duncanrv@gmail.com", "722683623");
+        User user = new User("Albert", "1234", 2);
 
         //Persisting the object.
-        em.persist(person);
-        log.debug("Objeto a persistir: " + person);
+        em.persist(user);
+        log.debug("Objeto a persistir: " + user);
 
         //Finishing transaction.
         tx.commit();

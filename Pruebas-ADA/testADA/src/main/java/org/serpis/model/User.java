@@ -15,7 +15,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Person implements Serializable {
+public class User implements Serializable {
 
     //SerialVersion
     private static final long SerialVersionUID = 1L;
@@ -23,18 +23,18 @@ public class Person implements Serializable {
     //Columns
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "personId")
-    private int personId;
+    @Column(name = "userId")
+    private int userId;
     private String name;
-    private String surnames;
-    private String email;
-    private String phone;
+    private String password;
+    @OneToOne
+    @JoinColumn(name = "personId", insertable = false, updatable = false)
+    private int personId;   //This is the foreign key
 
     //Custom constructor
-    public Person(String name, String surnames, String email, String phone) {
+    public User(String name, String password, int personId) {
         this.name = name;
-        this.surnames = surnames;
-        this.email = email;
-        this.phone = phone;
+        this.password = password;
+        this.personId = personId;
     }
 }

@@ -6,6 +6,7 @@
 
     <persistence-unit name="PersonPU" transaction-type="RESOURCE_LOCAL">
         <class>org.serpis.model.Person</class>
+        <class>org.serpis.model.User</class>
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/testada?useSSL=false&amp;serverTimezone=UTC&amp;allowPublicKeyRetrieval=true"/>
             <property name="javax.persistence.jdbc.user" value="root"/>
