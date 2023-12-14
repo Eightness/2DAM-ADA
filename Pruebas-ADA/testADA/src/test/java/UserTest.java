@@ -5,6 +5,7 @@
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.serpis.model.Person;
 import org.serpis.model.User;
 
 import javax.persistence.EntityManager;
@@ -18,7 +19,7 @@ public class UserTest {
 
     public static void main(String[] args) {
         //Entity Manager.
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PersonPU");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("AgendaPU");
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
 
@@ -26,11 +27,11 @@ public class UserTest {
         tx.begin();
 
         //Persistence object.
-        User user = new User("Albert", "1234", 2);
+        User user = new User("jajaxd", "54321", em.find(Person.class, 9));
 
         //Persisting the object.
         em.persist(user);
-        log.debug("Objeto a persistir: " + user);
+        log.debug("Usuario a persistir: " + user);
 
         //Finishing transaction.
         tx.commit();

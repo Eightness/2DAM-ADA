@@ -28,11 +28,11 @@ public class User implements Serializable {
     private String name;
     private String password;
     @OneToOne
-    @JoinColumn(name = "personId", insertable = false, updatable = false)
-    private int personId;   //This is the foreign key
+    @JoinColumn(name = "personId")
+    private Person personId;   //This is the foreign key
 
     //Custom constructor
-    public User(String name, String password, int personId) {
+    public User(String name, String password, Person personId) {
         this.name = name;
         this.password = password;
         this.personId = personId;

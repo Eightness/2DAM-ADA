@@ -18,7 +18,7 @@ public class PersonTest {
 
     public static void main(String[] args) {
         //Entity Manager.
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PersonPU");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("AgendaPU");
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
 
@@ -26,7 +26,7 @@ public class PersonTest {
         tx.begin();
 
         //Persistence object.
-        Person person = new Person("Sergi", "Rua Valiente", "duncanrv@gmail.com", "722683623");
+        Person person = new Person("Albert", "Lozano Blasco", "albertlb08@gmail.com", "625760988");
 
         //Persisting the object.
         em.persist(person);
