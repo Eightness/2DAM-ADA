@@ -5,12 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a2e07742-8c18-427c-904c-9710b3ff9087" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/serpis/model/Product.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/serpis/model/Section.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/ProductTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/SectionTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/serpis/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/serpis/model/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/PersonTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/PersonTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/UserTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/UserTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +41,8 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.PersonTest.executor": "Run",
+    "Application.ProductTest.executor": "Run",
+    "Application.SectionTest.executor": "Run",
     "Application.UserTest.executor": "Run",
     "Application.test.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
@@ -60,9 +62,23 @@
       <recent name="$PROJECT_DIR$/src/main/resources" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.UserTest">
+  <component name="RunManager" selected="Application.ProductTest">
     <configuration name="PersonTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="PersonTest" />
+      <module name="testADA" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProductTest" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="ProductTest" />
+      <module name="testADA" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SectionTest" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="SectionTest" />
       <module name="testADA" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -75,6 +91,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.ProductTest" />
+      <item itemvalue="Application.SectionTest" />
+      <item itemvalue="Application.PersonTest" />
+      <item itemvalue="Application.UserTest" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.UserTest" />
