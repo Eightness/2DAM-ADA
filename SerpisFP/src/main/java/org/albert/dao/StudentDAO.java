@@ -5,6 +5,8 @@ import org.albert.providers.CRUDInterface;
 import org.albert.providers.DAOManager;
 import java.util.List;
 
+import static org.eclipse.persistence.jpa.JpaHelper.getEntityManager;
+
 /**
  * Class StudentDAO. Contains Student's CRUD logic.
  */

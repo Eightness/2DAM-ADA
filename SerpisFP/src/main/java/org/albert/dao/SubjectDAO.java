@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Class SubjectDAO. Contains Subject's CRUD logic.
  */
-public class SubjectDAO extends DAOManager implements CRUDInterface<Subject, Integer> {
+public class SubjectDAO extends DAOManager implements CRUDInterface<Subject, String> {
     //Methods.
     @Override
     public void createEntity(Subject entity) {
@@ -21,37 +21,37 @@ public class SubjectDAO extends DAOManager implements CRUDInterface<Subject, Int
     }
 
     @Override
-    public Subject readEntityById(Integer primaryKey) {
+    public Subject readEntityById(String primaryKey) {
         return null;
     }
 
     @Override
-    public List<Subject> readEntitiesById(List<Integer> primaryKeys) {
+    public List<Subject> readEntitiesById(List<String> primaryKeys) {
         return null;
     }
 
     @Override
-    public void updateEntityById(Subject entity, Integer primaryKey) {
+    public void updateEntityById(Subject entity, String primaryKey) {
 
     }
 
     @Override
-    public void updateEntitiesById(List<Subject> entities, List<Integer> primaryKeys) {
+    public void updateEntitiesById(List<Subject> entities, List<String> primaryKeys) {
 
     }
 
     @Override
-    public void deleteEntityById(Integer primaryKey) {
+    public void deleteEntityById(String primaryKey) {
 
     }
 
     @Override
-    public void deleteEntitiesById(List<Integer> primaryKeys) {
+    public void deleteEntitiesById(List<String> primaryKeys) {
 
     }
 
     @Override
-    public boolean exists(Integer primaryKey) {
+    public boolean exists(String primaryKey) {
         return false;
     }
 }

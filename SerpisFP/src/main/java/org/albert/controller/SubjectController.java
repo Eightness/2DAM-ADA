@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Class SubjectController. Subject CRUD's Controller.
  */
-public class SubjectController extends ControllerManager implements CRUDInterface<Subject, Integer> {
+public class SubjectController extends ControllerManager implements CRUDInterface<Subject, String> {
     //Methods.
     @Override
     public void createEntity(Subject entity) {
@@ -21,37 +21,37 @@ public class SubjectController extends ControllerManager implements CRUDInterfac
     }
 
     @Override
-    public Subject readEntityById(Integer primaryKey) {
+    public Subject readEntityById(String primaryKey) {
         return subjectDAO.readEntityById(primaryKey);
     }
 
     @Override
-    public List<Subject> readEntitiesById(List<Integer> primaryKeys) {
+    public List<Subject> readEntitiesById(List<String> primaryKeys) {
         return subjectDAO.readEntitiesById(primaryKeys);
     }
 
     @Override
-    public void updateEntityById(Subject entity, Integer primaryKey) {
+    public void updateEntityById(Subject entity, String primaryKey) {
         subjectDAO.updateEntityById(entity, primaryKey);
     }
 
     @Override
-    public void updateEntitiesById(List<Subject> entities, List<Integer> primaryKeys) {
+    public void updateEntitiesById(List<Subject> entities, List<String> primaryKeys) {
         subjectDAO.updateEntitiesById(entities, primaryKeys);
     }
 
     @Override
-    public void deleteEntityById(Integer primaryKey) {
+    public void deleteEntityById(String primaryKey) {
         subjectDAO.deleteEntityById(primaryKey);
     }
 
     @Override
-    public void deleteEntitiesById(List<Integer> primaryKeys) {
+    public void deleteEntitiesById(List<String> primaryKeys) {
         subjectDAO.deleteEntitiesById(primaryKeys);
     }
 
     @Override
-    public boolean exists(Integer primaryKey) {
-        return subjectDAO.exists(primaryKey);
+    public boolean exists(String primaryKey) {
+        return false;
     }
 }

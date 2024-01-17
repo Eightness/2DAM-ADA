@@ -1,5 +1,7 @@
 package org.albert.view;
 
+import org.albert.SerpisFPApplication;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -25,15 +27,13 @@ public class UIMenu {
 
     //Methods.
     public String coolASCIImage() {
-        return """
-                  
-                  ___   _     ______  _____ ______  _____\s
-                 / _ \\ | |    | ___ \\|  ___|| ___ \\|_   _|
-                / /_\\ \\| |    | |_/ /| |__  | |_/ /  | | \s
-                |  _  || |    | ___ \\|  __| |    /   | | \s
-                | | | || |____| |_/ /| |___ | |\\ \\   | | \s
-                \\_| |_/\\_____/\\____/ \\____/ \\_| \\_|  \\_/ \s
-                """;
+        return "\n" +
+                "    ___    __    ____  __________  ______\n" +
+                "   /   |  / /   / __ )/ ____/ __ \\/_  __/\n" +
+                "  / /| | / /   / __  / __/ / /_/ / / /   \n" +
+                " / ___ |/ /___/ /_/ / /___/ _, _/ / /    \n" +
+                "/_/  |_/_____/_____/_____/_/ |_| /_/     \n";
+
     }
 
     public void welcomeMessage() {
@@ -70,14 +70,15 @@ public class UIMenu {
         System.out.println("| Mòduls:\t\t" + itemsCount.get(4) + "\t| 5. Matrícula.\t\t\t\t\t\t|");
         System.out.println("| Matrícules:\t" + itemsCount.get(5) + "\t| 6. Eixir de l'aplicació.\t\t\t|");
         System.out.println("+-------------------------------------------------------+");
+        System.out.println("[!] Si vols esborrar totes les dades de la BBDD, polsa 0.");
     }
 
     public void crudMenu(
             ArrayList<Integer> itemsCount,
-            String entityName
+            SerpisFPApplication.Entity entity
     ) {
         System.out.println();
-        System.out.println("Treballant amb l'entitat " + entityName + "...");
+        System.out.println("Treballant amb l'entitat " + entity.getEntityName() + "...");
         System.out.println("+-------------------+-----------------------------------+");
         System.out.println("| Base de Dades     | Quina acció vols realitzar?       |");
         System.out.println("| 'SerpisFP'        |                                   |");
@@ -93,10 +94,10 @@ public class UIMenu {
 
     public void createMenu(
             ArrayList<Integer> itemsCount,
-            String entityName
+            SerpisFPApplication.Entity entity
     ) {
         System.out.println();
-        System.out.println("Afegint l'entitat " + entityName + "...");
+        System.out.println("Afegint l'entitat " + entity.getEntityName() + "...");
         System.out.println("+-------------------+-----------------------------------+");
         System.out.println("| Base de Dades     | De quina manera vols afegir?      |");
         System.out.println("| 'SerpisFP'        |                                   |");
@@ -112,10 +113,10 @@ public class UIMenu {
 
     public void readMenu(
             ArrayList<Integer> itemsCount,
-            String entityName
+            SerpisFPApplication.Entity entity
     ) {
         System.out.println();
-        System.out.println("Llegint l'entitat " + entityName + "...");
+        System.out.println("Llegint l'entitat " + entity.getEntityName() + "...");
         System.out.println("+-------------------+-----------------------------------+");
         System.out.println("| Base de Dades     | De quina manera vols llegir?      |");
         System.out.println("| 'SerpisFP'        |                                   |");
@@ -131,10 +132,10 @@ public class UIMenu {
 
     public void updateMenu(
             ArrayList<Integer> itemsCount,
-            String entityName
+            SerpisFPApplication.Entity entity
     ) {
         System.out.println();
-        System.out.println("Actualitzant l'entitat " + entityName + "...");
+        System.out.println("Actualitzant l'entitat " + entity.getEntityName() + "...");
         System.out.println("+-------------------+-----------------------------------+");
         System.out.println("| Base de Dades     | De quina manera vols actualitzar? |");
         System.out.println("| 'SerpisFP'        |                                   |");
@@ -150,10 +151,10 @@ public class UIMenu {
 
     public void deleteMenu(
             ArrayList<Integer> itemsCount,
-            String entityName
+            SerpisFPApplication.Entity entity
     ) {
         System.out.println();
-        System.out.println("Esborrant l'entitat " + entityName + "...");
+        System.out.println("Esborrant l'entitat " + entity.getEntityName() + "...");
         System.out.println("+-------------------+-----------------------------------+");
         System.out.println("| Base de Dades     | De quina manera vols esborrar?    |");
         System.out.println("| 'SerpisFP'        |                                   |");

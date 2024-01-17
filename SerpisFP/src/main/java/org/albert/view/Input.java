@@ -100,12 +100,16 @@ public class Input {
         return scanner.nextLine();
     }
 
+    public List<String> getStrings(String s) {
+        return null;
+    }
+
     //METHODS THAT REQUIRE USER'S INPUT.
     //--------------------------------------------------------------------------
 
     //ENTITY GROUP.
     public Group createGroup() {
-        return null;
+        return new Group(3, "grupo1", "aula1");
     }
 
     public List<Group> createGroups() {

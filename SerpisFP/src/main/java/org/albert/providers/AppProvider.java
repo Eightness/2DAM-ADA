@@ -1,9 +1,6 @@
 package org.albert.providers;
 
-import org.albert.controller.GroupController;
-import org.albert.controller.ProjectController;
-import org.albert.controller.StudentController;
-import org.albert.controller.SubjectController;
+import org.albert.controller.*;
 import org.albert.view.Input;
 import org.albert.view.UIMenu;
 
@@ -12,10 +9,12 @@ import org.albert.view.UIMenu;
  */
 public abstract class AppProvider {
     //Attributes.
-    protected final UIMenu uiMenu = new UIMenu();
-    protected final Input input = new Input();
-    protected final GroupController groupController = new GroupController();
-    protected final ProjectController projectController = new ProjectController();
-    protected final StudentController studentController = new StudentController();
-    protected final SubjectController subjectController = new SubjectController();
+    protected static final UIMenu uiMenu = new UIMenu();
+    protected static final Input input = new Input();
+    protected static final GenericController genericController = new GenericController();
+    protected static final EnrollmentController enrollmentController = new EnrollmentController();
+    protected static final GroupController groupController = new GroupController();
+    protected static final ProjectController projectController = new ProjectController();
+    protected static final StudentController studentController = new StudentController();
+    protected static final SubjectController subjectController = new SubjectController();
 }

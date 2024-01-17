@@ -4,12 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Class Student. Entity Student.
  */
 @Entity
-@Table(name = "ALUMNO_AL15")
+@Table(name = "alumno_al15")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

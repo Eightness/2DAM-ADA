@@ -7,6 +7,7 @@ import org.albert.dao.*;
  */
 public abstract class ControllerManager {
     //Attributes.
+    protected final GenericDAO genericDAO = new GenericDAO();
     protected final EnrollmentDAO enrollmentDAO = new EnrollmentDAO();
     protected final GroupDAO groupDAO = new GroupDAO();
     protected final ProjectDAO projectDAO = new ProjectDAO();
