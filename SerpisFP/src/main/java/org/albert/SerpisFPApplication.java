@@ -11,7 +11,7 @@ public class SerpisFPApplication extends AppProvider {
     private static boolean running = true;
     private static boolean subMenu = true;
     private static boolean actionMenu = true;
-    private static final ArrayList<Integer> itemsCount = new ArrayList<>();
+    private static ArrayList<Integer> itemsCount;
 
     public enum Entity {
         GROUP("GRUP"),
@@ -39,12 +39,11 @@ public class SerpisFPApplication extends AppProvider {
     //Start.
     public static void start() {
         //Gathering necessary data.
-        getItemsCountFromDatabase();
         System.out.println("[!] Conexió a la base de dades realitzada amb èxit.");
-        System.out.println("[!] S'han afegit les dades per defecte correctament.");
+        getItemsCountFromDatabase();
 
         //Welcome message.
-        System.out.println(uiMenu.coolASCIImage());
+        System.out.println(uiMenu.coolASCII());
         uiMenu.welcomeMessage();
 
         //Menu's logic.
@@ -61,12 +60,7 @@ public class SerpisFPApplication extends AppProvider {
 
     //Simulates providing database items count.
     private static void getItemsCountFromDatabase() {
-        itemsCount.add(26);
-        itemsCount.add(8);
-        itemsCount.add(2);
-        itemsCount.add(3);
-        itemsCount.add(7);
-        itemsCount.add(6);
+        itemsCount = genericController.getItemsCountFromDatabase();
     }
 
     //SWITCHES METHODS.
@@ -291,6 +285,7 @@ public class SerpisFPApplication extends AppProvider {
             default:
                 System.out.println("Algo ha fallat.");
         }
+        getItemsCountFromDatabase();
     }
 
     //Read Actions.
@@ -487,6 +482,7 @@ public class SerpisFPApplication extends AppProvider {
             }
             default : System.out.println("Algo ha fallat.");
         }
+        getItemsCountFromDatabase();
     }
 
 }

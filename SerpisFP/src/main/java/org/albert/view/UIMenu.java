@@ -26,7 +26,7 @@ public class UIMenu {
     };
 
     //Methods.
-    public String coolASCIImage() {
+    public String coolASCII() {
         return "\n" +
                 "    ___    __    ____  __________  ______\n" +
                 "   /   |  / /   / __ )/ ____/ __ \\/_  __/\n" +

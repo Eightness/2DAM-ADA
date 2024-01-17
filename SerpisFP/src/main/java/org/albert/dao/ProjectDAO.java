@@ -31,6 +31,11 @@ public class ProjectDAO extends DAOManager implements CRUDInterface<Project, Str
     }
 
     @Override
+    public List<Project> readAllEntities() {
+        return null;
+    }
+
+    @Override
     public void updateEntityById(Project entity, String primaryKey) {
 
     }

@@ -11,38 +11,54 @@ import java.util.ArrayList;
 public class GenericDAO extends DAOManager {
     //Methods.
     public ArrayList<Integer> getItemsCountFromDatabase() {
-        return null;
+        ArrayList<Integer> itemsCount = new ArrayList<>();
+
+        try {
+            long totalCount = (long) entityManager.createQuery("SELECT COUNT(e) FROM Enrollment e").getSingleResult();
+            itemsCount.add((int) totalCount);
+
+            long groupCount = (long) entityManager.createQuery("SELECT COUNT(g) FROM Group g").getSingleResult();
+            itemsCount.add((int) groupCount);
+
+            long projectCount = (long) entityManager.createQuery("SELECT COUNT(p) FROM Project p").getSingleResult();
+            itemsCount.add((int) projectCount);
+
+            long studentCount = (long) entityManager.createQuery("SELECT COUNT(s) FROM Student s").getSingleResult();
+            itemsCount.add((int) studentCount);
+
+            long subjectCount = (long) entityManager.createQuery("SELECT COUNT(sub) FROM Subject sub").getSingleResult();
+            itemsCount.add((int) subjectCount);
+
+            long enrollmentCount = (long) entityManager.createQuery("SELECT COUNT(en) FROM Enrollment en").getSingleResult();
+            itemsCount.add((int) enrollmentCount);
+
+            System.out.println("[!] S'han actualitzat els comptadors d'elements correctament.");
+        } catch (Exception e) {
+            System.out.println("[!] ERROR! No s'han pogut obtenir els comptadors d'elements. Motiu: " + e.getMessage());
+        }
+
+        return itemsCount;
     }
+
 
     public void deleteAllItemsFromDatabase() {
         try {
             entityTransaction.begin();
 
-            //Delete Items.
-            Query deleteStudents = entityManager.createQuery("DELETE FROM alumno_al15");
-            deleteStudents.executeUpdate();
-
-            Query deleteGroups = entityManager.createQuery("DELETE FROM GROUP");
-            deleteGroups.executeUpdate();
-
-            Query deleteEnrollments = entityManager.createQuery("DELETE FROM ENROLLMENT");
-            deleteEnrollments.executeUpdate();
-
-            Query deleteSubjects = entityManager.createQuery("DELETE FROM SUBJECT");
-            deleteSubjects.executeUpdate();
-
-            Query deleteProjects = entityManager.createQuery("DELETE FROM PROJECT");
-            deleteProjects.executeUpdate();
+            entityManager.createQuery("DELETE FROM Enrollment").executeUpdate();
+            entityManager.createQuery("DELETE FROM Group").executeUpdate();
+            entityManager.createQuery("DELETE FROM Project").executeUpdate();
+            entityManager.createQuery("DELETE FROM Student").executeUpdate();
+            entityManager.createQuery("DELETE FROM Subject").executeUpdate();
 
             entityTransaction.commit();
-
-            System.out.println("[!] S'han esborrat totes les dades de la BBDD correctament.");
+            System.out.println("[!] S'han eliminat tots els registres de totes les taules correctament.");
         } catch (Exception e) {
             if (entityTransaction != null && entityTransaction.isActive()) {
                 entityTransaction.rollback();
             }
-            e.printStackTrace();
-            System.out.println("[!] ERROR! No s'han pogut esborrar les dades de la BBDD.");
+            System.out.println("[!] ERROR! No s'han pogut eliminar tots els registres de totes les taules. Motiu: " + e.getMessage());
         }
     }
+
 }

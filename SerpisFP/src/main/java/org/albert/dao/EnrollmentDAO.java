@@ -30,6 +30,11 @@ public class EnrollmentDAO extends DAOManager implements CRUDInterface<Enrollmen
     }
 
     @Override
+    public List<Enrollment> readAllEntities() {
+        return null;
+    }
+
+    @Override
     public void updateEntityById(Enrollment entity, Integer primaryKey) {
 
     }

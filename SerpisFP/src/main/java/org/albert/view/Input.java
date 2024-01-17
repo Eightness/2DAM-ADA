@@ -109,11 +109,31 @@ public class Input {
 
     //ENTITY GROUP.
     public Group createGroup() {
-        return new Group(3, "grupo1", "aula1");
+        System.out.println("[!] Introdueix les dades del nou grup:");
+        int groupCode = getInt("CODGRUPO: ");
+        String description = getString("Descripció: ");
+        String classroom = getString("Aula: ");
+
+        return new Group(groupCode, description, classroom);
     }
 
     public List<Group> createGroups() {
-        return null;
+        System.out.println("[!] Introdueix les dades dels nous grups. Per a finalitzar, prem 'Enter' sense introduir dades.");
+        List<Group> groups = new ArrayList<>();
+
+        while (true) {
+            Group group = createGroup();
+            groups.add(group);
+
+            System.out.print("Vols afegir un altre grup? (S/N): ");
+            String response = scanner.nextLine().trim().toUpperCase();
+
+            if (!response.equals("S")) {
+                break;
+            }
+        }
+
+        return groups;
     }
 
     //ENTITY PROJECT.

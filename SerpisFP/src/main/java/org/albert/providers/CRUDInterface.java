@@ -15,6 +15,7 @@ public interface CRUDInterface<E, PK> {
     //Read methods.
     E readEntityById(PK primaryKey);
     List<E> readEntitiesById(List<PK> primaryKeys);
+    List<E> readAllEntities();
 
     //Update methods.
     void updateEntityById(E entity, PK primaryKey);

@@ -22,12 +22,19 @@ public class GroupController extends ControllerManager implements CRUDInterface<
 
     @Override
     public Group readEntityById(Integer primaryKey) {
+        viewGroup.showEntity(groupDAO.readEntityById(primaryKey));
         return groupDAO.readEntityById(primaryKey);
     }
 
     @Override
     public List<Group> readEntitiesById(List<Integer> primaryKeys) {
+        viewGroup.showEntities(groupDAO.readEntitiesById(primaryKeys));
         return groupDAO.readEntitiesById(primaryKeys);
+    }
+
+    @Override
+    public List<Group> readAllEntities() {
+        return groupDAO.readAllEntities();
     }
 
     @Override

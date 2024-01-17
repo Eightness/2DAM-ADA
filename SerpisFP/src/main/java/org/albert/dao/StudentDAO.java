@@ -33,6 +33,11 @@ public class StudentDAO extends DAOManager implements CRUDInterface<Student, Str
     }
 
     @Override
+    public List<Student> readAllEntities() {
+        return null;
+    }
+
+    @Override
     public void updateEntityById(Student entity, String primaryKey) {
 
     }

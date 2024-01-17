@@ -31,6 +31,11 @@ public class StudentController extends ControllerManager implements CRUDInterfac
     }
 
     @Override
+    public List<Student> readAllEntities() {
+        return studentDAO.readAllEntities();
+    }
+
+    @Override
     public void updateEntityById(Student entity, String primaryKey) {
         studentDAO.updateEntityById(entity, primaryKey);
     }

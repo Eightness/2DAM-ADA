@@ -31,6 +31,11 @@ public class SubjectDAO extends DAOManager implements CRUDInterface<Subject, Str
     }
 
     @Override
+    public List<Subject> readAllEntities() {
+        return null;
+    }
+
+    @Override
     public void updateEntityById(Subject entity, String primaryKey) {
 
     }

@@ -31,6 +31,11 @@ public class EnrollmentController extends ControllerManager implements CRUDInter
     }
 
     @Override
+    public List<Enrollment> readAllEntities() {
+        return enrollmentDAO.readAllEntities();
+    }
+
+    @Override
     public void updateEntityById(Enrollment entity, Integer primaryKey) {
         enrollmentDAO.updateEntityById(entity, primaryKey);
     }

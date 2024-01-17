@@ -31,6 +31,11 @@ public class ProjectController extends ControllerManager implements CRUDInterfac
     }
 
     @Override
+    public List<Project> readAllEntities() {
+        return projectDAO.readAllEntities();
+    }
+
+    @Override
     public void updateEntityById(Project entity, String primaryKey) {
         projectDAO.updateEntityById(entity, primaryKey);
     }

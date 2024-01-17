@@ -31,6 +31,11 @@ public class SubjectController extends ControllerManager implements CRUDInterfac
     }
 
     @Override
+    public List<Subject> readAllEntities() {
+        return subjectDAO.readAllEntities();
+    }
+
+    @Override
     public void updateEntityById(Subject entity, String primaryKey) {
         subjectDAO.updateEntityById(entity, primaryKey);
     }
