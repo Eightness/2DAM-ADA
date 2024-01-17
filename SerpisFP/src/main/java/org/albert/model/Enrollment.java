@@ -17,6 +17,10 @@ import javax.persistence.*;
 public class Enrollment {
 
     @Id
+    @Column(name = "IDMATRICULA")
+    private int enrollmentId;
+
+    @Id
     @ManyToOne
     @JoinColumn(name = "NIA")
     private Student student;

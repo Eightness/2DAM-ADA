@@ -5,7 +5,6 @@ package org.albert;
  */
 public class Main {
     public static void main(String[] args) {
-        SerpisFPApplication serpisFPApplication = new SerpisFPApplication();
-        serpisFPApplication.start();
+        SerpisFPApplication.start();
     }
 }

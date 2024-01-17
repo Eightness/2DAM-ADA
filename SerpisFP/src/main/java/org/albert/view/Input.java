@@ -1,10 +1,6 @@
 package org.albert.view;
 
-import org.albert.model.Group;
-import org.albert.model.Project;
-import org.albert.model.Student;
-import org.albert.model.Subject;
-
+import org.albert.model.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -15,7 +11,7 @@ public class Input {
 
     //Methods
 
-    //GET INPUT
+    //GET INPUT.
     //--------------------------------------------------------------------------
 
     public int getInt(String message) {
@@ -104,7 +100,7 @@ public class Input {
         return scanner.nextLine();
     }
 
-    //METHODS THAT REQUIRE USER'S INPUT
+    //METHODS THAT REQUIRE USER'S INPUT.
     //--------------------------------------------------------------------------
 
     //ENTITY GROUP.
@@ -142,4 +138,11 @@ public class Input {
     public List<Subject> createSubjects() {
         return null;
     }
+
+    //ENTITY ENROLLMENT.
+    public Enrollment createEnrollment() {
+        return null;
+    }
+
+    public List<Enrollment> createEnrollments() { return null; }
 }
