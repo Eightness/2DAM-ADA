@@ -19,7 +19,7 @@ import javax.persistence.Table;
 public class Subject {
 
     @Id
-    @Column(name = "CODMODULO")
+    @Column(name = "CODMODULO", nullable = false)
     private String subjectCode;
 
     @Column(name = "DESCRIPCION")

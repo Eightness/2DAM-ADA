@@ -22,16 +22,19 @@ public class SubjectController extends ControllerManager implements CRUDInterfac
 
     @Override
     public Subject readEntityById(String primaryKey) {
+        viewSubject.showEntity(subjectDAO.readEntityById(primaryKey));
         return subjectDAO.readEntityById(primaryKey);
     }
 
     @Override
     public List<Subject> readEntitiesById(List<String> primaryKeys) {
+        viewSubject.showEntities(subjectDAO.readEntitiesById(primaryKeys));
         return subjectDAO.readEntitiesById(primaryKeys);
     }
 
     @Override
     public List<Subject> readAllEntities() {
+        viewSubject.showEntities(subjectDAO.readAllEntities());
         return subjectDAO.readAllEntities();
     }
 

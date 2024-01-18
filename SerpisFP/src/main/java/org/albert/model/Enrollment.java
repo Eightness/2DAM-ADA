@@ -17,19 +17,17 @@ import javax.persistence.*;
 public class Enrollment {
 
     @Id
-    @Column(name = "IDMATRICULA")
-    private int enrollmentId;
+    @Column(name = "IDMATRICULA", nullable = false)
+    private Integer id;
 
-    @Id
     @ManyToOne
-    @JoinColumn(name = "NIA")
+    @JoinColumn(name = "NIA", nullable = false)
     private Student student;
 
-    @Id
     @ManyToOne
-    @JoinColumn(name = "CODMODULO")
+    @JoinColumn(name = "CODMODULO", nullable = false)
     private Subject subject;
 
-    @Column(name = "DESCRIPCION")
+    @Column(name = "DESCRIPCION", length = 50)
     private String description;
 }

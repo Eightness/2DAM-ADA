@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
-import java.io.Serializable;
+import java.util.List;
 
 /**
  * Class Student. Entity Student.
@@ -29,4 +29,10 @@ public class Student {
     @ManyToOne
     @JoinColumn(name = "CODGRUPO", nullable = false)
     private Group group;
+
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Enrollment> enrollments;
+
+    @OneToOne(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Project project;
 }

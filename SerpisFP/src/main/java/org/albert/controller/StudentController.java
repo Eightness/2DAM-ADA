@@ -22,16 +22,19 @@ public class StudentController extends ControllerManager implements CRUDInterfac
 
     @Override
     public Student readEntityById(String primaryKey) {
+        viewStudent.showEntity(studentDAO.readEntityById(primaryKey));
         return studentDAO.readEntityById(primaryKey);
     }
 
     @Override
     public List<Student> readEntitiesById(List<String> primaryKeys) {
+        viewStudent.showEntities(studentDAO.readEntitiesById(primaryKeys));
         return studentDAO.readEntitiesById(primaryKeys);
     }
 
     @Override
     public List<Student> readAllEntities() {
+        viewStudent.showEntities(studentDAO.readAllEntities());
         return studentDAO.readAllEntities();
     }
 

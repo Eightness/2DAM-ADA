@@ -15,7 +15,7 @@ public class UIMenu {
             "Ara podràs gestionar la base de dades del centre educatiu IES Serpis de manera fàcil i eficient amb JPA.",
             "Benvingut/da al teu espai de control per a la gestió de dades acadèmiques amb JPA!",
             "Amb JPA, podràs afegir, llegir, actualitzar i esborrar registres de manera senzilla. Comencem!",
-            "Gràcies per utilitzar la meva app. Si tens algun dubte, estic aquí per ajudar-te!"
+            "Gràcies per utilitzar la meva app. Si tens algun dubte, estic ací per ajudar-te!"
     };
     private final String[] goodbyeMessages = {
             "Gràcies per utilitzar SerpisFP! Espere veure't prompte.",
@@ -41,7 +41,7 @@ public class UIMenu {
         int randomIndex = random.nextInt(welcomeMessages.length);
 
         System.out.println();
-        System.out.println(welcomeMessages[randomIndex]);
+        System.out.println(welcomeMessages[randomIndex] + "👋");
         System.out.println("Aplicació desenvolupada per Albert Lozano.");
     }
 
@@ -50,7 +50,7 @@ public class UIMenu {
         int randomIndex = random.nextInt(goodbyeMessages.length);
 
         System.out.println();
-        System.out.println(goodbyeMessages[randomIndex]);
+        System.out.println(goodbyeMessages[randomIndex] + "👋");
         System.out.println("Aplicació desenvolupada per Albert Lozano.");
     }
 
@@ -70,7 +70,7 @@ public class UIMenu {
         System.out.println("| Mòduls:\t\t" + itemsCount.get(4) + "\t| 5. Matrícula.\t\t\t\t\t\t|");
         System.out.println("| Matrícules:\t" + itemsCount.get(5) + "\t| 6. Eixir de l'aplicació.\t\t\t|");
         System.out.println("+-------------------------------------------------------+");
-        System.out.println("[!] Si vols esborrar totes les dades de la BBDD, polsa 0.");
+        System.out.println("[❔] Si vols esborrar totes les dades de la BBDD, polsa 0.");
     }
 
     public void crudMenu(

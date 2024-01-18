@@ -16,13 +16,13 @@ import javax.persistence.*;
 public class Project {
 
     @Id
-    @Column(name = "CODPROYECTO")
-    private String projectCode;
+    @Column(name = "CODPROYECTO", nullable = false)
+    private String id;
 
     @Column(name = "TITULO")
     private String title;
 
-    @ManyToOne
-    @JoinColumn(name = "NIA", nullable = false, unique = true)
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "nia", referencedColumnName = "NIA")
     private Student student;
 }

@@ -1,11 +1,14 @@
 package org.albert.view;
 
 import org.albert.model.*;
+import org.albert.providers.ControllerManager;
+
+import javax.ws.rs.core.StreamingOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Input {
+public class Input extends ControllerManager {
     //Attributes
     private final Scanner scanner = new Scanner(System.in);
 
@@ -109,17 +112,14 @@ public class Input {
 
     //ENTITY GROUP.
     public Group createGroup() {
-        System.out.println();
-        System.out.println("[!] Introdueix les dades del nou grup:");
         int groupCode = getInt("CODGRUPO: ");
         String description = getString("Descripció: ");
         String classroom = getString("Aula: ");
 
-        return new Group(groupCode, description, classroom);
+        return new Group(groupCode, description, classroom, new ArrayList<Student>());
     }
 
     public List<Group> createGroups() {
-        System.out.println("[!] Introdueix les dades dels nous grups. Per a finalitzar, prem 'Enter' sense introduir dades.");
         List<Group> groups = new ArrayList<>();
 
         while (true) {
@@ -139,35 +139,159 @@ public class Input {
 
     //ENTITY PROJECT.
     public Project createProject() {
-        return null;
+        String id = getString("CODPROYECTO: ");
+        String title = getString("Títol: ");
+
+        System.out.println();
+        System.out.println("[❕] Alumnes en la base de dades: ");
+        viewStudent.showEntities(studentDAO.readAllEntities());
+
+        String nia = getString("NIA alumne: ");
+
+        Student student = studentDAO.readEntityById(nia);
+
+        if (student != null) {
+            return new Project(id, title, student);
+        } else {
+            return new Project(id, title, null);
+        }
+
     }
 
     public List<Project> createProjects() {
-        return null;
+        List<Project> projects = new ArrayList<>();
+
+        while (true) {
+            Project project = createProject();
+            projects.add(project);
+
+            System.out.print("Vols afegir un altre projecte? (S/N): ");
+            String response = scanner.nextLine().trim().toUpperCase();
+
+            if (!response.equals("S")) {
+                break;
+            }
+        }
+
+        return projects;
     }
 
     //ENTITY STUDENT.
     public Student createStudent() {
-        return null;
+        String nia = getString("NIA: ");
+        String name = getString("Nom: ");
+        String surnames = getString("Cognoms: ");
+
+        System.out.println();
+        System.out.println("[❕] Grups en la base de dades: ");
+        viewGroup.showEntities(groupDAO.readAllEntities());
+
+        int groupCode = getInt("CODGRUPO: ");
+        Group group = groupDAO.readEntityById(groupCode);
+
+        if (group != null) {
+            System.out.println();
+            System.out.println("[❕] Projectes en la base de dades: ");
+            viewProject.showEntities(projectDAO.readAllEntities());
+
+            String projectId = getString("CODPROYECTO: ");
+            Project project = projectDAO.readEntityById(projectId);
+
+            return new Student(nia, name, surnames, group, null, project);
+        } else {
+            System.out.println("[❌] El grup no existeix. No es pot crear l'estudiant.");
+            return null;
+        }
     }
 
+
     public List<Student> createStudents() {
-        return null;
+        List<Student> students = new ArrayList<>();
+
+        while (true) {
+            Student student = createStudent();
+            students.add(student);
+
+            System.out.print("Vols afegir un altre estudiant? (S/N): ");
+            String response = scanner.nextLine().trim().toUpperCase();
+
+            if (!response.equals("S")) {
+                break;
+            }
+        }
+
+        return students;
     }
 
     //ENTITY SUBJECT.
     public Subject createSubject() {
-        return null;
+        String subjectCode = getString("CODMODULO: ");
+        String description = getString("Descripció: ");
+        int numHours = getInt("Hores: ");
+
+        return new Subject(subjectCode, description, numHours);
     }
 
     public List<Subject> createSubjects() {
-        return null;
+        List<Subject> subjects = new ArrayList<>();
+
+        while (true) {
+            Subject subject = createSubject();
+            subjects.add(subject);
+
+            System.out.print("Vols afegir una altra assignatura? (S/N): ");
+            String response = scanner.nextLine().trim().toUpperCase();
+
+            if (!response.equals("S")) {
+                break;
+            }
+        }
+
+        return subjects;
     }
 
     //ENTITY ENROLLMENT.
     public Enrollment createEnrollment() {
-        return null;
+        int enrollmentId = getInt("IDMATRICULA: ");
+        String description = getString("Descripció: ");
+
+        System.out.println();
+        System.out.println("[❕] Alumnes en la base de dades: ");
+        viewStudent.showEntities(studentDAO.readAllEntities());
+
+        String nia = getString("NIA: ");
+        Student student = studentDAO.readEntityById(nia);
+
+        System.out.println();
+        System.out.println("[❕] Mòduls en la base de dades: ");
+        viewSubject.showEntities(subjectDAO.readAllEntities());
+
+        String subjectCode = getString("CODMODULO: ");
+        Subject subject = subjectDAO.readEntityById(subjectCode);
+
+        if (student != null && subject != null) {
+            return new Enrollment(enrollmentId, student, subject, description);
+        } else {
+            System.out.println("[❌] No s'ha pogut crear la matrícula. L'estudiant o l'assignatura no existeixen.");
+            return null;
+        }
     }
 
-    public List<Enrollment> createEnrollments() { return null; }
+    public List<Enrollment> createEnrollments() {
+        List<Enrollment> enrollments = new ArrayList<>();
+
+        while (true) {
+            Enrollment enrollment = createEnrollment();
+            enrollments.add(enrollment);
+
+            System.out.print("Vols afegir una altra matrícula? (S/N): ");
+            String response = scanner.nextLine().trim().toUpperCase();
+
+            if (!response.equals("S")) {
+                break;
+            }
+        }
+
+        return enrollments;
+    }
 }

@@ -22,16 +22,19 @@ public class EnrollmentController extends ControllerManager implements CRUDInter
 
     @Override
     public Enrollment readEntityById(Integer primaryKey) {
+        viewEnrollment.showEntity(enrollmentDAO.readEntityById(primaryKey));
         return enrollmentDAO.readEntityById(primaryKey);
     }
 
     @Override
     public List<Enrollment> readEntitiesById(List<Integer> primaryKeys) {
+        viewEnrollment.showEntities(enrollmentDAO.readEntitiesById(primaryKeys));
         return enrollmentDAO.readEntitiesById(primaryKeys);
     }
 
     @Override
     public List<Enrollment> readAllEntities() {
+        viewEnrollment.showEntities(enrollmentDAO.readAllEntities());
         return enrollmentDAO.readAllEntities();
     }
 

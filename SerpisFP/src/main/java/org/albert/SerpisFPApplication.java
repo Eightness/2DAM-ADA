@@ -72,7 +72,11 @@ public class SerpisFPApplication extends AppProvider {
         subMenu = true;
         switch (input.getInt("Per favor, selecciona una opció: ")) {
             case 0:
-                genericController.deleteAllItemsFromDatabase();
+                String election = input.getString("[❗] Estas segur/a de voler esborrar totes les dades? 'OK' per confirmar o qualsevol altra cosa per a cancelar: ");
+                if (election.equalsIgnoreCase("OK")) {
+                    genericController.deleteAllItemsFromDatabase();
+                    getItemsCountFromDatabase();
+                }
                 break;
             case 1:
                 processEntity(Entity.GROUP);
@@ -226,9 +230,13 @@ public class SerpisFPApplication extends AppProvider {
             case GROUP:
                 switch (option) {
                     case 1:
+                        System.out.println();
+                        System.out.println("[❕] Creant nou grup...");
                         groupController.createEntity(input.createGroup());
                         break;
                     case 2:
+                        System.out.println();
+                        System.out.println("[❕] Creant nous grups...");
                         groupController.createEntities(input.createGroups());
                         break;
                     default:
@@ -239,9 +247,13 @@ public class SerpisFPApplication extends AppProvider {
             case PROJECT:
                 switch (option) {
                     case 1:
+                        System.out.println();
+                        System.out.println("[❕] Creant nou projecte...");
                         projectController.createEntity(input.createProject());
                         break;
                     case 2:
+                        System.out.println();
+                        System.out.println("[❕] Creant nous projectes...");
                         projectController.createEntities(input.createProjects());
                         break;
                     default:
@@ -252,9 +264,13 @@ public class SerpisFPApplication extends AppProvider {
             case STUDENT:
                 switch (option) {
                     case 1:
+                        System.out.println();
+                        System.out.println("[❕] Creant nou alumne...");
                         studentController.createEntity(input.createStudent());
                         break;
                     case 2:
+                        System.out.println();
+                        System.out.println("[❕] Creant nous alumnes...");
                         studentController.createEntities(input.createStudents());
                         break;
                     default:
@@ -265,9 +281,13 @@ public class SerpisFPApplication extends AppProvider {
             case SUBJECT:
                 switch (option) {
                     case 1:
+                        System.out.println();
+                        System.out.println("[❕] Creant nou mòdul...");
                         subjectController.createEntity(input.createSubject());
                         break;
                     case 2:
+                        System.out.println();
+                        System.out.println("[❕] Creant nous mòduls...");
                         subjectController.createEntities(input.createSubjects());
                         break;
                     default:
@@ -278,9 +298,13 @@ public class SerpisFPApplication extends AppProvider {
             case ENROLLMENT:
                 switch (option) {
                     case 1:
+                        System.out.println();
+                        System.out.println("[❕] Creant nova matrícula...");
                         enrollmentController.createEntity(input.createEnrollment());
                         break;
                     case 2:
+                        System.out.println();
+                        System.out.println("[❕] Creant noves matrícules...");
                         enrollmentController.createEntities(input.createEnrollments());
                         break;
                     default:
@@ -301,12 +325,18 @@ public class SerpisFPApplication extends AppProvider {
             case GROUP:
                 switch (option) {
                     case 1:
+                        System.out.println();
+                        System.out.println("[❕] Llegint un grup...");
                         groupController.readEntityById(input.getInt("Introdueix un id (CODGRUPO): "));
                         break;
                     case 2:
+                        System.out.println();
+                        System.out.println("[❕] Llegint varios grups...");
                         groupController.readEntitiesById(input.getInts("Introdueix un id (CODGRUPO): "));
                         break;
                     case 3:
+                        System.out.println();
+                        System.out.println("[❕] Llegint tots els grups...");
                         groupController.readAllEntities();
                         break;
                     default:
@@ -317,12 +347,18 @@ public class SerpisFPApplication extends AppProvider {
             case PROJECT:
                 switch (option) {
                     case 1:
+                        System.out.println();
+                        System.out.println("[❕] Llegint un projecte...");
                         projectController.readEntityById(input.getString("Introdueix un id (CODPROYECTO): "));
                         break;
                     case 2:
+                        System.out.println();
+                        System.out.println("[❕] Llegint varios projectes...");
                         projectController.readEntitiesById(input.getStrings("Introdueix un id (CODPROYECTO): "));
                         break;
                     case 3:
+                        System.out.println();
+                        System.out.println("[❕] Llegint tots els projectes...");
                         projectController.readAllEntities();
                         break;
                     default:
@@ -333,12 +369,18 @@ public class SerpisFPApplication extends AppProvider {
             case STUDENT:
                 switch (option) {
                     case 1:
+                        System.out.println();
+                        System.out.println("[❕] Llegint un alumne...");
                         studentController.readEntityById(input.getString("Introdueix un id (NIA): "));
                         break;
                     case 2:
+                        System.out.println();
+                        System.out.println("[❕] Llegint varios alumnes...");
                         studentController.readEntitiesById(input.getStrings("Introdueix un id (NIA): "));
                         break;
                     case 3:
+                        System.out.println();
+                        System.out.println("[❕] Llegint tots els alumnes...");
                         studentController.readAllEntities();
                         break;
                     default:
@@ -349,12 +391,18 @@ public class SerpisFPApplication extends AppProvider {
             case SUBJECT:
                 switch (option) {
                     case 1:
+                        System.out.println();
+                        System.out.println("[❕] Llegint un mòdul...");
                         subjectController.readEntityById(input.getString("Introdueix un id (CODMODULO): "));
                         break;
                     case 2:
+                        System.out.println();
+                        System.out.println("[❕] Llegint varios mòduls...");
                         subjectController.readEntitiesById(input.getStrings("Introdueix un id (CODMODULO): "));
                         break;
                     case 3:
+                        System.out.println();
+                        System.out.println("[❕] Llegint tots els mòduls...");
                         subjectController.readAllEntities();
                         break;
                     default:
@@ -365,12 +413,18 @@ public class SerpisFPApplication extends AppProvider {
             case ENROLLMENT:
                 switch (option) {
                     case 1:
+                        System.out.println();
+                        System.out.println("[❕] Llegint una matrícula...");
                         enrollmentController.readEntityById(input.getInt("Introdueix un id (IDMATRICULA): "));
                         break;
                     case 2:
+                        System.out.println();
+                        System.out.println("[❕] Llegint varies matrícules...");
                         enrollmentController.readEntitiesById(input.getInts("Introdueix un id (IDMATRICULA): "));
                         break;
                     case 3:
+                        System.out.println();
+                        System.out.println("[❕] Llegint totes les matrícules...");
                         enrollmentController.readAllEntities();
                         break;
                     default:
@@ -390,9 +444,13 @@ public class SerpisFPApplication extends AppProvider {
             case GROUP:
                 switch (option) {
                     case 1:
+                        System.out.println();
+                        System.out.println("[❕] Actualitzant un grup...");
                         groupController.updateEntityById(input.createGroup(), input.getInt("Introdueix un id (CODGRUPO): "));
                         break;
                     case 2:
+                        System.out.println();
+                        System.out.println("[❕] Actualitzant varios grups...");
                         groupController.updateEntitiesById(input.createGroups(), input.getInts("Introdueix un id (CODGRUPO): "));
                         break;
                     default:
@@ -403,9 +461,13 @@ public class SerpisFPApplication extends AppProvider {
             case PROJECT:
                 switch (option) {
                     case 1:
+                        System.out.println();
+                        System.out.println("[❕] Actualitzant un projecte...");
                         projectController.updateEntityById(input.createProject(), input.getString("Introdueix un id (CODPROYECTO): "));
                         break;
                     case 2:
+                        System.out.println();
+                        System.out.println("[❕] Actualitzant varios projectes...");
                         projectController.updateEntitiesById(input.createProjects(), input.getStrings("Introdueix un id (CODPROYECTO): "));
                         break;
                     default:
@@ -416,9 +478,13 @@ public class SerpisFPApplication extends AppProvider {
             case STUDENT:
                 switch (option) {
                     case 1:
+                        System.out.println();
+                        System.out.println("[❕] Actualitzant un alumne...");
                         studentController.updateEntityById(input.createStudent(), input.getString("Introdueix un id (NIA): "));
                         break;
                     case 2:
+                        System.out.println();
+                        System.out.println("[❕] Actualitzant varios alumnes...");
                         studentController.updateEntitiesById(input.createStudents(), input.getStrings("Introdueix un id (NIA): "));
                         break;
                     default:
@@ -429,9 +495,13 @@ public class SerpisFPApplication extends AppProvider {
             case SUBJECT:
                 switch (option) {
                     case 1:
+                        System.out.println();
+                        System.out.println("[❕] Actualitzant un mòdul...");
                         subjectController.updateEntityById(input.createSubject(), input.getString("Introdueix un id (CODMODULO): "));
                         break;
                     case 2:
+                        System.out.println();
+                        System.out.println("[❕] Actualitzant varios mòduls...");
                         subjectController.updateEntitiesById(input.createSubjects(), input.getStrings("Introdueix un id (CODMODULO): "));
                         break;
                     default:
@@ -442,9 +512,13 @@ public class SerpisFPApplication extends AppProvider {
             case ENROLLMENT:
                 switch (option) {
                     case 1:
+                        System.out.println();
+                        System.out.println("[❕] Actualitzant una matrícula...");
                         enrollmentController.updateEntityById(input.createEnrollment(), input.getInt("Introdueix un id (IDMATRICULA): "));
                         break;
                     case 2:
+                        System.out.println();
+                        System.out.println("[❕] Actualitzant varies matrícules...");
                         enrollmentController.updateEntitiesById(input.createEnrollments(), input.getInts("Introdueix un id (IDMATRICULA): "));
                         break;
                     default:
@@ -464,12 +538,18 @@ public class SerpisFPApplication extends AppProvider {
             case GROUP: {
                 switch (option) {
                     case 1:
+                        System.out.println();
+                        System.out.println("[❕] Esborrant un grup...");
                         groupController.deleteEntityById(input.getInt("Introdueix un id (CODGRUPO): "));
                         break;
                     case 2:
+                        System.out.println();
+                        System.out.println("[❕] Esborrant varios grups...");
                         groupController.deleteEntitiesById(input.getInts("Introdueix un id (CODGRUPO): "));
                         break;
                     case 3:
+                        System.out.println();
+                        System.out.println("[❕] Esborrant tots els grups...");
                         groupController.deleteAllEntities();
                         break;
                     default:
@@ -481,12 +561,18 @@ public class SerpisFPApplication extends AppProvider {
             case PROJECT: {
                 switch (option) {
                     case 1:
+                        System.out.println();
+                        System.out.println("[❕] Esborrant un projecte...");
                         projectController.deleteEntityById(input.getString("Introdueix un id (CODPROYECTO): "));
                         break;
                     case 2:
+                        System.out.println();
+                        System.out.println("[❕] Esborrant varios projectes...");
                         projectController.deleteEntitiesById(input.getStrings("Introdueix un id (CODPROYECTO): "));
                         break;
                     case 3:
+                        System.out.println();
+                        System.out.println("[❕] Esborrant tots els projectes...");
                         projectController.deleteAllEntities();
                         break;
                     default:
@@ -498,12 +584,18 @@ public class SerpisFPApplication extends AppProvider {
             case STUDENT: {
                 switch (option) {
                     case 1:
+                        System.out.println();
+                        System.out.println("[❕] Esborrant un alumne...");
                         studentController.deleteEntityById(input.getString("Introdueix un id (NIA): "));
                         break;
                     case 2:
+                        System.out.println();
+                        System.out.println("[❕] Esborrant varios alumnes...");
                         studentController.deleteEntitiesById(input.getStrings("Introdueix un id (NIA): "));
                         break;
                     case 3:
+                        System.out.println();
+                        System.out.println("[❕] Esborrant tots els alumnes...");
                         studentController.deleteAllEntities();
                         break;
                     default:
@@ -515,12 +607,18 @@ public class SerpisFPApplication extends AppProvider {
             case SUBJECT: {
                 switch (option) {
                     case 1:
+                        System.out.println();
+                        System.out.println("[❕] Esborrant un mòdul...");
                         subjectController.deleteEntityById(input.getString("Introdueix un id (CODMODULO): "));
                         break;
                     case 2:
+                        System.out.println();
+                        System.out.println("[❕] Esborrant varios mòduls...");
                         subjectController.deleteEntitiesById(input.getStrings("Introdueix un id (CODMODULO): "));
                         break;
                     case 3:
+                        System.out.println();
+                        System.out.println("[❕] Esborrant tots els mòduls...");
                         subjectController.deleteAllEntities();
                         break;
                     default:
@@ -532,12 +630,18 @@ public class SerpisFPApplication extends AppProvider {
             case ENROLLMENT: {
                 switch (option) {
                     case 1:
+                        System.out.println();
+                        System.out.println("[❕] Esborrant una matrícula...");
                         enrollmentController.deleteEntityById(input.getInt("Introdueix un id (IDMATRICULA): "));
                         break;
                     case 2:
+                        System.out.println();
+                        System.out.println("[❕] Esborrant varies matrícules...");
                         enrollmentController.deleteEntitiesById(input.getInts("Introdueix un id (IDMATRICULA): "));
                         break;
                     case 3:
+                        System.out.println();
+                        System.out.println("[❕] Esborrant totes les matrícules...");
                         enrollmentController.deleteAllEntities();
                         break;
                     default:

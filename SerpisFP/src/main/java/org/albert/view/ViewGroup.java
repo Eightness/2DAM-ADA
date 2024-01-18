@@ -1,6 +1,7 @@
 package org.albert.view;
 
 import org.albert.model.Group;
+import org.albert.model.Student;
 import org.albert.providers.ViewInterface;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public class ViewGroup implements ViewInterface<Group> {
             System.out.format("| %-10s | %-16s | %-11s |%n", group.getGroupCode(), group.getDescription(), group.getClassroom());
             System.out.format("+------------+------------------+-------------+%n");
         } else {
-            System.out.println("[!] ERROR! No s'ha pogut mostrar el grup.");
+            System.out.println("[❌] ERROR! No s'ha pogut mostrar el grup.");
         }
     }
 
@@ -32,7 +33,7 @@ public class ViewGroup implements ViewInterface<Group> {
 
             System.out.format("+------------+------------------+-------------+%n");
         } else {
-            System.out.println("[!] ERROR! No s'han pogut mostrar els grups.");
+            System.out.println("[❌] ERROR! No s'han pogut mostrar els grups.");
         }
     }
 }

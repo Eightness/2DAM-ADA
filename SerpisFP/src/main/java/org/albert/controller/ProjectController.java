@@ -22,16 +22,19 @@ public class ProjectController extends ControllerManager implements CRUDInterfac
 
     @Override
     public Project readEntityById(String primaryKey) {
+        viewProject.showEntity(projectDAO.readEntityById(primaryKey));
         return projectDAO.readEntityById(primaryKey);
     }
 
     @Override
     public List<Project> readEntitiesById(List<String> primaryKeys) {
+        viewProject.showEntities(projectDAO.readEntitiesById(primaryKeys));
         return projectDAO.readEntitiesById(primaryKeys);
     }
 
     @Override
     public List<Project> readAllEntities() {
+        viewProject.showEntities(projectDAO.readAllEntities());
         return projectDAO.readAllEntities();
     }
 
