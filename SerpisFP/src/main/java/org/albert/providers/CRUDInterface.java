@@ -24,6 +24,7 @@ public interface CRUDInterface<E, PK> {
     //Delete methods.
     void deleteEntityById(PK primaryKey);
     void deleteEntitiesById(List<PK> primaryKeys);
+    void deleteAllEntities();
 
     //Useful methods.
     boolean exists(PK primaryKey);

@@ -55,6 +55,11 @@ public class EnrollmentDAO extends DAOManager implements CRUDInterface<Enrollmen
     }
 
     @Override
+    public void deleteAllEntities() {
+
+    }
+
+    @Override
     public boolean exists(Integer primaryKey) {
         return false;
     }

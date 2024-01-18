@@ -20,7 +20,7 @@ public class GroupDAO extends DAOManager implements CRUDInterface<Group, Integer
     @Override
     public void createEntity(Group entity) {
         if (exists(entity.getGroupCode())) {
-            System.out.println("[!] ERROR! Ja existeix un grup amb id (CODGRUPO) " + entity.getGroupCode() + ".");
+            System.out.println("[❌] ERROR! Ja existeix un grup amb id (CODGRUPO) " + entity.getGroupCode() + ".");
             return;
         }
         try {
@@ -29,12 +29,12 @@ public class GroupDAO extends DAOManager implements CRUDInterface<Group, Integer
             entityManager.persist(entity);
 
             entityTransaction.commit();
-            System.out.println("[!] S'ha afegit el nou grup correctament.");
+            System.out.println("[✅] S'ha afegit el nou grup correctament.");
         } catch (Exception e) {
             if (entityTransaction != null && entityTransaction.isActive()) {
                 entityTransaction.rollback();
             }
-            System.out.println("[!] ERROR! No s'ha pogut afegir el nou grup correctament. Motiu: " + e.getMessage());
+            System.out.println("[❌] ERROR! No s'ha pogut afegir el nou grup correctament. Motiu: " + e.getMessage());
         }
     }
 
@@ -50,7 +50,7 @@ public class GroupDAO extends DAOManager implements CRUDInterface<Group, Integer
         try {
             return entityManager.find(Group.class, primaryKey);
         } catch (Exception e) {
-            System.out.println("[!] ERROR! No s'ha pogut llegir el grup amb id (CODGRUPO) " + primaryKey + ". Motiu: " + e.getMessage());
+            System.out.println("[❌] ERROR! No s'ha pogut llegir el grup amb id (CODGRUPO) " + primaryKey + ". Motiu: " + e.getMessage());
             return null;
         }
     }
@@ -66,7 +66,7 @@ public class GroupDAO extends DAOManager implements CRUDInterface<Group, Integer
                 }
             }
         } catch (Exception e) {
-            System.out.println("[!] ERROR! No s'ha pogut llegir alguns grups. Motiu: " + e.getMessage());
+            System.out.println("[❌] ERROR! No s'ha pogut llegir alguns grups. Motiu: " + e.getMessage());
         }
         return groups;
     }
@@ -82,7 +82,7 @@ public class GroupDAO extends DAOManager implements CRUDInterface<Group, Integer
             TypedQuery<Group> typedQuery = entityManager.createQuery(criteriaQuery);
             return typedQuery.getResultList();
         } catch (Exception e) {
-            System.out.println("[!] ERROR! No s'han pogut llegir tots els grups. Motiu: " + e.getMessage());
+            System.out.println("[❌] ERROR! No s'han pogut llegir tots els grups. Motiu: " + e.getMessage());
             return null;
         }
     }
@@ -98,23 +98,23 @@ public class GroupDAO extends DAOManager implements CRUDInterface<Group, Integer
                 existingGroup.setClassroom(entity.getClassroom());
 
                 entityTransaction.commit();
-                System.out.println("[!] S'ha actualitzat el grup amb id (CODGRUPO) " + primaryKey + " correctament.");
+                System.out.println("[✅] S'ha actualitzat el grup amb id (CODGRUPO) " + primaryKey + " correctament.");
             } else {
                 entityTransaction.rollback();
-                System.out.println("[!] ERROR! No s'ha trobat cap grup amb id (CODGRUPO) " + primaryKey + ".");
+                System.out.println("[❌] ERROR! No s'ha trobat cap grup amb id (CODGRUPO) " + primaryKey + ".");
             }
         } catch (Exception e) {
             if (entityTransaction != null && entityTransaction.isActive()) {
                 entityTransaction.rollback();
             }
-            System.out.println("[!] ERROR! No s'ha pogut actualitzar el grup amb id (CODGRUPO) " + primaryKey + ". Motiu: " + e.getMessage());
+            System.out.println("[❌] ERROR! No s'ha pogut actualitzar el grup amb id (CODGRUPO) " + primaryKey + ". Motiu: " + e.getMessage());
         }
     }
 
     @Override
     public void updateEntitiesById(List<Group> entities, List<Integer> primaryKeys) {
         if (entities.size() != primaryKeys.size()) {
-            System.out.println("[!] ERROR! La llista d'entitats i la llista de claus primàries tenen mides diferents.");
+            System.out.println("[❌] ERROR! La llista d'entitats i la llista de claus primàries tenen mides diferents.");
             return;
         }
 
@@ -132,16 +132,16 @@ public class GroupDAO extends DAOManager implements CRUDInterface<Group, Integer
             if (group != null) {
                 entityManager.remove(group);
                 entityTransaction.commit();
-                System.out.println("[!] S'ha eliminat el grup amb id (CODGRUPO) " + primaryKey + " correctament.");
+                System.out.println("[✅] S'ha eliminat el grup amb id (CODGRUPO) " + primaryKey + " correctament.");
             } else {
                 entityTransaction.rollback();
-                System.out.println("[!] ERROR! No s'ha trobat cap grup amb id (CODGRUPO) " + primaryKey + ".");
+                System.out.println("[❌] ERROR! No s'ha trobat cap grup amb id (CODGRUPO) " + primaryKey + ".");
             }
         } catch (Exception e) {
             if (entityTransaction != null && entityTransaction.isActive()) {
                 entityTransaction.rollback();
             }
-            System.out.println("[!] ERROR! No s'ha pogut eliminar el grup amb id (CODGRUPO) " + primaryKey + ". Motiu: " + e.getMessage());
+            System.out.println("[❌] ERROR! No s'ha pogut eliminar el grup amb id (CODGRUPO) " + primaryKey + ". Motiu: " + e.getMessage());
         }
     }
 
@@ -149,6 +149,23 @@ public class GroupDAO extends DAOManager implements CRUDInterface<Group, Integer
     public void deleteEntitiesById(List<Integer> primaryKeys) {
         for (Integer primaryKey : primaryKeys) {
             deleteEntityById(primaryKey);
+        }
+    }
+
+    @Override
+    public void deleteAllEntities() {
+        try {
+            entityTransaction.begin();
+
+            entityManager.createQuery("DELETE FROM Group").executeUpdate();
+
+            entityTransaction.commit();
+            System.out.println("[✅] S'han eliminat tots els registres de grups.");
+        } catch (Exception e) {
+            if (entityTransaction != null && entityTransaction.isActive()) {
+                entityTransaction.rollback();
+            }
+            System.out.println("[❌] ERROR! No s'han pogut eliminar tots els registres de grups. Motiu: " + e.getMessage());
         }
     }
 
@@ -162,7 +179,7 @@ public class GroupDAO extends DAOManager implements CRUDInterface<Group, Integer
 
             return count > 0;
         } catch (Exception e) {
-            System.out.println("[!] No s'ha pogut verificar la existència del grup. Motiu: " + e.getMessage());
+            System.out.println("[❌] No s'ha pogut verificar la existència del grup. Motiu: " + e.getMessage());
             return false;
         }
     }

@@ -56,6 +56,11 @@ public class SubjectController extends ControllerManager implements CRUDInterfac
     }
 
     @Override
+    public void deleteAllEntities() {
+        subjectDAO.deleteAllEntities();
+    }
+
+    @Override
     public boolean exists(String primaryKey) {
         return false;
     }

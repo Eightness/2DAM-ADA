@@ -34,6 +34,7 @@ public class GroupController extends ControllerManager implements CRUDInterface<
 
     @Override
     public List<Group> readAllEntities() {
+        viewGroup.showEntities(groupDAO.readAllEntities());
         return groupDAO.readAllEntities();
     }
 
@@ -55,6 +56,11 @@ public class GroupController extends ControllerManager implements CRUDInterface<
     @Override
     public void deleteEntitiesById(List<Integer> primaryKeys) {
         groupDAO.deleteEntitiesById(primaryKeys);
+    }
+
+    @Override
+    public void deleteAllEntities() {
+        groupDAO.deleteAllEntities();
     }
 
     @Override

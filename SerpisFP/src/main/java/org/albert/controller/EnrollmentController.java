@@ -56,6 +56,11 @@ public class EnrollmentController extends ControllerManager implements CRUDInter
     }
 
     @Override
+    public void deleteAllEntities() {
+        enrollmentDAO.deleteAllEntities();
+    }
+
+    @Override
     public boolean exists(Integer primaryKey) {
         return enrollmentDAO.exists(primaryKey);
     }

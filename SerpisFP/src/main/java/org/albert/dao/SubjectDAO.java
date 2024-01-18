@@ -56,6 +56,11 @@ public class SubjectDAO extends DAOManager implements CRUDInterface<Subject, Str
     }
 
     @Override
+    public void deleteAllEntities() {
+
+    }
+
+    @Override
     public boolean exists(String primaryKey) {
         return false;
     }

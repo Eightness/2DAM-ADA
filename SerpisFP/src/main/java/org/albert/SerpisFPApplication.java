@@ -1,5 +1,6 @@
 package org.albert;
 
+import lombok.Getter;
 import org.albert.providers.AppProvider;
 import java.util.ArrayList;
 
@@ -13,6 +14,7 @@ public class SerpisFPApplication extends AppProvider {
     private static boolean actionMenu = true;
     private static ArrayList<Integer> itemsCount;
 
+    @Getter
     public enum Entity {
         GROUP("GRUP"),
         PROJECT("PROJECTE"),
@@ -25,10 +27,6 @@ public class SerpisFPApplication extends AppProvider {
         Entity(String entityName) {
             this.entityName = entityName;
         }
-
-        public String getEntityName() {
-            return entityName;
-        }
     }
 
     //Methods.
@@ -39,7 +37,9 @@ public class SerpisFPApplication extends AppProvider {
     //Start.
     public static void start() {
         //Gathering necessary data.
-        System.out.println("[!] Conexió a la base de dades realitzada amb èxit.");
+        System.out.println("[✅] Conexió a la base de dades realitzada amb èxit.");
+        genericController.deleteAllItemsFromDatabase(); //Delete this line if you want to save changes into the DB.
+        genericController.loadDemoData();
         getItemsCountFromDatabase();
 
         //Welcome message.
@@ -168,6 +168,9 @@ public class SerpisFPApplication extends AppProvider {
                 readActions(entityName, 2);
                 break;
             case 3:
+                readActions(entityName, 3);
+                break;
+            case 4:
                 actionMenu = false;
                 break;
             default:
@@ -204,6 +207,9 @@ public class SerpisFPApplication extends AppProvider {
                 deleteActions(entityName, 2);
                 break;
             case 3:
+                deleteActions(entityName, 3);
+                break;
+            case 4:
                 actionMenu = false;
                 break;
             default:
@@ -300,6 +306,9 @@ public class SerpisFPApplication extends AppProvider {
                     case 2:
                         groupController.readEntitiesById(input.getInts("Introdueix un id (CODGRUPO): "));
                         break;
+                    case 3:
+                        groupController.readAllEntities();
+                        break;
                     default:
                         System.out.println("Algo ha fallat.");
                         break;
@@ -312,6 +321,9 @@ public class SerpisFPApplication extends AppProvider {
                         break;
                     case 2:
                         projectController.readEntitiesById(input.getStrings("Introdueix un id (CODPROYECTO): "));
+                        break;
+                    case 3:
+                        projectController.readAllEntities();
                         break;
                     default:
                         System.out.println("Algo ha fallat.");
@@ -326,6 +338,9 @@ public class SerpisFPApplication extends AppProvider {
                     case 2:
                         studentController.readEntitiesById(input.getStrings("Introdueix un id (NIA): "));
                         break;
+                    case 3:
+                        studentController.readAllEntities();
+                        break;
                     default:
                         System.out.println("Algo ha fallat.");
                         break;
@@ -339,6 +354,9 @@ public class SerpisFPApplication extends AppProvider {
                     case 2:
                         subjectController.readEntitiesById(input.getStrings("Introdueix un id (CODMODULO): "));
                         break;
+                    case 3:
+                        subjectController.readAllEntities();
+                        break;
                     default:
                         System.out.println("Algo ha fallat.");
                         break;
@@ -351,6 +369,9 @@ public class SerpisFPApplication extends AppProvider {
                         break;
                     case 2:
                         enrollmentController.readEntitiesById(input.getInts("Introdueix un id (IDMATRICULA): "));
+                        break;
+                    case 3:
+                        enrollmentController.readAllEntities();
                         break;
                     default:
                         System.out.println("Algo ha fallat.");
@@ -440,47 +461,94 @@ public class SerpisFPApplication extends AppProvider {
     private static void deleteActions(Entity entityName, int option) {
         actionMenu = false;
         switch (entityName) {
-            case GROUP : {
+            case GROUP: {
                 switch (option) {
-                    case 1 : groupController.deleteEntityById(input.getInt("Introdueix un id (CODGRUPO): ")); break;
-                    case 2 : groupController.deleteEntitiesById(input.getInts("Introdueix un id (CODGRUPO): ")); break;
-                    default : System.out.println("Opció introduïda invàlida.");
+                    case 1:
+                        groupController.deleteEntityById(input.getInt("Introdueix un id (CODGRUPO): "));
+                        break;
+                    case 2:
+                        groupController.deleteEntitiesById(input.getInts("Introdueix un id (CODGRUPO): "));
+                        break;
+                    case 3:
+                        groupController.deleteAllEntities();
+                        break;
+                    default:
+                        System.out.println("Opció introduïda invàlida.");
+                        break;
                 }
                 break;
             }
-            case PROJECT : {
+            case PROJECT: {
                 switch (option) {
-                    case 1 : projectController.deleteEntityById(input.getString("Introdueix un id (CODPROYECTO): ")); break;
-                    case 2 : projectController.deleteEntitiesById(input.getStrings("Introdueix un id (CODPROYECTO): ")); break;
-                    default : System.out.println("Opció introduïda invàlida.");
+                    case 1:
+                        projectController.deleteEntityById(input.getString("Introdueix un id (CODPROYECTO): "));
+                        break;
+                    case 2:
+                        projectController.deleteEntitiesById(input.getStrings("Introdueix un id (CODPROYECTO): "));
+                        break;
+                    case 3:
+                        projectController.deleteAllEntities();
+                        break;
+                    default:
+                        System.out.println("Opció introduïda invàlida.");
+                        break;
                 }
                 break;
             }
-            case STUDENT : {
+            case STUDENT: {
                 switch (option) {
-                    case 1 : studentController.deleteEntityById(input.getString("Introdueix un id (NIA): ")); break;
-                    case 2 : studentController.deleteEntitiesById(input.getStrings("Introdueix un id (NIA): ")); break;
-                    default : System.out.println("Opció introduïda invàlida.");
+                    case 1:
+                        studentController.deleteEntityById(input.getString("Introdueix un id (NIA): "));
+                        break;
+                    case 2:
+                        studentController.deleteEntitiesById(input.getStrings("Introdueix un id (NIA): "));
+                        break;
+                    case 3:
+                        studentController.deleteAllEntities();
+                        break;
+                    default:
+                        System.out.println("Opció introduïda invàlida.");
+                        break;
                 }
                 break;
             }
-            case SUBJECT : {
+            case SUBJECT: {
                 switch (option) {
-                    case 1 : subjectController.deleteEntityById(input.getString("Introdueix un id (CODMODULO): ")); break;
-                    case 2 : subjectController.deleteEntitiesById(input.getStrings("Introdueix un id (CODMODULO): ")); break;
-                    default : System.out.println("Opció introduïda invàlida.");
+                    case 1:
+                        subjectController.deleteEntityById(input.getString("Introdueix un id (CODMODULO): "));
+                        break;
+                    case 2:
+                        subjectController.deleteEntitiesById(input.getStrings("Introdueix un id (CODMODULO): "));
+                        break;
+                    case 3:
+                        subjectController.deleteAllEntities();
+                        break;
+                    default:
+                        System.out.println("Opció introduïda invàlida.");
+                        break;
                 }
                 break;
             }
-            case ENROLLMENT : {
+            case ENROLLMENT: {
                 switch (option) {
-                    case 1 : enrollmentController.deleteEntityById(input.getInt("Introdueix un id (IDMATRICULA): ")); break;
-                    case 2 : enrollmentController.deleteEntitiesById(input.getInts("Introdueix un id (IDMATRICULA): ")); break;
-                    default : System.out.println("Opció introduïda invàlida.");
+                    case 1:
+                        enrollmentController.deleteEntityById(input.getInt("Introdueix un id (IDMATRICULA): "));
+                        break;
+                    case 2:
+                        enrollmentController.deleteEntitiesById(input.getInts("Introdueix un id (IDMATRICULA): "));
+                        break;
+                    case 3:
+                        enrollmentController.deleteAllEntities();
+                        break;
+                    default:
+                        System.out.println("Opció introduïda invàlida.");
+                        break;
                 }
                 break;
             }
-            default : System.out.println("Algo ha fallat.");
+            default:
+                System.out.println("Algo ha fallat.");
+                break;
         }
         getItemsCountFromDatabase();
     }

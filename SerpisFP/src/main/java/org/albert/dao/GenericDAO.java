@@ -32,9 +32,9 @@ public class GenericDAO extends DAOManager {
             long enrollmentCount = (long) entityManager.createQuery("SELECT COUNT(en) FROM Enrollment en").getSingleResult();
             itemsCount.add((int) enrollmentCount);
 
-            System.out.println("[!] S'han actualitzat els comptadors d'elements correctament.");
+            System.out.println("[✅] S'han actualitzat els comptadors d'elements.");
         } catch (Exception e) {
-            System.out.println("[!] ERROR! No s'han pogut obtenir els comptadors d'elements. Motiu: " + e.getMessage());
+            System.out.println("[❌] ERROR! No s'han pogut obtenir els comptadors d'elements. Motiu: " + e.getMessage());
         }
 
         return itemsCount;
@@ -52,12 +52,12 @@ public class GenericDAO extends DAOManager {
             entityManager.createQuery("DELETE FROM Subject").executeUpdate();
 
             entityTransaction.commit();
-            System.out.println("[!] S'han eliminat tots els registres de totes les taules correctament.");
+            System.out.println("[✅] S'han eliminat tots els registres de totes les taules.");
         } catch (Exception e) {
             if (entityTransaction != null && entityTransaction.isActive()) {
                 entityTransaction.rollback();
             }
-            System.out.println("[!] ERROR! No s'han pogut eliminar tots els registres de totes les taules. Motiu: " + e.getMessage());
+            System.out.println("[❌] ERROR! No s'han pogut eliminar tots els registres de totes les taules. Motiu: " + e.getMessage());
         }
     }
 

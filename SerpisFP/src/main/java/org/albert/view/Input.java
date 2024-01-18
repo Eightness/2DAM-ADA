@@ -109,6 +109,7 @@ public class Input {
 
     //ENTITY GROUP.
     public Group createGroup() {
+        System.out.println();
         System.out.println("[!] Introdueix les dades del nou grup:");
         int groupCode = getInt("CODGRUPO: ");
         String description = getString("Descripció: ");

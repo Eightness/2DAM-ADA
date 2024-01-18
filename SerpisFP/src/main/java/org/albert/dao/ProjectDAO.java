@@ -56,6 +56,11 @@ public class ProjectDAO extends DAOManager implements CRUDInterface<Project, Str
     }
 
     @Override
+    public void deleteAllEntities() {
+
+    }
+
+    @Override
     public boolean exists(String primaryKey) {
         return false;
     }

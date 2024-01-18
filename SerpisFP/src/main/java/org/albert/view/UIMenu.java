@@ -123,8 +123,8 @@ public class UIMenu {
         System.out.println("+-------------------+-----------------------------------+");
         System.out.println("| Total ítems:\t" + itemsCount.get(0) + "\t| 1. Llegir un element.\t\t\t\t|");
         System.out.println("| Grups:\t\t" + itemsCount.get(1) + "\t| 2. Llegir varios elements.\t\t|");
-        System.out.println("| Projectes:\t" + itemsCount.get(2) + "\t| 3. Tornar.\t\t\t\t\t\t|");
-        System.out.println("| Alumnes:\t\t" + itemsCount.get(3) + "\t|\t\t\t\t\t\t\t\t\t|");
+        System.out.println("| Projectes:\t" + itemsCount.get(2) + "\t| 3. Llegir tots els elements.\t\t|");
+        System.out.println("| Alumnes:\t\t" + itemsCount.get(3) + "\t| 4. Tornar.\t\t\t\t\t\t|");
         System.out.println("| Mòduls:\t\t" + itemsCount.get(4) + "\t|\t\t\t\t\t\t\t\t\t|");
         System.out.println("| Matrícules:\t" + itemsCount.get(5) + "\t|\t\t\t\t\t\t\t\t\t|");
         System.out.println("+-------------------------------------------------------+");
@@ -161,8 +161,8 @@ public class UIMenu {
         System.out.println("+-------------------+-----------------------------------+");
         System.out.println("| Total ítems:\t" + itemsCount.get(0) + "\t| 1. Esborrar un element.\t\t\t|");
         System.out.println("| Grups:\t\t" + itemsCount.get(1) + "\t| 2. Esborrar varios elements.\t\t|");
-        System.out.println("| Projectes:\t" + itemsCount.get(2) + "\t| 3. Tornar.\t\t\t\t\t\t|");
-        System.out.println("| Alumnes:\t\t" + itemsCount.get(3) + "\t|\t\t\t\t\t\t\t\t\t|");
+        System.out.println("| Projectes:\t" + itemsCount.get(2) + "\t| 3. Esborrar tots els elements.\t|");
+        System.out.println("| Alumnes:\t\t" + itemsCount.get(3) + "\t| 4. Tornar.\t\t\t\t\t\t|");
         System.out.println("| Mòduls:\t\t" + itemsCount.get(4) + "\t|\t\t\t\t\t\t\t\t\t|");
         System.out.println("| Matrícules:\t" + itemsCount.get(5) + "\t|\t\t\t\t\t\t\t\t\t|");
         System.out.println("+-------------------------------------------------------+");

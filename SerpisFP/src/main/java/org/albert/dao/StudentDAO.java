@@ -58,6 +58,11 @@ public class StudentDAO extends DAOManager implements CRUDInterface<Student, Str
     }
 
     @Override
+    public void deleteAllEntities() {
+
+    }
+
+    @Override
     public boolean exists(String primaryKey) {
         return false;
     }

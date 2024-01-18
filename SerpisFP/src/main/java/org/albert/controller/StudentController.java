@@ -56,6 +56,11 @@ public class StudentController extends ControllerManager implements CRUDInterfac
     }
 
     @Override
+    public void deleteAllEntities() {
+        studentDAO.deleteAllEntities();
+    }
+
+    @Override
     public boolean exists(String primaryKey) {
         return studentDAO.exists(primaryKey);
     }

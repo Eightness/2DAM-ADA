@@ -56,6 +56,11 @@ public class ProjectController extends ControllerManager implements CRUDInterfac
     }
 
     @Override
+    public void deleteAllEntities() {
+        projectDAO.deleteAllEntities();
+    }
+
+    @Override
     public boolean exists(String primaryKey) {
         return projectDAO.exists(primaryKey);
     }
