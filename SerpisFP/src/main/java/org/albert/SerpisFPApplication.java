@@ -227,7 +227,7 @@ public class SerpisFPApplication extends AppProvider {
     private static void createActions(Entity entityName, int option) {
         actionMenu = false;
         System.out.println();
-        System.out.print("[❔] Recorda que l'ordre de creació per defecte (quan la BBDD està buida) és:");
+        System.out.println("[❔] Recorda que l'ordre de creació per defecte (quan la BBDD està buida) és:");
         System.out.println("1.GRUP > 2.ALUMNE > 3.PROJECTE/MÒDUL > 4.MATRÍCULA.");
         switch (entityName) {
             case GROUP:
