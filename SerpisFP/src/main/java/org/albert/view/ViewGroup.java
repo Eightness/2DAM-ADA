@@ -1,7 +1,6 @@
 package org.albert.view;
 
 import org.albert.model.Group;
-import org.albert.model.Student;
 import org.albert.providers.ViewInterface;
 
 import java.util.List;

@@ -1,8 +1,9 @@
 package org.albert.controller;
 
-import org.albert.model.*;
+import org.albert.SerpisFPApplication;
 import org.albert.providers.ControllerManager;
 
+import javax.persistence.Entity;
 import java.util.ArrayList;
 
 /**
@@ -20,5 +21,9 @@ public class GenericController extends ControllerManager {
 
     public void loadDemoData() {
         genericDAO.loadDemoData();
+    }
+
+    public boolean existsAtLeastOneEntityOf(String entityName) {
+        return genericDAO.existsAtLeastOneEntityOf(entityName);
     }
 }

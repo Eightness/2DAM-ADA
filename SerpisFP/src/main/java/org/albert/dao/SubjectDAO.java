@@ -19,6 +19,10 @@ public class SubjectDAO extends DAOManager implements CRUDInterface<Subject, Str
     //Methods.
     @Override
     public void createEntity(Subject entity) {
+        if (entity == null) {
+            System.out.println("[❌] ERROR! No s'ha creat correctament el mòdul.");
+            return;
+        }
         if (exists(entity.getSubjectCode())) {
             System.out.println("[❌] ERROR! Ja existeix un mòdul amb CODMODULO " + entity.getSubjectCode() + ".");
             return;

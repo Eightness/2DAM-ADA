@@ -2,8 +2,6 @@ package org.albert.view;
 
 import org.albert.model.*;
 import org.albert.providers.ControllerManager;
-
-import javax.ws.rs.core.StreamingOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -28,31 +26,7 @@ public class Input extends ControllerManager {
                 validated = true;
             } catch (Exception e) {
                 System.out.println();
-                System.out.println("[!] No s'ha introduït un nombre enter.");
-                scanner.nextLine();
-            }
-        }
-        scanner.nextLine();
-        return num;
-    }
-
-    public int getInt(String message, int firstOption, int secondOption) {
-        int num = 0;
-        boolean validated = false;
-        while(!validated) {
-            System.out.println();
-            System.out.print(message);
-            try {
-                num = scanner.nextInt();
-                if (num == 1 || num == 0) {
-                    validated = true;
-                } else {
-                    System.out.println();
-                    System.out.println("Per favor, introdueix " + firstOption + " o " + secondOption + ".");
-                }
-            } catch (Exception e) {
-                System.out.println();
-                System.out.println("[!] No s'ha introduït un nombre enter.");
+                System.out.println("[❗] No s'ha introduït un nombre enter.");
                 scanner.nextLine();
             }
         }
@@ -65,7 +39,7 @@ public class Input extends ControllerManager {
         boolean keepAsking = true;
 
         System.out.println();
-        System.out.println("Quan vulgues parar, introdueix un -1.");
+        System.out.println("[❔] Quan vulgues parar, introdueix un -1.");
         while(keepAsking) {
             int num = getInt(message);
             if (num == -1) {
@@ -78,33 +52,40 @@ public class Input extends ControllerManager {
         return nums;
     }
 
-    public double getDouble(String message) {
-        double num = 0.0;
-        boolean validated = false;
-        while(!validated) {
-            System.out.println();
-            System.out.print(message);
-            try {
-                num = scanner.nextDouble();
-                validated = true;
-            } catch (Exception e) {
-                System.out.println();
-                System.out.println("[!] No s'ha introduït un nombre real.");
-                scanner.nextLine();
-            }
-        }
-        scanner.nextLine();
-        return num;
-    }
-
-    public String getString(String message) {
+    public String getStringNotNull(String message) {
         System.out.println();
         System.out.print(message);
         return scanner.nextLine();
     }
 
-    public List<String> getStrings(String s) {
-        return null;
+    public String getStringNullable(String message) {
+        System.out.println();
+        System.out.print(message);
+        String response = scanner.nextLine();
+        if (response.isBlank()) {
+            return null;
+        } else {
+            return response;
+        }
+    }
+
+    public List<String> getStrings(String message) {
+        List<String> stringList = new ArrayList<>();
+        boolean keepAsking = true;
+
+        System.out.println();
+        System.out.println("[❔] Quan vulgues parar, introdueix una línia en blanc.");
+        while (keepAsking) {
+            String input = getStringNotNull(message);
+
+            if (input.isBlank()) {
+                keepAsking = false;
+            } else {
+                stringList.add(input);
+            }
+        }
+
+        return stringList;
     }
 
     //METHODS THAT REQUIRE USER'S INPUT.
@@ -113,10 +94,27 @@ public class Input extends ControllerManager {
     //ENTITY GROUP.
     public Group createGroup() {
         int groupCode = getInt("CODGRUPO: ");
-        String description = getString("Descripció: ");
-        String classroom = getString("Aula: ");
+        String description = getStringNotNull("Descripció: ");
+        String classroom = getStringNotNull("Aula: ");
 
-        return new Group(groupCode, description, classroom, new ArrayList<Student>());
+        if(genericDAO.existsAtLeastOneEntityOf("Student")) {
+            System.out.println();
+            System.out.print("[❔] Vols afegir algun/s estudiant/s ja existent/s al grup? (S/N): ");
+            String response = scanner.nextLine().trim().toUpperCase();
+
+            if (!response.equals("S")) {
+                return new Group(groupCode, description, classroom, new ArrayList<>());
+            } else {
+                System.out.println();
+                System.out.println("[❕] Aquests són els alumnes que ja existeixen: ");
+                viewStudent.showEntities(studentDAO.readAllEntities());
+                List<String> studentsNiaToAdd = getStrings("[❕] Per favor, introdueix el NIA dels alumnes que vulgues afegir al grup: ");
+                List<Student> selectedStudents = studentDAO.readEntitiesById(studentsNiaToAdd);
+                return new Group(groupCode, description, classroom, selectedStudents);
+            }
+        } else {
+                return new Group(groupCode, description, classroom, new ArrayList<>());
+        }
     }
 
     public List<Group> createGroups() {
@@ -139,14 +137,14 @@ public class Input extends ControllerManager {
 
     //ENTITY PROJECT.
     public Project createProject() {
-        String id = getString("CODPROYECTO: ");
-        String title = getString("Títol: ");
+        String id = getStringNotNull("CODPROYECTO: ");
+        String title = getStringNotNull("Títol: ");
 
         System.out.println();
         System.out.println("[❕] Alumnes en la base de dades: ");
         viewStudent.showEntities(studentDAO.readAllEntities());
 
-        String nia = getString("NIA alumne: ");
+        String nia = getStringNotNull("NIA alumne: ");
 
         Student student = studentDAO.readEntityById(nia);
 
@@ -165,7 +163,7 @@ public class Input extends ControllerManager {
             Project project = createProject();
             projects.add(project);
 
-            System.out.print("Vols afegir un altre projecte? (S/N): ");
+            System.out.print("[❔] Vols afegir un altre projecte? (S/N): ");
             String response = scanner.nextLine().trim().toUpperCase();
 
             if (!response.equals("S")) {
@@ -178,9 +176,12 @@ public class Input extends ControllerManager {
 
     //ENTITY STUDENT.
     public Student createStudent() {
-        String nia = getString("NIA: ");
-        String name = getString("Nom: ");
-        String surnames = getString("Cognoms: ");
+        if (!genericDAO.existsAtLeastOneEntityOf("Group")) {
+            return null;
+        }
+        String nia = getStringNotNull("NIA: ");
+        String name = getStringNotNull("Nom: ");
+        String surnames = getStringNotNull("Cognoms: ");
 
         System.out.println();
         System.out.println("[❕] Grups en la base de dades: ");
@@ -194,7 +195,7 @@ public class Input extends ControllerManager {
             System.out.println("[❕] Projectes en la base de dades: ");
             viewProject.showEntities(projectDAO.readAllEntities());
 
-            String projectId = getString("CODPROYECTO: ");
+            String projectId = getStringNotNull("CODPROYECTO: ");
             Project project = projectDAO.readEntityById(projectId);
 
             return new Student(nia, name, surnames, group, null, project);
@@ -212,7 +213,7 @@ public class Input extends ControllerManager {
             Student student = createStudent();
             students.add(student);
 
-            System.out.print("Vols afegir un altre estudiant? (S/N): ");
+            System.out.print("[❔] Vols afegir un altre estudiant? (S/N): ");
             String response = scanner.nextLine().trim().toUpperCase();
 
             if (!response.equals("S")) {
@@ -225,8 +226,8 @@ public class Input extends ControllerManager {
 
     //ENTITY SUBJECT.
     public Subject createSubject() {
-        String subjectCode = getString("CODMODULO: ");
-        String description = getString("Descripció: ");
+        String subjectCode = getStringNotNull("CODMODULO: ");
+        String description = getStringNotNull("Descripció: ");
         int numHours = getInt("Hores: ");
 
         return new Subject(subjectCode, description, numHours);
@@ -239,7 +240,7 @@ public class Input extends ControllerManager {
             Subject subject = createSubject();
             subjects.add(subject);
 
-            System.out.print("Vols afegir una altra assignatura? (S/N): ");
+            System.out.print("[❔] Vols afegir una altra assignatura? (S/N): ");
             String response = scanner.nextLine().trim().toUpperCase();
 
             if (!response.equals("S")) {
@@ -253,20 +254,20 @@ public class Input extends ControllerManager {
     //ENTITY ENROLLMENT.
     public Enrollment createEnrollment() {
         int enrollmentId = getInt("IDMATRICULA: ");
-        String description = getString("Descripció: ");
+        String description = getStringNotNull("Descripció: ");
 
         System.out.println();
         System.out.println("[❕] Alumnes en la base de dades: ");
         viewStudent.showEntities(studentDAO.readAllEntities());
 
-        String nia = getString("NIA: ");
+        String nia = getStringNotNull("NIA: ");
         Student student = studentDAO.readEntityById(nia);
 
         System.out.println();
         System.out.println("[❕] Mòduls en la base de dades: ");
         viewSubject.showEntities(subjectDAO.readAllEntities());
 
-        String subjectCode = getString("CODMODULO: ");
+        String subjectCode = getStringNotNull("CODMODULO: ");
         Subject subject = subjectDAO.readEntityById(subjectCode);
 
         if (student != null && subject != null) {
@@ -284,7 +285,7 @@ public class Input extends ControllerManager {
             Enrollment enrollment = createEnrollment();
             enrollments.add(enrollment);
 
-            System.out.print("Vols afegir una altra matrícula? (S/N): ");
+            System.out.print("[❔] Vols afegir una altra matrícula? (S/N): ");
             String response = scanner.nextLine().trim().toUpperCase();
 
             if (!response.equals("S")) {

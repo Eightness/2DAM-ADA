@@ -19,6 +19,10 @@ public class EnrollmentDAO extends DAOManager implements CRUDInterface<Enrollmen
     //Methods.
     @Override
     public void createEntity(Enrollment entity) {
+        if (entity == null) {
+            System.out.println("[❌] ERROR! No s'ha creat correctament la matrícula.");
+            return;
+        }
         if (exists(entity.getId())) {
             System.out.println("[❌] ERROR! Ja existeix una matrícula amb IDMATRICULA " + entity.getId() + ".");
             return;

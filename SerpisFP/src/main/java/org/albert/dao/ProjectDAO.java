@@ -19,6 +19,10 @@ public class ProjectDAO extends DAOManager implements CRUDInterface<Project, Str
     //Methods.
     @Override
     public void createEntity(Project entity) {
+        if (entity == null) {
+            System.out.println("[❌] ERROR! No s'ha creat correctament el projecte.");
+            return;
+        }
         if (exists(entity.getId())) {
             System.out.println("[❌] ERROR! Ja existeix un projecte amb CODPROYECTO " + entity.getId() + ".");
             return;

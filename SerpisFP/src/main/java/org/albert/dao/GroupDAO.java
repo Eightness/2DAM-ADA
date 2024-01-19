@@ -19,6 +19,10 @@ public class GroupDAO extends DAOManager implements CRUDInterface<Group, Integer
     //Methods.
     @Override
     public void createEntity(Group entity) {
+        if (entity == null) {
+            System.out.println("[❌] ERROR! No s'ha creat correctament el grup.");
+            return;
+        }
         if (exists(entity.getGroupCode())) {
             System.out.println("[❌] ERROR! Ja existeix un grup amb id (CODGRUPO) " + entity.getGroupCode() + ".");
             return;

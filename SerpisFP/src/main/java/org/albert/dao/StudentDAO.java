@@ -19,6 +19,10 @@ public class StudentDAO extends DAOManager implements CRUDInterface<Student, Str
     //Methods.
     @Override
     public void createEntity(Student entity) {
+        if (entity == null) {
+            System.out.println("[❌] ERROR! No s'ha creat correctament l'alumne.");
+            return;
+        }
         if (exists(entity.getNia())) {
             System.out.println("[❌] ERROR! Ja existeix un alumne amb NIA " + entity.getNia() + ".");
             return;

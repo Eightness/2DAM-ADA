@@ -72,7 +72,7 @@ public class SerpisFPApplication extends AppProvider {
         subMenu = true;
         switch (input.getInt("Per favor, selecciona una opció: ")) {
             case 0:
-                String election = input.getString("[❗] Estas segur/a de voler esborrar totes les dades? 'OK' per confirmar o qualsevol altra cosa per a cancelar: ");
+                String election = input.getStringNotNull("[❗] Estas segur/a de voler esborrar totes les dades? 'OK' per confirmar o qualsevol altra cosa per a cancelar: ");
                 if (election.equalsIgnoreCase("OK")) {
                     genericController.deleteAllItemsFromDatabase();
                     getItemsCountFromDatabase();
@@ -226,6 +226,9 @@ public class SerpisFPApplication extends AppProvider {
     //Create Actions.
     private static void createActions(Entity entityName, int option) {
         actionMenu = false;
+        System.out.println();
+        System.out.print("[❔] Recorda que l'ordre de creació per defecte (quan la BBDD està buida) és:");
+        System.out.println("1.GRUP > 2.ALUMNE > 3.PROJECTE/MÒDUL > 4.MATRÍCULA.");
         switch (entityName) {
             case GROUP:
                 switch (option) {
@@ -349,7 +352,7 @@ public class SerpisFPApplication extends AppProvider {
                     case 1:
                         System.out.println();
                         System.out.println("[❕] Llegint un projecte...");
-                        projectController.readEntityById(input.getString("Introdueix un id (CODPROYECTO): "));
+                        projectController.readEntityById(input.getStringNotNull("Introdueix un id (CODPROYECTO): "));
                         break;
                     case 2:
                         System.out.println();
@@ -371,7 +374,7 @@ public class SerpisFPApplication extends AppProvider {
                     case 1:
                         System.out.println();
                         System.out.println("[❕] Llegint un alumne...");
-                        studentController.readEntityById(input.getString("Introdueix un id (NIA): "));
+                        studentController.readEntityById(input.getStringNotNull("Introdueix un id (NIA): "));
                         break;
                     case 2:
                         System.out.println();
@@ -393,7 +396,7 @@ public class SerpisFPApplication extends AppProvider {
                     case 1:
                         System.out.println();
                         System.out.println("[❕] Llegint un mòdul...");
-                        subjectController.readEntityById(input.getString("Introdueix un id (CODMODULO): "));
+                        subjectController.readEntityById(input.getStringNotNull("Introdueix un id (CODMODULO): "));
                         break;
                     case 2:
                         System.out.println();
@@ -463,7 +466,7 @@ public class SerpisFPApplication extends AppProvider {
                     case 1:
                         System.out.println();
                         System.out.println("[❕] Actualitzant un projecte...");
-                        projectController.updateEntityById(input.createProject(), input.getString("Introdueix un id (CODPROYECTO): "));
+                        projectController.updateEntityById(input.createProject(), input.getStringNotNull("Introdueix un id (CODPROYECTO): "));
                         break;
                     case 2:
                         System.out.println();
@@ -480,7 +483,7 @@ public class SerpisFPApplication extends AppProvider {
                     case 1:
                         System.out.println();
                         System.out.println("[❕] Actualitzant un alumne...");
-                        studentController.updateEntityById(input.createStudent(), input.getString("Introdueix un id (NIA): "));
+                        studentController.updateEntityById(input.createStudent(), input.getStringNotNull("Introdueix un id (NIA): "));
                         break;
                     case 2:
                         System.out.println();
@@ -497,7 +500,7 @@ public class SerpisFPApplication extends AppProvider {
                     case 1:
                         System.out.println();
                         System.out.println("[❕] Actualitzant un mòdul...");
-                        subjectController.updateEntityById(input.createSubject(), input.getString("Introdueix un id (CODMODULO): "));
+                        subjectController.updateEntityById(input.createSubject(), input.getStringNotNull("Introdueix un id (CODMODULO): "));
                         break;
                     case 2:
                         System.out.println();
@@ -563,7 +566,7 @@ public class SerpisFPApplication extends AppProvider {
                     case 1:
                         System.out.println();
                         System.out.println("[❕] Esborrant un projecte...");
-                        projectController.deleteEntityById(input.getString("Introdueix un id (CODPROYECTO): "));
+                        projectController.deleteEntityById(input.getStringNotNull("Introdueix un id (CODPROYECTO): "));
                         break;
                     case 2:
                         System.out.println();
@@ -586,7 +589,7 @@ public class SerpisFPApplication extends AppProvider {
                     case 1:
                         System.out.println();
                         System.out.println("[❕] Esborrant un alumne...");
-                        studentController.deleteEntityById(input.getString("Introdueix un id (NIA): "));
+                        studentController.deleteEntityById(input.getStringNotNull("Introdueix un id (NIA): "));
                         break;
                     case 2:
                         System.out.println();
@@ -609,7 +612,7 @@ public class SerpisFPApplication extends AppProvider {
                     case 1:
                         System.out.println();
                         System.out.println("[❕] Esborrant un mòdul...");
-                        subjectController.deleteEntityById(input.getString("Introdueix un id (CODMODULO): "));
+                        subjectController.deleteEntityById(input.getStringNotNull("Introdueix un id (CODMODULO): "));
                         break;
                     case 2:
                         System.out.println();

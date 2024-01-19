@@ -2,6 +2,8 @@ package org.albert.dao;
 
 import org.albert.model.*;
 import org.albert.providers.DAOManager;
+
+import javax.persistence.Entity;
 import javax.persistence.Query;
 import java.util.ArrayList;
 
@@ -65,9 +67,9 @@ public class GenericDAO extends DAOManager {
 
     public void loadDemoData() {
         //Creating groups.
-        Group group1 = new Group(1, "2DAMC", "16", new ArrayList<Student>());
-        Group group2 = new Group(2, "2DAMR", "15", new ArrayList<Student>());
-        Group group3 = new Group(3, "2ASIRC", "14", new ArrayList<Student>());
+        Group group1 = new Group(1, "2DAMC", "16", new ArrayList<>());
+        Group group2 = new Group(2, "2DAMR", "15", new ArrayList<>());
+        Group group3 = new Group(3, "2ASIRC", "14", new ArrayList<>());
 
         //Creating students.
         Student myself = new Student("1", "Albert", "Lozano Blasco", group1, null, null);
@@ -124,6 +126,25 @@ public class GenericDAO extends DAOManager {
             }
             System.out.println("[❌] ERROR! No s'han pogut carregar les dades per defecte. Motiu: " + e.getMessage());
         }
+    }
+
+    public boolean existsAtLeastOneEntityOf(String entityName) {
+        try {
+            entityTransaction.begin();
+
+            Long count = (Long) entityManager.createQuery("SELECT COUNT(e) FROM " + entityName + " e", Long.class)
+                    .getSingleResult();
+
+            entityTransaction.commit();
+
+            return count > 0;
+        } catch (Exception e) {
+            if (entityTransaction != null && entityTransaction.isActive()) {
+                entityTransaction.rollback();
+            }
+            System.out.println("[❌] ERROR! No s'ha pogut comprovar si hi ha mínim 1 registre en la BBDD. Motiu: " + e.getMessage());
+        }
+        return false;
     }
 
 }
