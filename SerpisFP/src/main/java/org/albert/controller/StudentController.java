@@ -67,4 +67,13 @@ public class StudentController extends ControllerManager implements CRUDInterfac
     public boolean exists(String primaryKey) {
         return studentDAO.exists(primaryKey);
     }
+
+    @Override
+    public boolean existsAtLeastOneEntry() {
+        return studentDAO.existsAtLeastOneEntry();
+    }
+
+    public List<Student> readAllStudentsWithoutAProject() {
+        return studentDAO.readAllStudentsWithoutAProject();
+    }
 }

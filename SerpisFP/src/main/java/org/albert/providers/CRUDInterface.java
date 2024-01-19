@@ -28,4 +28,5 @@ public interface CRUDInterface<E, PK> {
 
     //Useful methods.
     boolean exists(PK primaryKey);
+    boolean existsAtLeastOneEntry();
 }

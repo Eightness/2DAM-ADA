@@ -67,4 +67,9 @@ public class EnrollmentController extends ControllerManager implements CRUDInter
     public boolean exists(Integer primaryKey) {
         return enrollmentDAO.exists(primaryKey);
     }
+
+    @Override
+    public boolean existsAtLeastOneEntry() {
+        return enrollmentDAO.existsAtLeastOneEntry();
+    }
 }

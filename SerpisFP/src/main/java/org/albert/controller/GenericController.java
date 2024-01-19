@@ -1,10 +1,10 @@
 package org.albert.controller;
 
-import org.albert.SerpisFPApplication;
+import org.albert.model.Student;
 import org.albert.providers.ControllerManager;
 
-import javax.persistence.Entity;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class GenericController. Basic database operations.
@@ -24,6 +24,6 @@ public class GenericController extends ControllerManager {
     }
 
     public boolean existsAtLeastOneEntityOf(String entityName) {
-        return genericDAO.existsAtLeastOneEntityOf(entityName);
+        return genericDAO.existsAtLeastOneEntity(entityName);
     }
 }

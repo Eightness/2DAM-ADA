@@ -97,24 +97,7 @@ public class Input extends ControllerManager {
         String description = getStringNotNull("Descripció: ");
         String classroom = getStringNotNull("Aula: ");
 
-        if(genericDAO.existsAtLeastOneEntityOf("Student")) {
-            System.out.println();
-            System.out.print("[❔] Vols afegir algun/s estudiant/s ja existent/s al grup? (S/N): ");
-            String response = scanner.nextLine().trim().toUpperCase();
-
-            if (!response.equals("S")) {
-                return new Group(groupCode, description, classroom, new ArrayList<>());
-            } else {
-                System.out.println();
-                System.out.println("[❕] Aquests són els alumnes que ja existeixen: ");
-                viewStudent.showEntities(studentDAO.readAllEntities());
-                List<String> studentsNiaToAdd = getStrings("[❕] Per favor, introdueix el NIA dels alumnes que vulgues afegir al grup: ");
-                List<Student> selectedStudents = studentDAO.readEntitiesById(studentsNiaToAdd);
-                return new Group(groupCode, description, classroom, selectedStudents);
-            }
-        } else {
-                return new Group(groupCode, description, classroom, new ArrayList<>());
-        }
+        return new Group(groupCode, description, classroom, new ArrayList<>());
     }
 
     public List<Group> createGroups() {
@@ -137,14 +120,18 @@ public class Input extends ControllerManager {
 
     //ENTITY PROJECT.
     public Project createProject() {
+        if (studentDAO.readAllStudentsWithoutAProject().isEmpty()) {
+            System.out.println("[❌] No es pot crear un nou projecte. No hi ha alumnes sense projecte disponibles.");
+            return null;
+        }
         String id = getStringNotNull("CODPROYECTO: ");
         String title = getStringNotNull("Títol: ");
 
         System.out.println();
-        System.out.println("[❕] Alumnes en la base de dades: ");
-        viewStudent.showEntities(studentDAO.readAllEntities());
+        System.out.println("[❕] Alumnes (sense projectes) en la base de dades: ");
+        viewStudent.showEntities(studentDAO.readAllStudentsWithoutAProject());
 
-        String nia = getStringNotNull("NIA alumne: ");
+        String nia = getStringNotNull("Introdueix el NIA del alumne: ");
 
         Student student = studentDAO.readEntityById(nia);
 
@@ -176,7 +163,8 @@ public class Input extends ControllerManager {
 
     //ENTITY STUDENT.
     public Student createStudent() {
-        if (!genericDAO.existsAtLeastOneEntityOf("Group")) {
+        if (!genericDAO.existsAtLeastOneEntity("Group")) {
+            System.out.println("[❌] No es pot crear un nou alumne. No hi ha ningún grup creat en la BBDD.");
             return null;
         }
         String nia = getStringNotNull("NIA: ");
@@ -191,16 +179,11 @@ public class Input extends ControllerManager {
         Group group = groupDAO.readEntityById(groupCode);
 
         if (group != null) {
-            System.out.println();
-            System.out.println("[❕] Projectes en la base de dades: ");
-            viewProject.showEntities(projectDAO.readAllEntities());
-
-            String projectId = getStringNotNull("CODPROYECTO: ");
-            Project project = projectDAO.readEntityById(projectId);
-
-            return new Student(nia, name, surnames, group, null, project);
+            Student newStudent = new Student(nia, name, surnames, group, new ArrayList<>(), null);
+            group.getStudents().add(newStudent);
+            return newStudent;
         } else {
-            System.out.println("[❌] El grup no existeix. No es pot crear l'estudiant.");
+            System.out.println("[❌] El grup no existeix. No es pot crear l'alumne.");
             return null;
         }
     }
@@ -253,6 +236,10 @@ public class Input extends ControllerManager {
 
     //ENTITY ENROLLMENT.
     public Enrollment createEnrollment() {
+        if (!studentDAO.existsAtLeastOneEntry() || !subjectDAO.existsAtLeastOneEntry()) {
+            System.out.println("[❌] No es pot crear una nova matrícula. No hi ha alumnes/mòduls creats.");
+            return null;
+        }
         int enrollmentId = getInt("IDMATRICULA: ");
         String description = getStringNotNull("Descripció: ");
 
@@ -273,7 +260,7 @@ public class Input extends ControllerManager {
         if (student != null && subject != null) {
             return new Enrollment(enrollmentId, student, subject, description);
         } else {
-            System.out.println("[❌] No s'ha pogut crear la matrícula. L'estudiant o l'assignatura no existeixen.");
+            System.out.println("[❌] No s'ha pogut crear la matrícula. L'alumne o el mòdul no existeixen.");
             return null;
         }
     }

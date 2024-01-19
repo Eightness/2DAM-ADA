@@ -3,9 +3,9 @@ package org.albert.dao;
 import org.albert.model.*;
 import org.albert.providers.DAOManager;
 
-import javax.persistence.Entity;
 import javax.persistence.Query;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class GenericDAO. Contains basic methods to operate with the database.
@@ -128,12 +128,11 @@ public class GenericDAO extends DAOManager {
         }
     }
 
-    public boolean existsAtLeastOneEntityOf(String entityName) {
+    public boolean existsAtLeastOneEntity(String entityName) {
         try {
             entityTransaction.begin();
 
-            Long count = (Long) entityManager.createQuery("SELECT COUNT(e) FROM " + entityName + " e", Long.class)
-                    .getSingleResult();
+            Long count = entityManager.createQuery("SELECT COUNT(e) FROM " + entityName + " e", Long.class).getSingleResult();
 
             entityTransaction.commit();
 

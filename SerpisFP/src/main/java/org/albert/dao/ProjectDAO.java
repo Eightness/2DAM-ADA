@@ -187,4 +187,18 @@ public class ProjectDAO extends DAOManager implements CRUDInterface<Project, Str
             return false;
         }
     }
+
+    @Override
+    public boolean existsAtLeastOneEntry() {
+        try {
+            Query query = entityManager.createQuery("SELECT COUNT(p) FROM Project p");
+
+            Long count = (Long) query.getSingleResult();
+
+            return count > 0;
+        } catch (Exception e) {
+            System.out.println("[❌] No s'ha pogut verificar la existència del projecte. Motiu: " + e.getMessage());
+            return false;
+        }
+    }
 }

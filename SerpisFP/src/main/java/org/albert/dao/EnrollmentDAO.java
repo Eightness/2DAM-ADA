@@ -189,4 +189,18 @@ public class EnrollmentDAO extends DAOManager implements CRUDInterface<Enrollmen
             return false;
         }
     }
+
+    @Override
+    public boolean existsAtLeastOneEntry() {
+        try {
+            Query query = entityManager.createQuery("SELECT COUNT(e) FROM Enrollment e");
+
+            Long count = (Long) query.getSingleResult();
+
+            return count > 0;
+        } catch (Exception e) {
+            System.out.println("[❌] No s'ha pogut verificar la existència de la matrícula. Motiu: " + e.getMessage());
+            return false;
+        }
+    }
 }

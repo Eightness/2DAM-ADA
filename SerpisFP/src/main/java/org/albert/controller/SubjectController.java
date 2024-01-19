@@ -67,4 +67,9 @@ public class SubjectController extends ControllerManager implements CRUDInterfac
     public boolean exists(String primaryKey) {
         return false;
     }
+
+    @Override
+    public boolean existsAtLeastOneEntry() {
+        return subjectDAO.existsAtLeastOneEntry();
+    }
 }

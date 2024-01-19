@@ -67,4 +67,9 @@ public class ProjectController extends ControllerManager implements CRUDInterfac
     public boolean exists(String primaryKey) {
         return projectDAO.exists(primaryKey);
     }
+
+    @Override
+    public boolean existsAtLeastOneEntry() {
+        return projectDAO.existsAtLeastOneEntry();
+    }
 }

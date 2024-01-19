@@ -188,4 +188,18 @@ public class SubjectDAO extends DAOManager implements CRUDInterface<Subject, Str
             return false;
         }
     }
+
+    @Override
+    public boolean existsAtLeastOneEntry() {
+        try {
+            Query query = entityManager.createQuery("SELECT COUNT(s) FROM Subject s");
+
+            Long count = (Long) query.getSingleResult();
+
+            return count > 0;
+        } catch (Exception e) {
+            System.out.println("[❌] No s'ha pogut verificar la existència del mòdul. Motiu: " + e.getMessage());
+            return false;
+        }
+    }
 }

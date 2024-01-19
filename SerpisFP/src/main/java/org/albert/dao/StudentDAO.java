@@ -188,4 +188,38 @@ public class StudentDAO extends DAOManager implements CRUDInterface<Student, Str
             return false;
         }
     }
+
+    @Override
+    public boolean existsAtLeastOneEntry() {
+        try {
+            Query query = entityManager.createQuery("SELECT COUNT(s) FROM Student s");
+
+            Long count = (Long) query.getSingleResult();
+
+            return count > 0;
+        } catch (Exception e) {
+            System.out.println("[❌] No s'ha pogut verificar la existència de l'alumne. Motiu: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public List<Student> readAllStudentsWithoutAProject() {
+        try {
+            entityTransaction.begin();
+
+            TypedQuery<Student> query = entityManager.createQuery("SELECT s FROM Student s WHERE s.project IS NULL", Student.class);
+
+            List<Student> studentsWithoutGroup = query.getResultList();
+
+            entityTransaction.commit();
+            return studentsWithoutGroup;
+        } catch (Exception e) {
+            if (entityTransaction != null && entityTransaction.isActive()) {
+                entityTransaction.rollback();
+            }
+            System.out.println("[❌] ERROR! No s'han pogut llegir els estudiants sense projecte. Motiu: " + e.getMessage());
+            return null;
+        }
+    }
+
 }

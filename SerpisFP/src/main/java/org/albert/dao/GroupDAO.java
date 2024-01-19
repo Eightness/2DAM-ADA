@@ -187,4 +187,18 @@ public class GroupDAO extends DAOManager implements CRUDInterface<Group, Integer
             return false;
         }
     }
+
+    @Override
+    public boolean existsAtLeastOneEntry() {
+        try {
+            Query query = entityManager.createQuery("SELECT COUNT(g) FROM Group g");
+
+            Long count = (Long) query.getSingleResult();
+
+            return count > 0;
+        } catch (Exception e) {
+            System.out.println("[❌] No s'ha pogut verificar la existència del grup. Motiu: " + e.getMessage());
+            return false;
+        }
+    }
 }

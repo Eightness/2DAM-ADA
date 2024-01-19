@@ -67,4 +67,9 @@ public class GroupController extends ControllerManager implements CRUDInterface<
     public boolean exists(Integer primaryKey) {
         return groupDAO.exists(primaryKey);
     }
+
+    @Override
+    public boolean existsAtLeastOneEntry() {
+        return groupDAO.existsAtLeastOneEntry();
+    }
 }
