@@ -1,6 +1,8 @@
 package org.albert.dao;
 
 import org.albert.model.Enrollment;
+import org.albert.model.Student;
+import org.albert.model.Subject;
 import org.albert.providers.CRUDInterface;
 import org.albert.providers.DAOManager;
 
@@ -27,10 +29,37 @@ public class EnrollmentDAO extends DAOManager implements CRUDInterface<Enrollmen
             System.out.println("[❌] ERROR! Ja existeix una matrícula amb IDMATRICULA " + entity.getId() + ".");
             return;
         }
+        if (existsSameEnrollment(entity.getStudent(), entity.getSubject())) {
+            System.out.println("[❌] ERROR! L'alumne amb NIA " + entity.getStudent().getNia() + " ja està matriculat en el mòdul amb el codi " + entity.getSubject().getSubjectCode() + ".");
+            return;
+        }
         try {
             entityTransaction.begin();
 
+            Student student = entity.getStudent();
+            Subject subject = entity.getSubject();
+
+            if (student != null) {
+                student = entityManager.getReference(student.getClass(), student.getNia());
+                entity.setStudent(student);
+            }
+
+            if (subject != null) {
+                subject = entityManager.getReference(subject.getClass(), subject.getSubjectCode());
+                entity.setSubject(subject);
+            }
+
             entityManager.persist(entity);
+
+            if (student != null) {
+                student.getEnrollments().add(entity);
+                entityManager.merge(student);
+            }
+
+            if (subject != null) {
+                subject.getEnrollments().add(entity);
+                entityManager.merge(subject);
+            }
 
             entityTransaction.commit();
             System.out.println("[✅] S'ha afegit la nova matrícula correctament.");
@@ -186,6 +215,21 @@ public class EnrollmentDAO extends DAOManager implements CRUDInterface<Enrollmen
             return count > 0;
         } catch (Exception e) {
             System.out.println("[❌] No s'ha pogut verificar la existència de la matrícula. Motiu: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean existsSameEnrollment(Student student, Subject subject) {
+        try {
+            Query query = entityManager.createQuery("SELECT COUNT(e) FROM Enrollment e WHERE e.student = :student AND e.subject = :subject");
+            query.setParameter("student", student);
+            query.setParameter("subject", subject);
+
+            Long count = (Long) query.getSingleResult();
+
+            return count > 0;
+        } catch (Exception e) {
+            System.out.println("[❌] No s'ha pogut verificar la existència de la matrícula. Motiu : " + e.getMessage());
             return false;
         }
     }

@@ -1,5 +1,8 @@
 package org.albert.dao;
 
+import org.albert.model.Enrollment;
+import org.albert.model.Group;
+import org.albert.model.Project;
 import org.albert.model.Student;
 import org.albert.providers.CRUDInterface;
 import org.albert.providers.DAOManager;
@@ -30,7 +33,19 @@ public class StudentDAO extends DAOManager implements CRUDInterface<Student, Str
         try {
             entityTransaction.begin();
 
+            Group group = entity.getGroup();
+
+            if (group != null) {
+                group = entityManager.getReference(group.getClass(), group.getGroupCode());
+                entity.setGroup(group);
+            }
+
             entityManager.persist(entity);
+
+            if (group != null) {
+                group.getStudents().add(entity);
+                entityManager.merge(group);
+            }
 
             entityTransaction.commit();
             System.out.println("[✅] S'ha afegit el nou alumne correctament.");
@@ -218,6 +233,26 @@ public class StudentDAO extends DAOManager implements CRUDInterface<Student, Str
                 entityTransaction.rollback();
             }
             System.out.println("[❌] ERROR! No s'han pogut llegir els estudiants sense projecte. Motiu: " + e.getMessage());
+            return null;
+        }
+    }
+
+    public List<Enrollment> getEnrollmentsFromThisStudent(Student entity) {
+        try {
+            Query query = entityManager.createQuery("SELECT e FROM Enrollment e WHERE e.student = :student");
+            query.setParameter("student", entity);
+            return query.getResultList();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public Project getProjectFromThisStudent(Student entity) {
+        try {
+            Query query = entityManager.createQuery("SELECT p FROM Project p WHERE p.student = :student");
+            query.setParameter("student", entity);
+            return (Project) query.getSingleResult();
+        } catch (Exception e) {
             return null;
         }
     }

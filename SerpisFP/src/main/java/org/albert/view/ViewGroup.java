@@ -3,13 +3,18 @@ package org.albert.view;
 import org.albert.model.Group;
 import org.albert.model.Student;
 import org.albert.providers.ViewInterface;
-
+import org.albert.providers.ViewManager;
 import java.util.List;
 import java.util.Scanner;
 
-public class ViewGroup implements ViewInterface<Group> {
+public class ViewGroup extends ViewManager implements ViewInterface<Group> {
     //Attributes.
     private final Scanner scanner = new Scanner(System.in);
+
+    private String waitForResponse() {
+        System.out.print("Pulsa enter per a seguir veient grups...");
+        return scanner.nextLine();
+    }
 
     @Override
     public void showEntity(Group group) {
@@ -20,7 +25,8 @@ public class ViewGroup implements ViewInterface<Group> {
             System.out.format("| %-10s | %-16s | %-11s |%n", group.getGroupCode(), group.getDescription(), group.getClassroom());
             System.out.format("+------------+------------------+-------------+%n");
 
-            List<Student> students = group.getStudents();
+            System.out.println("Alumnes:");
+            List<Student> students = groupDAO.getStudentsFromThisGroup(group);
             if (students != null && !students.isEmpty()) {
                 System.out.format("+------------+---------------------+--------------------------+%n");
                 System.out.format("| NIA        | NOM                 | COGNOMS                  |%n");
@@ -40,13 +46,13 @@ public class ViewGroup implements ViewInterface<Group> {
     @Override
     public void showEntities(List<Group> groups) {
         if (groups != null && !groups.isEmpty()) {
-            int index = 1;
+            int index = 0;
             for (Group group : groups) {
-                if (index % 4 == 0) {
-                    System.out.print("Pulsa qualsevol tecla per a seguir veient grups...");
-                    String response = scanner.next();
+                if (index % 2 == 0 && index != 0) {
+                    waitForResponse();
+                    System.out.println();
                 }
-                System.out.println("Grup " + index + ":");
+                System.out.println("[🟢] Grup " + (index + 1) + ":");
                 showEntity(group);
                 System.out.println();
                 index++;

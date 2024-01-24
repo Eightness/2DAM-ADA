@@ -1,9 +1,11 @@
 package org.albert.dao;
 
 import org.albert.model.Group;
+import org.albert.model.Student;
 import org.albert.providers.CRUDInterface;
 import org.albert.providers.DAOManager;
 
+import javax.persistence.Entity;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -202,7 +204,13 @@ public class GroupDAO extends DAOManager implements CRUDInterface<Group, Integer
         }
     }
 
-    public void addStudent(int primaryKey) {
-
+    public List<Student> getStudentsFromThisGroup(Group entity) {
+        try {
+            Query query = entityManager.createQuery("SELECT s FROM Student s WHERE s.group = :group");
+            query.setParameter("group", entity);
+            return query.getResultList();
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

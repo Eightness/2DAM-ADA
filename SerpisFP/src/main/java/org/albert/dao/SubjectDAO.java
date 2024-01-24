@@ -1,5 +1,6 @@
 package org.albert.dao;
 
+import org.albert.model.Enrollment;
 import org.albert.model.Subject;
 import org.albert.providers.CRUDInterface;
 import org.albert.providers.DAOManager;
@@ -200,6 +201,16 @@ public class SubjectDAO extends DAOManager implements CRUDInterface<Subject, Int
         } catch (Exception e) {
             System.out.println("[❌] No s'ha pogut verificar la existència del mòdul. Motiu: " + e.getMessage());
             return false;
+        }
+    }
+
+    public List<Enrollment> getEnrollmentsFromThisSubject(Subject subject) {
+        try {
+            Query query = entityManager.createQuery("SELECT e FROM Enrollment e WHERE e.subject = :subject");
+            query.setParameter("subject", subject);
+            return query.getResultList();
+        } catch (Exception e) {
+            return null;
         }
     }
 }

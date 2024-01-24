@@ -35,4 +35,12 @@ public class Student {
 
     @OneToOne(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
     private Project project;
+
+    public Student(String nia, String name, String surnames, Group group, Project project) {
+        this.nia = nia;
+        this.name = name;
+        this.surnames = surnames;
+        this.group = group;
+        this.project = project;
+    }
 }

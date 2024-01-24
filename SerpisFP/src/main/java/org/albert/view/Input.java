@@ -128,7 +128,7 @@ public class Input extends ControllerManager {
         String description = getStringNullable("Descripció: ", 50);
         String classroom = getStringNullable("Aula: ", 10);
         System.out.println();
-        return new Group(groupCode, description, classroom, new ArrayList<>());
+        return new Group(groupCode, description, classroom);
     }
 
     public List<Group> createGroups() {
@@ -160,7 +160,7 @@ public class Input extends ControllerManager {
 
         System.out.println();
         System.out.println("[❕] Alumnes (sense projectes) en la base de dades: ");
-        viewStudent.showEntities(studentDAO.readAllStudentsWithoutAProject());
+        viewStudent.showEntities(studentDAO.readAllEntities());
 
         String nia = getStringNotNull("Introdueix el NIA del alumne: ", 10);
 
@@ -212,7 +212,7 @@ public class Input extends ControllerManager {
 
         System.out.println();
         if (group != null) {
-            return new Student(nia, name, surnames, group, new ArrayList<>(), null);
+            return new Student(nia, name, surnames, group, null);
         } else {
             System.out.println("[❌] El grup no existeix. No es pot crear l'alumne.");
             return null;
@@ -270,6 +270,7 @@ public class Input extends ControllerManager {
             System.out.println("[❌] No es pot crear una nova matrícula. No hi ha alumnes/mòduls creats.");
             return null;
         }
+
         int enrollmentId = getInt("IDMATRICULA: ");
         String description = getStringNullable("Descripció: ", 50);
 

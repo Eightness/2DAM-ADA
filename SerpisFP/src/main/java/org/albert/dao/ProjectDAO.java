@@ -1,6 +1,7 @@
 package org.albert.dao;
 
 import org.albert.model.Project;
+import org.albert.model.Student;
 import org.albert.providers.CRUDInterface;
 import org.albert.providers.DAOManager;
 
@@ -30,7 +31,19 @@ public class ProjectDAO extends DAOManager implements CRUDInterface<Project, Str
         try {
             entityTransaction.begin();
 
+            Student student = entity.getStudent();
+
+            if (student != null) {
+                student = entityManager.getReference(student.getClass(), student.getNia());
+                entity.setStudent(student);
+            }
+
             entityManager.persist(entity);
+
+            if (student != null) {
+                student.setProject(entity);
+                entityManager.merge(student);
+            }
 
             entityTransaction.commit();
             System.out.println("[✅] S'ha afegit el nou projecte correctament.");

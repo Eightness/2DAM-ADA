@@ -64,16 +64,16 @@ public class GenericDAO extends DAOManager {
 
     public void loadDemoData() {
         //Creating groups.
-        Group group1 = new Group(1, "2DAMC", "16", new ArrayList<>());
-        Group group2 = new Group(2, "2DAMR", "15", new ArrayList<>());
-        Group group3 = new Group(3, "2ASIRC", "14", new ArrayList<>());
+        Group group1 = new Group(1, "2DAMC", "16");
+        Group group2 = new Group(2, "2DAMR", "15");
+        Group group3 = new Group(3, "2ASIRC", "14");
 
         //Creating students.
-        Student myself = new Student("1", "Albert", "Lozano Blasco", group1, null, null);
-        Student president = new Student("2", "Antonio", "Molines Martín", group1, null, null);
-        Student student2 = new Student("3", "Cristian", "Popica", group2, null, null);
-        Student student3 = new Student("4", "Daniel", "Ruiz Montero", group3, null, null);
-        Student student4 = new Student("5", "David", "Guaita Onsurbe", group3, null, null);
+        Student myself = new Student("1", "Albert", "Lozano Blasco", group1, null);
+        Student president = new Student("2", "Antonio", "Molines Martín", group1, null);
+        Student student2 = new Student("3", "Cristian", "Popica", group2, null);
+        Student student3 = new Student("4", "Daniel", "Ruiz Montero", group3, null);
+        Student student4 = new Student("5", "David", "Guaita Onsurbe", group3, null);
 
         //Creating subjects.
         Subject din = new Subject(1, "DIN", 8);

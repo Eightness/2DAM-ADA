@@ -3,10 +3,9 @@ package org.albert.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+
+import javax.persistence.*;
+import java.util.List;
 
 /**
  * Class Subject. Entity Subject.
@@ -27,4 +26,13 @@ public class Subject {
 
     @Column(name = "NUMHORAS")
     private int numHours;
+
+    @OneToMany(mappedBy = "subject")
+    private List<Enrollment> enrollments;
+
+    public Subject(int subjectCode, String description, int numHours) {
+        this.subjectCode = subjectCode;
+        this.description = description;
+        this.numHours = numHours;
+    }
 }

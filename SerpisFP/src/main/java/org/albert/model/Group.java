@@ -29,4 +29,10 @@ public class Group {
 
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Student> students;
+
+    public Group(int groupCode, String description, String classroom) {
+        this.groupCode = groupCode;
+        this.description = description;
+        this.classroom = classroom;
+    }
 }
