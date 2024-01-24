@@ -135,10 +135,18 @@ public class SubjectDAO extends DAOManager implements CRUDInterface<Subject, Int
             entityTransaction.begin();
 
             Subject subject = entityManager.find(Subject.class, primaryKey);
+
             if (subject != null) {
+                List<Enrollment> enrollments = getEnrollmentsFromThisSubject(subject);
+
+                for (Enrollment enrollment : enrollments) {
+                    entityManager.remove(enrollment);
+                }
+
                 entityManager.remove(subject);
                 entityTransaction.commit();
                 System.out.println("[✅] S'ha eliminat el mòdul amb CODMODULO " + primaryKey + " correctament.");
+                System.out.println("[✅] També s'han eliminat les matrícules associades a aquest.");
             } else {
                 entityTransaction.rollback();
                 System.out.println("[❌] ERROR! No s'ha trobat cap mòdul amb CODMODULO " + primaryKey + ".");
@@ -150,6 +158,7 @@ public class SubjectDAO extends DAOManager implements CRUDInterface<Subject, Int
             System.out.println("[❌] ERROR! No s'ha pogut eliminar el mòdul amb CODMODULO " + primaryKey + ". Motiu: " + e.getMessage());
         }
     }
+
 
     @Override
     public void deleteEntitiesById(List<Integer> primaryKeys) {

@@ -48,7 +48,7 @@ public class ViewProject implements ViewInterface<Project> {
                 index++;
             }
         } else {
-            System.out.println("[❌] ERROR! No s'han pogut mostrar els projectes.");
+            System.out.println("[❌] ERROR! No s'han pogut mostrar els projectes (no hi ha).");
         }
     }
 }

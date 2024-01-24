@@ -13,6 +13,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -149,7 +150,28 @@ public class StudentDAO extends DAOManager implements CRUDInterface<Student, Str
             entityTransaction.begin();
 
             Student student = entityManager.find(Student.class, primaryKey);
+
             if (student != null) {
+                List<Enrollment> enrollments = getEnrollmentsFromThisStudent(student);
+
+                Project project = student.getProject();
+
+                if (project != null) {
+                    entityTransaction.rollback();
+                    System.out.println("[❌] ERROR! No es possible eliminar l'alumne amb NIA " + primaryKey + ". L'alumne té un projecte a presentar.");
+                    return;
+                }
+
+                if (!enrollments.isEmpty() && !(enrollments.size() == 1 && enrollments.get(0).getSubject().getDescription().equals("FCT"))) {
+                    entityTransaction.rollback();
+                    System.out.println("[❌] ERROR! No es possible eliminar l'alumne amb NIA " + primaryKey + ". L'alumne està matriculat d'algun mòdul que no és FCT.");
+                    return;
+                }
+
+                for (Enrollment enrollment : enrollments) {
+                    entityManager.remove(enrollment);
+                }
+
                 entityManager.remove(student);
                 entityTransaction.commit();
                 System.out.println("[✅] S'ha eliminat l'alumne amb NIA " + primaryKey + " correctament.");
@@ -164,6 +186,7 @@ public class StudentDAO extends DAOManager implements CRUDInterface<Student, Str
             System.out.println("[❌] ERROR! No s'ha pogut eliminar l'alumne amb NIA " + primaryKey + ". Motiu: " + e.getMessage());
         }
     }
+
 
     @Override
     public void deleteEntitiesById(List<String> primaryKeys) {
@@ -237,13 +260,15 @@ public class StudentDAO extends DAOManager implements CRUDInterface<Student, Str
         }
     }
 
-    public List<Enrollment> getEnrollmentsFromThisStudent(Student entity) {
+    public List<Enrollment> getEnrollmentsFromThisStudent(Student student) {
         try {
-            Query query = entityManager.createQuery("SELECT e FROM Enrollment e WHERE e.student = :student");
-            query.setParameter("student", entity);
+            TypedQuery<Enrollment> query = entityManager.createQuery(
+                    "SELECT e FROM Enrollment e WHERE e.student = :student", Enrollment.class);
+            query.setParameter("student", student);
             return query.getResultList();
         } catch (Exception e) {
-            return null;
+            System.out.println("[❌] ERROR! No se ha podido obtener las matrículas del alumno con NIA " + student.getNia() + ". Motivo: " + e.getMessage());
+            return Collections.emptyList();
         }
     }
 
@@ -255,6 +280,16 @@ public class StudentDAO extends DAOManager implements CRUDInterface<Student, Str
         } catch (Exception e) {
             return null;
         }
+    }
+
+    private boolean canDeleteStudent(Student student) {
+        List<Enrollment> enrollments = getEnrollmentsFromThisStudent(student);
+        boolean hasNonFCTEnrollments = enrollments.stream()
+                .anyMatch(enrollment -> !enrollment.getSubject().getDescription().equals("FCT"));
+
+        boolean hasProject = student.getProject() != null;
+
+        return !hasNonFCTEnrollments && !hasProject;
     }
 
 }

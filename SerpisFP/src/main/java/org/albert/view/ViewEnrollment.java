@@ -46,7 +46,7 @@ public class ViewEnrollment implements ViewInterface<Enrollment> {
                 index++;
             }
         } else {
-            System.out.println("[❌] ERROR! No s'han pogut mostrar les matricules.");
+            System.out.println("[❌] ERROR! No s'han pogut mostrar les matricules (no hi ha).");
         }
     }
 }

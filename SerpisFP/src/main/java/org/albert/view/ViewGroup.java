@@ -58,7 +58,7 @@ public class ViewGroup extends ViewManager implements ViewInterface<Group> {
                 index++;
             }
         } else {
-            System.out.println("[❌] ERROR! No s'han pogut mostrar els grups.");
+            System.out.println("[❌] ERROR! No s'han pogut mostrar els grups (no hi ha).");
         }
     }
 }

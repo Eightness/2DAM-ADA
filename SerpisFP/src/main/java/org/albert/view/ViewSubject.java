@@ -64,7 +64,7 @@ public class ViewSubject extends ViewManager implements ViewInterface<Subject> {
                 index++;
             }
         } else {
-            System.out.println("[❌] ERROR! No s'han pogut mostrar els mòduls.");
+            System.out.println("[❌] ERROR! No s'han pogut mostrar els mòduls (no hi ha).");
         }
     }
 }

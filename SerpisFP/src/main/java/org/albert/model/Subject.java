@@ -1,8 +1,6 @@
 package org.albert.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -12,7 +10,8 @@ import java.util.List;
  */
 @Entity
 @Table(name = "MODULO_AL15")
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Subject {

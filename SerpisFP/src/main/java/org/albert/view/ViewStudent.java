@@ -58,7 +58,7 @@ public class ViewStudent extends ViewManager implements ViewInterface<Student> {
                 System.out.println("[❕] Aquest alumne no té cap projecte.");
             }
         } else {
-            System.out.println("[❌] ERROR! No s'ha pogut mostrar l'estudiant.");
+            System.out.println("[❌] ERROR! No s'ha pogut mostrar l'alumne.");
         }
     }
 
@@ -78,7 +78,7 @@ public class ViewStudent extends ViewManager implements ViewInterface<Student> {
                 index++;
             }
         } else {
-            System.out.println("[❌] ERROR! No s'han pogut mostrar els estudiants.");
+            System.out.println("[❌] ERROR! No s'han pogut mostrar els alumnes (no hi ha).");
         }
     }
 }

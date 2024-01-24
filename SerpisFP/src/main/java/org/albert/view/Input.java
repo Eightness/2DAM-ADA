@@ -151,8 +151,8 @@ public class Input extends ControllerManager {
 
     //ENTITY PROJECT.
     public Project createProject() {
-        if (!studentDAO.readAllStudentsWithoutAProject().isEmpty()) {
-            System.out.println("[❌] No es pot crear un nou projecte. No hi ha alumnes sense projecte disponibles.");
+        if (!genericDAO.existsAtLeastOneEntity("Student")) {
+            System.out.println("[❌] No es pot crear un nou projecte. No hi ha ningún alumne creat en la BBDD.");
             return null;
         }
         String id = getStringNotNull("CODPROYECTO: ", 10);
@@ -200,7 +200,7 @@ public class Input extends ControllerManager {
             return null;
         }
         String nia = getStringNotNull("NIA: ", 10);
-        String name = getStringNotNull("Nom: ", 50);
+        String name = getStringNullable("Nom: ", 50);
         String surnames = getStringNullable("Cognoms: ", 50);
 
         System.out.println();

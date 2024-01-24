@@ -135,10 +135,16 @@ public class GroupDAO extends DAOManager implements CRUDInterface<Group, Integer
             entityTransaction.begin();
 
             Group group = entityManager.find(Group.class, primaryKey);
+
             if (group != null) {
-                entityManager.remove(group);
-                entityTransaction.commit();
-                System.out.println("[✅] S'ha eliminat el grup amb id (CODGRUPO) " + primaryKey + " correctament.");
+                if (!getStudentsFromThisGroup(group).isEmpty()) {
+                    entityTransaction.rollback();
+                    System.out.println("[❌] ERROR! No es pot eliminar el grup amb id (CODGRUPO) " + primaryKey + " perquè té alumnes assignats.");
+                } else {
+                    entityManager.remove(group);
+                    entityTransaction.commit();
+                    System.out.println("[✅] S'ha eliminat el grup amb id (CODGRUPO) " + primaryKey + " correctament.");
+                }
             } else {
                 entityTransaction.rollback();
                 System.out.println("[❌] ERROR! No s'ha trobat cap grup amb id (CODGRUPO) " + primaryKey + ".");
