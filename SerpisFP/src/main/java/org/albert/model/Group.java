@@ -18,13 +18,13 @@ import java.util.List;
 public class Group {
 
     @Id
-    @Column(name = "CODGRUPO")
+    @Column(name = "CODGRUPO", nullable = false)
     private int groupCode;
 
-    @Column(name = "DESCRIPCION")
+    @Column(name = "DESCRIPCION", length = 50)
     private String description;
 
-    @Column(name = "AULA")
+    @Column(name = "AULA", length = 10)
     private String classroom;
 
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, orphanRemoval = true)

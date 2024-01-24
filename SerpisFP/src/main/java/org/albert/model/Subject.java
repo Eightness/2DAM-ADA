@@ -20,7 +20,7 @@ public class Subject {
 
     @Id
     @Column(name = "CODMODULO", nullable = false)
-    private String subjectCode;
+    private int subjectCode;
 
     @Column(name = "DESCRIPCION")
     private String description;

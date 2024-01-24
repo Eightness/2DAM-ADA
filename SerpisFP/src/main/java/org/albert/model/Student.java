@@ -17,13 +17,13 @@ import java.util.List;
 public class Student {
 
     @Id
-    @Column(name = "NIA")
+    @Column(name = "NIA", nullable = false, length = 10)
     private String nia;
 
-    @Column(name = "NOMBRE")
+    @Column(name = "NOMBRE", length = 50)
     private String name;
 
-    @Column(name = "APELLIDOS")
+    @Column(name = "APELLIDOS", length = 50)
     private String surnames;
 
     @ManyToOne

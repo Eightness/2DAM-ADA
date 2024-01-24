@@ -198,7 +198,7 @@ public class StudentDAO extends DAOManager implements CRUDInterface<Student, Str
 
             return count > 0;
         } catch (Exception e) {
-            System.out.println("[❌] No s'ha pogut verificar la existència de l'alumne. Motiu: " + e.getMessage());
+            System.out.println("[❌] No s'ha pogut verificar la existència d'un alumne. Motiu: " + e.getMessage());
             return false;
         }
     }

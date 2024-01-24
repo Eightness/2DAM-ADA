@@ -201,4 +201,8 @@ public class GroupDAO extends DAOManager implements CRUDInterface<Group, Integer
             return false;
         }
     }
+
+    public void addStudent(int primaryKey) {
+
+    }
 }

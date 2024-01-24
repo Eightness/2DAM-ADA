@@ -228,7 +228,7 @@ public class SerpisFPApplication extends AppProvider {
         actionMenu = false;
         System.out.println();
         System.out.println("[❔] Recorda que l'ordre de creació per defecte (quan la BBDD està buida) és:");
-        System.out.println("1.GRUP > 2.ALUMNE > 3.PROJECTE/MÒDUL > 4.MATRÍCULA.");
+        System.out.println("1.GRUP/MÒDUL > 2.ALUMNE > 3.PROJECTE/MATRÍCULA.");
         switch (entityName) {
             case GROUP:
                 switch (option) {
@@ -396,12 +396,12 @@ public class SerpisFPApplication extends AppProvider {
                     case 1:
                         System.out.println();
                         System.out.println("[❕] Llegint un mòdul...");
-                        subjectController.readEntityById(input.getStringNotNull("Introdueix un id (CODMODULO): "));
+                        subjectController.readEntityById(input.getInt("Introdueix un id (CODMODULO): "));
                         break;
                     case 2:
                         System.out.println();
                         System.out.println("[❕] Llegint varios mòduls...");
-                        subjectController.readEntitiesById(input.getStrings("Introdueix un id (CODMODULO): "));
+                        subjectController.readEntitiesById(input.getInts("Introdueix un id (CODMODULO): "));
                         break;
                     case 3:
                         System.out.println();
@@ -500,12 +500,12 @@ public class SerpisFPApplication extends AppProvider {
                     case 1:
                         System.out.println();
                         System.out.println("[❕] Actualitzant un mòdul...");
-                        subjectController.updateEntityById(input.createSubject(), input.getStringNotNull("Introdueix un id (CODMODULO): "));
+                        subjectController.updateEntityById(input.createSubject(), input.getInt("Introdueix un id (CODMODULO): "));
                         break;
                     case 2:
                         System.out.println();
                         System.out.println("[❕] Actualitzant varios mòduls...");
-                        subjectController.updateEntitiesById(input.createSubjects(), input.getStrings("Introdueix un id (CODMODULO): "));
+                        subjectController.updateEntitiesById(input.createSubjects(), input.getInts("Introdueix un id (CODMODULO): "));
                         break;
                     default:
                         System.out.println("Algo ha fallat.");
@@ -612,12 +612,12 @@ public class SerpisFPApplication extends AppProvider {
                     case 1:
                         System.out.println();
                         System.out.println("[❕] Esborrant un mòdul...");
-                        subjectController.deleteEntityById(input.getStringNotNull("Introdueix un id (CODMODULO): "));
+                        subjectController.deleteEntityById(input.getInt("Introdueix un id (CODMODULO): "));
                         break;
                     case 2:
                         System.out.println();
                         System.out.println("[❕] Esborrant varios mòduls...");
-                        subjectController.deleteEntitiesById(input.getStrings("Introdueix un id (CODMODULO): "));
+                        subjectController.deleteEntitiesById(input.getInts("Introdueix un id (CODMODULO): "));
                         break;
                     case 3:
                         System.out.println();

@@ -58,10 +58,41 @@ public class Input extends ControllerManager {
         return scanner.nextLine();
     }
 
+    public String getStringNotNull(String message, int length) {
+        String response = "";
+        do {
+            System.out.println();
+            System.out.print(message);
+            response = scanner.nextLine();
+            if (response.length() > length) {
+                System.out.println("[❗] No es permet que aquest camp tinga més de " + length + " caràcters.");
+            }
+        } while (response.length() > length);
+        return response;
+    }
+
     public String getStringNullable(String message) {
         System.out.println();
         System.out.print(message);
         String response = scanner.nextLine();
+        if (response.isBlank()) {
+            return null;
+        } else {
+            return response;
+        }
+    }
+
+    public String getStringNullable(String message, int length) {
+        String response = "";
+        do {
+            System.out.println();
+            System.out.print(message);
+            response = scanner.nextLine();
+            if (response.length() > length) {
+                System.out.println("[❗] No es permet que aquest camp tinga més de " + length + " caràcters.");
+            }
+        } while (response.length() > length);
+
         if (response.isBlank()) {
             return null;
         } else {
@@ -94,8 +125,8 @@ public class Input extends ControllerManager {
     //ENTITY GROUP.
     public Group createGroup() {
         int groupCode = getInt("CODGRUPO: ");
-        String description = getStringNotNull("Descripció: ");
-        String classroom = getStringNotNull("Aula: ");
+        String description = getStringNullable("Descripció: ", 50);
+        String classroom = getStringNullable("Aula: ", 10);
 
         return new Group(groupCode, description, classroom, new ArrayList<>());
     }
@@ -120,27 +151,27 @@ public class Input extends ControllerManager {
 
     //ENTITY PROJECT.
     public Project createProject() {
-        if (studentDAO.readAllStudentsWithoutAProject().isEmpty()) {
+        if (!studentDAO.readAllStudentsWithoutAProject().isEmpty()) {
             System.out.println("[❌] No es pot crear un nou projecte. No hi ha alumnes sense projecte disponibles.");
             return null;
         }
-        String id = getStringNotNull("CODPROYECTO: ");
-        String title = getStringNotNull("Títol: ");
+        String id = getStringNotNull("CODPROYECTO: ", 10);
+        String title = getStringNullable("Títol: ", 200);
 
         System.out.println();
         System.out.println("[❕] Alumnes (sense projectes) en la base de dades: ");
         viewStudent.showEntities(studentDAO.readAllStudentsWithoutAProject());
 
-        String nia = getStringNotNull("Introdueix el NIA del alumne: ");
+        String nia = getStringNotNull("Introdueix el NIA del alumne: ", 10);
 
         Student student = studentDAO.readEntityById(nia);
 
         if (student != null) {
             return new Project(id, title, student);
         } else {
-            return new Project(id, title, null);
+            System.out.println("[❌] No es pot crear el nou projecte. No hi ha cap alumne amb eixe NIA.");
+            return null;
         }
-
     }
 
     public List<Project> createProjects() {
@@ -167,9 +198,9 @@ public class Input extends ControllerManager {
             System.out.println("[❌] No es pot crear un nou alumne. No hi ha ningún grup creat en la BBDD.");
             return null;
         }
-        String nia = getStringNotNull("NIA: ");
-        String name = getStringNotNull("Nom: ");
-        String surnames = getStringNotNull("Cognoms: ");
+        String nia = getStringNotNull("NIA: ", 10);
+        String name = getStringNotNull("Nom: ", 50);
+        String surnames = getStringNullable("Cognoms: ", 50);
 
         System.out.println();
         System.out.println("[❕] Grups en la base de dades: ");
@@ -179,15 +210,12 @@ public class Input extends ControllerManager {
         Group group = groupDAO.readEntityById(groupCode);
 
         if (group != null) {
-            Student newStudent = new Student(nia, name, surnames, group, new ArrayList<>(), null);
-            group.getStudents().add(newStudent);
-            return newStudent;
+            return new Student(nia, name, surnames, group, new ArrayList<>(), null);
         } else {
             System.out.println("[❌] El grup no existeix. No es pot crear l'alumne.");
             return null;
         }
     }
-
 
     public List<Student> createStudents() {
         List<Student> students = new ArrayList<>();
@@ -209,8 +237,8 @@ public class Input extends ControllerManager {
 
     //ENTITY SUBJECT.
     public Subject createSubject() {
-        String subjectCode = getStringNotNull("CODMODULO: ");
-        String description = getStringNotNull("Descripció: ");
+        int subjectCode = getInt("CODMODULO: ");
+        String description = getStringNullable("Descripció: ", 50);
         int numHours = getInt("Hores: ");
 
         return new Subject(subjectCode, description, numHours);
@@ -241,20 +269,20 @@ public class Input extends ControllerManager {
             return null;
         }
         int enrollmentId = getInt("IDMATRICULA: ");
-        String description = getStringNotNull("Descripció: ");
+        String description = getStringNullable("Descripció: ", 50);
 
         System.out.println();
         System.out.println("[❕] Alumnes en la base de dades: ");
         viewStudent.showEntities(studentDAO.readAllEntities());
 
-        String nia = getStringNotNull("NIA: ");
+        String nia = getStringNotNull("NIA: ", 10);
         Student student = studentDAO.readEntityById(nia);
 
         System.out.println();
         System.out.println("[❕] Mòduls en la base de dades: ");
         viewSubject.showEntities(subjectDAO.readAllEntities());
 
-        String subjectCode = getStringNotNull("CODMODULO: ");
+        int subjectCode = getInt("CODMODULO: ");
         Subject subject = subjectDAO.readEntityById(subjectCode);
 
         if (student != null && subject != null) {

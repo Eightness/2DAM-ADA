@@ -19,7 +19,7 @@ public class Project {
     @Column(name = "CODPROYECTO", nullable = false)
     private String id;
 
-    @Column(name = "TITULO")
+    @Column(name = "TITULO", length = 200)
     private String title;
 
     @OneToOne(fetch = FetchType.LAZY)

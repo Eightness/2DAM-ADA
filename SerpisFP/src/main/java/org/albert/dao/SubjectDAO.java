@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Class SubjectDAO. Contains Subject's CRUD logic.
  */
-public class SubjectDAO extends DAOManager implements CRUDInterface<Subject, String> {
+public class SubjectDAO extends DAOManager implements CRUDInterface<Subject, Integer> {
     //Methods.
     @Override
     public void createEntity(Subject entity) {
@@ -50,7 +50,7 @@ public class SubjectDAO extends DAOManager implements CRUDInterface<Subject, Str
     }
 
     @Override
-    public Subject readEntityById(String primaryKey) {
+    public Subject readEntityById(Integer primaryKey) {
         try {
             return entityManager.find(Subject.class, primaryKey);
         } catch (Exception e) {
@@ -60,10 +60,10 @@ public class SubjectDAO extends DAOManager implements CRUDInterface<Subject, Str
     }
 
     @Override
-    public List<Subject> readEntitiesById(List<String> primaryKeys) {
+    public List<Subject> readEntitiesById(List<Integer> primaryKeys) {
         List<Subject> subjects = new ArrayList<>();
         try {
-            for (String primaryKey : primaryKeys) {
+            for (int primaryKey : primaryKeys) {
                 Subject subject = readEntityById(primaryKey);
                 if (subject != null) {
                     subjects.add(subject);
@@ -92,7 +92,7 @@ public class SubjectDAO extends DAOManager implements CRUDInterface<Subject, Str
     }
 
     @Override
-    public void updateEntityById(Subject entity, String primaryKey) {
+    public void updateEntityById(Subject entity, Integer primaryKey) {
         try {
             entityTransaction.begin();
 
@@ -117,7 +117,7 @@ public class SubjectDAO extends DAOManager implements CRUDInterface<Subject, Str
     }
 
     @Override
-    public void updateEntitiesById(List<Subject> entities, List<String> primaryKeys) {
+    public void updateEntitiesById(List<Subject> entities, List<Integer> primaryKeys) {
         if (entities.size() != primaryKeys.size()) {
             System.out.println("[❌] ERROR! La llista d'entitats i la llista de claus primàries tenen mides diferents.");
             return;
@@ -129,7 +129,7 @@ public class SubjectDAO extends DAOManager implements CRUDInterface<Subject, Str
     }
 
     @Override
-    public void deleteEntityById(String primaryKey) {
+    public void deleteEntityById(Integer primaryKey) {
         try {
             entityTransaction.begin();
 
@@ -151,8 +151,8 @@ public class SubjectDAO extends DAOManager implements CRUDInterface<Subject, Str
     }
 
     @Override
-    public void deleteEntitiesById(List<String> primaryKeys) {
-        for (String primaryKey : primaryKeys) {
+    public void deleteEntitiesById(List<Integer> primaryKeys) {
+        for (int primaryKey : primaryKeys) {
             deleteEntityById(primaryKey);
         }
     }
@@ -175,7 +175,7 @@ public class SubjectDAO extends DAOManager implements CRUDInterface<Subject, Str
     }
 
     @Override
-    public boolean exists(String primaryKey) {
+    public boolean exists(Integer primaryKey) {
         try {
             Query query = entityManager.createQuery("SELECT COUNT(s) FROM Subject s WHERE s.subjectCode = :primaryKey");
             query.setParameter("primaryKey", primaryKey);

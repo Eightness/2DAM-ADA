@@ -2,10 +2,8 @@ package org.albert.dao;
 
 import org.albert.model.*;
 import org.albert.providers.DAOManager;
-
 import javax.persistence.Query;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Class GenericDAO. Contains basic methods to operate with the database.
@@ -37,7 +35,6 @@ public class GenericDAO extends DAOManager {
 
         return itemsCount;
     }
-
 
     public void deleteAllItemsFromDatabase() {
         try {
@@ -79,11 +76,11 @@ public class GenericDAO extends DAOManager {
         Student student4 = new Student("5", "David", "Guaita Onsurbe", group3, null, null);
 
         //Creating subjects.
-        Subject din = new Subject("1", "DIN", 8);
-        Subject ada = new Subject("2", "ADA", 6);
-        Subject pmdm = new Subject("3", "PMDM", 5);
-        Subject sge = new Subject("4", "SGE", 5);
-        Subject psp = new Subject("5", "PSP", 3);
+        Subject din = new Subject(1, "DIN", 8);
+        Subject ada = new Subject(2, "ADA", 6);
+        Subject pmdm = new Subject(3, "PMDM", 5);
+        Subject sge = new Subject(4, "SGE", 5);
+        Subject psp = new Subject(5, "PSP", 3);
 
         //Creating project.
         Project project = new Project("1234", "App per a reptes personals", president);

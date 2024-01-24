@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Class SubjectController. Subject CRUD's Controller.
  */
-public class SubjectController extends ControllerManager implements CRUDInterface<Subject, String> {
+public class SubjectController extends ControllerManager implements CRUDInterface<Subject, Integer> {
     //Methods.
     @Override
     public void createEntity(Subject entity) {
@@ -21,13 +21,13 @@ public class SubjectController extends ControllerManager implements CRUDInterfac
     }
 
     @Override
-    public Subject readEntityById(String primaryKey) {
+    public Subject readEntityById(Integer primaryKey) {
         viewSubject.showEntity(subjectDAO.readEntityById(primaryKey));
         return subjectDAO.readEntityById(primaryKey);
     }
 
     @Override
-    public List<Subject> readEntitiesById(List<String> primaryKeys) {
+    public List<Subject> readEntitiesById(List<Integer> primaryKeys) {
         viewSubject.showEntities(subjectDAO.readEntitiesById(primaryKeys));
         return subjectDAO.readEntitiesById(primaryKeys);
     }
@@ -39,22 +39,22 @@ public class SubjectController extends ControllerManager implements CRUDInterfac
     }
 
     @Override
-    public void updateEntityById(Subject entity, String primaryKey) {
+    public void updateEntityById(Subject entity, Integer primaryKey) {
         subjectDAO.updateEntityById(entity, primaryKey);
     }
 
     @Override
-    public void updateEntitiesById(List<Subject> entities, List<String> primaryKeys) {
+    public void updateEntitiesById(List<Subject> entities, List<Integer> primaryKeys) {
         subjectDAO.updateEntitiesById(entities, primaryKeys);
     }
 
     @Override
-    public void deleteEntityById(String primaryKey) {
+    public void deleteEntityById(Integer primaryKey) {
         subjectDAO.deleteEntityById(primaryKey);
     }
 
     @Override
-    public void deleteEntitiesById(List<String> primaryKeys) {
+    public void deleteEntitiesById(List<Integer> primaryKeys) {
         subjectDAO.deleteEntitiesById(primaryKeys);
     }
 
@@ -64,7 +64,7 @@ public class SubjectController extends ControllerManager implements CRUDInterfac
     }
 
     @Override
-    public boolean exists(String primaryKey) {
+    public boolean exists(Integer primaryKey) {
         return false;
     }
 
