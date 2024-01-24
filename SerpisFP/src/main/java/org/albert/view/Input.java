@@ -127,7 +127,7 @@ public class Input extends ControllerManager {
         int groupCode = getInt("CODGRUPO: ");
         String description = getStringNullable("Descripció: ", 50);
         String classroom = getStringNullable("Aula: ", 10);
-
+        System.out.println();
         return new Group(groupCode, description, classroom, new ArrayList<>());
     }
 
@@ -166,6 +166,7 @@ public class Input extends ControllerManager {
 
         Student student = studentDAO.readEntityById(nia);
 
+        System.out.println();
         if (student != null) {
             return new Project(id, title, student);
         } else {
@@ -209,6 +210,7 @@ public class Input extends ControllerManager {
         int groupCode = getInt("CODGRUPO: ");
         Group group = groupDAO.readEntityById(groupCode);
 
+        System.out.println();
         if (group != null) {
             return new Student(nia, name, surnames, group, new ArrayList<>(), null);
         } else {
@@ -240,7 +242,7 @@ public class Input extends ControllerManager {
         int subjectCode = getInt("CODMODULO: ");
         String description = getStringNullable("Descripció: ", 50);
         int numHours = getInt("Hores: ");
-
+        System.out.println();
         return new Subject(subjectCode, description, numHours);
     }
 
@@ -285,6 +287,7 @@ public class Input extends ControllerManager {
         int subjectCode = getInt("CODMODULO: ");
         Subject subject = subjectDAO.readEntityById(subjectCode);
 
+        System.out.println();
         if (student != null && subject != null) {
             return new Enrollment(enrollmentId, student, subject, description);
         } else {

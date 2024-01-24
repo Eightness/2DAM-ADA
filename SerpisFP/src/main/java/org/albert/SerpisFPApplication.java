@@ -149,9 +149,11 @@ public class SerpisFPApplication extends AppProvider {
         switch (input.getInt("Per favor, selecciona una opció: ")) {
             case 1:
                 createActions(entityName, 1);
+                input.getStringNullable("Presiona qualsevol tecla per a continuar... ");
                 break;
             case 2:
                 createActions(entityName, 2);
+                input.getStringNullable("Presiona qualsevol tecla per a continuar... ");
                 break;
             case 3:
                 actionMenu = false;
@@ -167,12 +169,15 @@ public class SerpisFPApplication extends AppProvider {
         switch (input.getInt("Per favor, selecciona una opció: ")) {
             case 1:
                 readActions(entityName, 1);
+                input.getStringNullable("Presiona qualsevol tecla per a continuar... ");
                 break;
             case 2:
                 readActions(entityName, 2);
+                input.getStringNullable("Presiona qualsevol tecla per a continuar... ");
                 break;
             case 3:
                 readActions(entityName, 3);
+                input.getStringNullable("Presiona qualsevol tecla per a continuar... ");
                 break;
             case 4:
                 actionMenu = false;
@@ -188,9 +193,11 @@ public class SerpisFPApplication extends AppProvider {
         switch (input.getInt("Per favor, selecciona una opció: ")) {
             case 1:
                 updateActions(entityName, 1);
+                input.getStringNullable("Presiona qualsevol tecla per a continuar... ");
                 break;
             case 2:
                 updateActions(entityName, 2);
+                input.getStringNullable("Presiona qualsevol tecla per a continuar... ");
                 break;
             case 3:
                 actionMenu = false;
@@ -206,12 +213,15 @@ public class SerpisFPApplication extends AppProvider {
         switch (input.getInt("Per favor, selecciona una opció: ")) {
             case 1:
                 deleteActions(entityName, 1);
+                input.getStringNullable("Presiona qualsevol tecla per a continuar... ");
                 break;
             case 2:
                 deleteActions(entityName, 2);
+                input.getStringNullable("Presiona qualsevol tecla per a continuar... ");
                 break;
             case 3:
                 deleteActions(entityName, 3);
+                input.getStringNullable("Presiona qualsevol tecla per a continuar... ");
                 break;
             case 4:
                 actionMenu = false;
@@ -221,6 +231,7 @@ public class SerpisFPApplication extends AppProvider {
         }
     }
 
+    //Actions.
     //------------------------------------------------------------------------------------------------------------------
 
     //Create Actions.
