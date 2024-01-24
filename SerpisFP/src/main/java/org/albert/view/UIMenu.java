@@ -70,7 +70,7 @@ public class UIMenu {
         System.out.println("| Mòduls:\t\t" + itemsCount.get(4) + "\t| 5. Matrícula.\t\t\t\t\t\t|");
         System.out.println("| Matrícules:\t" + itemsCount.get(5) + "\t| 6. Eixir de l'aplicació.\t\t\t|");
         System.out.println("+-------------------------------------------------------+");
-        System.out.println("[❔] Si vols esborrar totes les dades de la BBDD, polsa 0.");
+        System.out.println("[❔] Si vols esborrar totes les dades de la BBDD, pulsa 0.");
     }
 
     public void crudMenu(

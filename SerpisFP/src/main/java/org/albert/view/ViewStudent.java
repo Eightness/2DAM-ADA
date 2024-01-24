@@ -32,28 +32,35 @@ public class ViewStudent extends ViewManager implements ViewInterface<Student> {
             System.out.println("Matrícules:");
             List<Enrollment> enrollments = studentDAO.getEnrollmentsFromThisStudent(student);
             if (enrollments != null && !enrollments.isEmpty()) {
-                System.out.format("+------------+------------------+%n");
-                System.out.format("| CODMODULO  | DESCRIPCIÓN      |%n");
-                System.out.format("+------------+------------------+%n");
+                System.out.format("+-------------+------------+------------------+%n");
+                System.out.format("| IDMATRICULA | CODMODULO  | DESCRIPCIÓN      |%n");
+                System.out.format("+-------------+------------+------------------+%n");
                 for (Enrollment enrollment : enrollments) {
-                    System.out.format("| %-10s | %-16s |%n",
+                    System.out.format("| %-11s | %-10s | %-16s |%n",
+                            enrollment.getId(),
                             enrollment.getSubject() != null ? enrollment.getSubject().getSubjectCode() : "",
                             enrollment.getDescription());
                 }
-                System.out.format("+------------+------------------+%n");
+                System.out.format("+-------------+------------+------------------+%n");
             } else {
                 System.out.println("[❕] Aquest alumne no té cap matrícula.");
             }
 
+
             System.out.println("Projecte:");
             Project project = studentDAO.getProjectFromThisStudent(student);
             if (project != null) {
-                System.out.format("+-------------+----------------------------------------------------+%n");
-                System.out.format("| CODPROYECTO | TÍTULO                                             |%n");
-                System.out.format("+-------------+----------------------------------------------------+%n");
-                System.out.format("| %-11s | %-50s |%n",
-                        project.getId(), project.getTitle());
-                System.out.format("+-------------+----------------------------------------------------+%n");
+                String nia = student.getNia();
+                String name = student.getName();
+                String surnames = student.getSurnames();
+                int groupCode = student.getGroup().getGroupCode();
+
+                System.out.format("+-------------+--------------------------------+------------+------------+--------------------------+------------+%n");
+                System.out.format("| CODPROYECTO | TITULO                         |    NIA     |   NOMBRE   |        APELLIDOS         | CODGRUPO   |%n");
+                System.out.format("+-------------+--------------------------------+------------+------------+--------------------------+------------+%n");
+                System.out.format("| %-11s | %-30s | %-10s | %-10s | %-24s | %-10s |%n",
+                        project.getId(), project.getTitle(), nia, name, surnames, groupCode);
+                System.out.format("+-------------+--------------------------------+------------+------------+--------------------------+------------+%n");
             } else {
                 System.out.println("[❕] Aquest alumne no té cap projecte.");
             }

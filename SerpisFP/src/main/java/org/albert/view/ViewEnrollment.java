@@ -19,13 +19,13 @@ public class ViewEnrollment implements ViewInterface<Enrollment> {
     @Override
     public void showEntity(Enrollment enrollment) {
         if (enrollment != null) {
-            System.out.format("+-------------+-----+------------+%n");
-            System.out.format("| IDMATRICULA | NIA | CODMODULO  |%n");
-            System.out.format("+-------------+-----+------------+%n");
-            System.out.format("| %-11s | %-3s | %-10s |%n",
+            System.out.format("+-------------+------------+------------+------------------+%n");
+            System.out.format("| IDMATRICULA | NIA        | CODMODULO  | DESCRIPCIÓN      |%n");
+            System.out.format("+-------------+------------+------------+------------------+%n");
+            System.out.format("| %-11s | %-10s | %-10s | %-16s |%n",
                     enrollment.getId(), enrollment.getStudent().getNia(),
-                    enrollment.getSubject().getSubjectCode());
-            System.out.format("+-------------+-----+------------+%n");
+                    enrollment.getSubject().getSubjectCode(), enrollment.getDescription());
+            System.out.format("+-------------+------------+------------+------------------+%n");
         } else {
             System.out.println("[❌] ERROR! No s'ha pogut mostrar la matrícula.");
         }

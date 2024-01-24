@@ -31,18 +31,20 @@ public class ViewSubject extends ViewManager implements ViewInterface<Subject> {
             System.out.println("Matrícules associades a aquest mòdul:");
             List<Enrollment> enrollments = subjectDAO.getEnrollmentsFromThisSubject(subject);
             if (enrollments != null && !enrollments.isEmpty()) {
-                System.out.format("+------------+------------------+%n");
-                System.out.format("| NIA        | DESCRIPCIÓ       |%n");
-                System.out.format("+------------+------------------+%n");
+                System.out.format("+-------------+------------+-----------------------+%n");
+                System.out.format("| IDMATRICULA | NIA        | DESCRIPCIÓN           |%n");
+                System.out.format("+-------------+------------+-----------------------+%n");
                 for (Enrollment enrollment : enrollments) {
-                    System.out.format("| %-10s | %-16s |%n",
+                    System.out.format("| %-11s | %-10s | %-21s |%n",
+                            enrollment.getId(),
                             enrollment.getStudent() != null ? enrollment.getStudent().getNia() : "",
                             enrollment.getDescription());
                 }
-                System.out.format("+------------+------------------+%n");
+                System.out.format("+-------------+------------+-----------------------+%n");
             } else {
                 System.out.println("[❕] Aquest mòdul no té cap matrícula.");
             }
+
         } else {
             System.out.println("[❌] ERROR! No s'ha pogut mostrar el mòdul.");
         }

@@ -162,7 +162,7 @@ public class Input extends ControllerManager {
         System.out.println("[❕] Alumnes (sense projectes) en la base de dades: ");
         viewStudent.showEntities(studentDAO.readAllEntities());
 
-        String nia = getStringNotNull("Introdueix el NIA del alumne: ", 10);
+        String nia = getStringNotNull("[❔] Introdueix el NIA del alumne: ", 10);
 
         Student student = studentDAO.readEntityById(nia);
 
@@ -207,7 +207,7 @@ public class Input extends ControllerManager {
         System.out.println("[❕] Grups en la base de dades: ");
         viewGroup.showEntities(groupDAO.readAllEntities());
 
-        int groupCode = getInt("CODGRUPO: ");
+        int groupCode = getInt("[❔] Introdueix el CODGRUPO del grup: ");
         Group group = groupDAO.readEntityById(groupCode);
 
         System.out.println();
@@ -278,14 +278,14 @@ public class Input extends ControllerManager {
         System.out.println("[❕] Alumnes en la base de dades: ");
         viewStudent.showEntities(studentDAO.readAllEntities());
 
-        String nia = getStringNotNull("NIA: ", 10);
+        String nia = getStringNotNull("[❔] Introdueix el NIA del alumne: ", 10);
         Student student = studentDAO.readEntityById(nia);
 
         System.out.println();
         System.out.println("[❕] Mòduls en la base de dades: ");
         viewSubject.showEntities(subjectDAO.readAllEntities());
 
-        int subjectCode = getInt("CODMODULO: ");
+        int subjectCode = getInt("[❔] Introdueix el CODMODULO del mòdul: ");
         Subject subject = subjectDAO.readEntityById(subjectCode);
 
         System.out.println();
