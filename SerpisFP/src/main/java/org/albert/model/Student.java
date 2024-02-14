@@ -30,10 +30,10 @@ public class Student {
     @JoinColumn(name = "CODGRUPO", nullable = false)
     private Group group;
 
-    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "student")
     private List<Enrollment> enrollments;
 
-    @OneToOne(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "student")
     private Project project;
 
     public Student(String nia, String name, String surnames, Group group, Project project) {

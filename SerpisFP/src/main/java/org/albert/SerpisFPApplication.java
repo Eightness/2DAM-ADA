@@ -23,7 +23,6 @@ public class SerpisFPApplication extends AppProvider {
         ENROLLMENT("MATRÍCULA");
 
         private final String entityName;
-
         Entity(String entityName) {
             this.entityName = entityName;
         }

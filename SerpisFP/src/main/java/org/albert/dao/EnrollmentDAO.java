@@ -67,7 +67,7 @@ public class EnrollmentDAO extends DAOManager implements CRUDInterface<Enrollmen
             if (entityTransaction != null && entityTransaction.isActive()) {
                 entityTransaction.rollback();
             }
-            System.out.println("[❌] ERROR! No s'ha pogut afegir la nova matrícula correctament. Motiu: " + e.getMessage());
+            System.out.println("[❌] ERROR! No s'ha pogut afegir la nova matrícula correctament.");
         }
     }
 
@@ -83,7 +83,7 @@ public class EnrollmentDAO extends DAOManager implements CRUDInterface<Enrollmen
         try {
             return entityManager.find(Enrollment.class, primaryKey);
         } catch (Exception e) {
-            System.out.println("[❌] ERROR! No s'ha pogut llegir la matrícula amb IDMATRICULA " + primaryKey + ". Motiu: " + e.getMessage());
+            System.out.println("[❌] ERROR! No s'ha pogut llegir la matrícula amb IDMATRICULA " + primaryKey + ".");
             return null;
         }
     }
@@ -99,7 +99,7 @@ public class EnrollmentDAO extends DAOManager implements CRUDInterface<Enrollmen
                 }
             }
         } catch (Exception e) {
-            System.out.println("[❌] ERROR! No s'ha pogut llegir algunes matrícules. Motiu: " + e.getMessage());
+            System.out.println("[❌] ERROR! No s'ha pogut llegir algunes matrícules.");
         }
         return enrollments;
     }
@@ -115,7 +115,7 @@ public class EnrollmentDAO extends DAOManager implements CRUDInterface<Enrollmen
             TypedQuery<Enrollment> typedQuery = entityManager.createQuery(criteriaQuery);
             return typedQuery.getResultList();
         } catch (Exception e) {
-            System.out.println("[❌] ERROR! No s'han pogut llegir totes les matrícules. Motiu: " + e.getMessage());
+            System.out.println("[❌] ERROR! No s'han pogut llegir totes les matrícules.");
             return null;
         }
     }
@@ -130,7 +130,6 @@ public class EnrollmentDAO extends DAOManager implements CRUDInterface<Enrollmen
                 existingEnrollment.setStudent(entity.getStudent());
                 existingEnrollment.setSubject(entity.getSubject());
                 existingEnrollment.setDescription(entity.getDescription());
-                // Otros campos que necesites actualizar
 
                 entityTransaction.commit();
                 System.out.println("[✅] S'ha actualitzat la matrícula amb IDMATRICULA " + primaryKey + " correctament.");
@@ -142,7 +141,7 @@ public class EnrollmentDAO extends DAOManager implements CRUDInterface<Enrollmen
             if (entityTransaction != null && entityTransaction.isActive()) {
                 entityTransaction.rollback();
             }
-            System.out.println("[❌] ERROR! No s'ha pogut actualitzar la matrícula amb IDMATRICULA " + primaryKey + ". Motiu: " + e.getMessage());
+            System.out.println("[❌] ERROR! No s'ha pogut actualitzar la matrícula amb IDMATRICULA " + primaryKey + ".");
         }
     }
 
@@ -176,7 +175,7 @@ public class EnrollmentDAO extends DAOManager implements CRUDInterface<Enrollmen
             if (entityTransaction != null && entityTransaction.isActive()) {
                 entityTransaction.rollback();
             }
-            System.out.println("[❌] ERROR! No s'ha pogut eliminar la matrícula amb IDMATRICULA " + primaryKey + ". Motiu: " + e.getMessage());
+            System.out.println("[❌] ERROR! No s'ha pogut eliminar la matrícula amb IDMATRICULA " + primaryKey + ".");
         }
     }
 
@@ -200,7 +199,7 @@ public class EnrollmentDAO extends DAOManager implements CRUDInterface<Enrollmen
             if (entityTransaction != null && entityTransaction.isActive()) {
                 entityTransaction.rollback();
             }
-            System.out.println("[❌] ERROR! No s'han pogut eliminar totes les matrícules. Motiu: " + e.getMessage());
+            System.out.println("[❌] ERROR! No s'han pogut eliminar totes les matrícules.");
         }
     }
 
@@ -214,7 +213,7 @@ public class EnrollmentDAO extends DAOManager implements CRUDInterface<Enrollmen
 
             return count > 0;
         } catch (Exception e) {
-            System.out.println("[❌] No s'ha pogut verificar la existència de la matrícula. Motiu: " + e.getMessage());
+            System.out.println("[❌] No s'ha pogut verificar la existència de la matrícula.");
             return false;
         }
     }
@@ -229,7 +228,7 @@ public class EnrollmentDAO extends DAOManager implements CRUDInterface<Enrollmen
 
             return count > 0;
         } catch (Exception e) {
-            System.out.println("[❌] No s'ha pogut verificar la existència de la matrícula. Motiu : " + e.getMessage());
+            System.out.println("[❌] No s'ha pogut verificar la existència de la matrícula.");
             return false;
         }
     }
@@ -243,7 +242,7 @@ public class EnrollmentDAO extends DAOManager implements CRUDInterface<Enrollmen
 
             return count > 0;
         } catch (Exception e) {
-            System.out.println("[❌] No s'ha pogut verificar la existència de la matrícula. Motiu: " + e.getMessage());
+            System.out.println("[❌] No s'ha pogut verificar la existència de la matrícula.");
             return false;
         }
     }

@@ -51,7 +51,7 @@ public class ProjectDAO extends DAOManager implements CRUDInterface<Project, Str
             if (entityTransaction != null && entityTransaction.isActive()) {
                 entityTransaction.rollback();
             }
-            System.out.println("[❌] ERROR! No s'ha pogut afegir el nou projecte correctament. Motiu: " + e.getMessage());
+            System.out.println("[❌] ERROR! No s'ha pogut afegir el nou projecte correctament.");
         }
     }
 
@@ -67,7 +67,7 @@ public class ProjectDAO extends DAOManager implements CRUDInterface<Project, Str
         try {
             return entityManager.find(Project.class, primaryKey);
         } catch (Exception e) {
-            System.out.println("[❌] ERROR! No s'ha pogut llegir el projecte amb CODPROYECTO " + primaryKey + ". Motiu: " + e.getMessage());
+            System.out.println("[❌] ERROR! No s'ha pogut llegir el projecte amb CODPROYECTO " + primaryKey + ".");
             return null;
         }
     }
@@ -83,7 +83,7 @@ public class ProjectDAO extends DAOManager implements CRUDInterface<Project, Str
                 }
             }
         } catch (Exception e) {
-            System.out.println("[❌] ERROR! No s'ha pogut llegir alguns projectes. Motiu: " + e.getMessage());
+            System.out.println("[❌] ERROR! No s'ha pogut llegir alguns projectes.");
         }
         return projects;
     }
@@ -99,7 +99,7 @@ public class ProjectDAO extends DAOManager implements CRUDInterface<Project, Str
             TypedQuery<Project> typedQuery = entityManager.createQuery(criteriaQuery);
             return typedQuery.getResultList();
         } catch (Exception e) {
-            System.out.println("[❌] ERROR! No s'han pogut llegir tots els projectes. Motiu: " + e.getMessage());
+            System.out.println("[❌] ERROR! No s'han pogut llegir tots els projectes.");
             return null;
         }
     }
@@ -124,7 +124,7 @@ public class ProjectDAO extends DAOManager implements CRUDInterface<Project, Str
             if (entityTransaction != null && entityTransaction.isActive()) {
                 entityTransaction.rollback();
             }
-            System.out.println("[❌] ERROR! No s'ha pogut actualitzar el projecte amb CODPROYECTO " + primaryKey + ". Motiu: " + e.getMessage());
+            System.out.println("[❌] ERROR! No s'ha pogut actualitzar el projecte amb CODPROYECTO " + primaryKey + ".");
         }
     }
 
@@ -146,6 +146,7 @@ public class ProjectDAO extends DAOManager implements CRUDInterface<Project, Str
             entityTransaction.begin();
 
             Project project = entityManager.find(Project.class, primaryKey);
+
             if (project != null) {
                 entityManager.remove(project);
                 entityTransaction.commit();
@@ -158,7 +159,7 @@ public class ProjectDAO extends DAOManager implements CRUDInterface<Project, Str
             if (entityTransaction != null && entityTransaction.isActive()) {
                 entityTransaction.rollback();
             }
-            System.out.println("[❌] ERROR! No s'ha pogut eliminar el projecte amb CODPROYECTO " + primaryKey + ". Motiu: " + e.getMessage());
+            System.out.println("[❌] ERROR! No s'ha pogut eliminar el projecte amb CODPROYECTO " + primaryKey + ".");
         }
     }
 
@@ -182,7 +183,7 @@ public class ProjectDAO extends DAOManager implements CRUDInterface<Project, Str
             if (entityTransaction != null && entityTransaction.isActive()) {
                 entityTransaction.rollback();
             }
-            System.out.println("[❌] ERROR! No s'han pogut eliminar tots els registres de projectes. Motiu: " + e.getMessage());
+            System.out.println("[❌] ERROR! No s'han pogut eliminar tots els registres de projectes.");
         }
     }
 
@@ -196,7 +197,7 @@ public class ProjectDAO extends DAOManager implements CRUDInterface<Project, Str
 
             return count > 0;
         } catch (Exception e) {
-            System.out.println("[❌] No s'ha pogut verificar la existència del projecte. Motiu: " + e.getMessage());
+            System.out.println("[❌] No s'ha pogut verificar la existència del projecte.");
             return false;
         }
     }
@@ -210,7 +211,7 @@ public class ProjectDAO extends DAOManager implements CRUDInterface<Project, Str
 
             return count > 0;
         } catch (Exception e) {
-            System.out.println("[❌] No s'ha pogut verificar la existència del projecte. Motiu: " + e.getMessage());
+            System.out.println("[❌] No s'ha pogut verificar la existència del projecte.");
             return false;
         }
     }

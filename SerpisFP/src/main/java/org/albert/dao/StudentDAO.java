@@ -54,7 +54,7 @@ public class StudentDAO extends DAOManager implements CRUDInterface<Student, Str
             if (entityTransaction != null && entityTransaction.isActive()) {
                 entityTransaction.rollback();
             }
-            System.out.println("[❌] ERROR! No s'ha pogut afegir el nou alumne correctament. Motiu: " + e.getMessage());
+            System.out.println("[❌] ERROR! No s'ha pogut afegir el nou alumne correctament.");
         }
     }
 
@@ -70,7 +70,7 @@ public class StudentDAO extends DAOManager implements CRUDInterface<Student, Str
         try {
             return entityManager.find(Student.class, primaryKey);
         } catch (Exception e) {
-            System.out.println("[❌] ERROR! No s'ha pogut llegir l'alumne amb NIA " + primaryKey + ". Motiu: " + e.getMessage());
+            System.out.println("[❌] ERROR! No s'ha pogut llegir l'alumne amb NIA " + primaryKey + ".");
             return null;
         }
     }
@@ -86,7 +86,7 @@ public class StudentDAO extends DAOManager implements CRUDInterface<Student, Str
                 }
             }
         } catch (Exception e) {
-            System.out.println("[❌] ERROR! No s'ha pogut llegir alguns alumnes. Motiu: " + e.getMessage());
+            System.out.println("[❌] ERROR! No s'ha pogut llegir alguns alumnes.");
         }
         return students;
     }
@@ -102,7 +102,7 @@ public class StudentDAO extends DAOManager implements CRUDInterface<Student, Str
             TypedQuery<Student> typedQuery = entityManager.createQuery(criteriaQuery);
             return typedQuery.getResultList();
         } catch (Exception e) {
-            System.out.println("[❌] ERROR! No s'han pogut llegir tots els alumnes. Motiu: " + e.getMessage());
+            System.out.println("[❌] ERROR! No s'han pogut llegir tots els alumnes.");
             return null;
         }
     }
@@ -128,7 +128,7 @@ public class StudentDAO extends DAOManager implements CRUDInterface<Student, Str
             if (entityTransaction != null && entityTransaction.isActive()) {
                 entityTransaction.rollback();
             }
-            System.out.println("[❌] ERROR! No s'ha pogut actualitzar l'alumne amb NIA " + primaryKey + ". Motiu: " + e.getMessage());
+            System.out.println("[❌] ERROR! No s'ha pogut actualitzar l'alumne amb NIA " + primaryKey + ".");
         }
     }
 
@@ -183,10 +183,9 @@ public class StudentDAO extends DAOManager implements CRUDInterface<Student, Str
             if (entityTransaction != null && entityTransaction.isActive()) {
                 entityTransaction.rollback();
             }
-            System.out.println("[❌] ERROR! No s'ha pogut eliminar l'alumne amb NIA " + primaryKey + ". Motiu: " + e.getMessage());
+            System.out.println("[❌] ERROR! No s'ha pogut eliminar l'alumne amb NIA " + primaryKey + ".");
         }
     }
-
 
     @Override
     public void deleteEntitiesById(List<String> primaryKeys) {
@@ -208,7 +207,7 @@ public class StudentDAO extends DAOManager implements CRUDInterface<Student, Str
             if (entityTransaction != null && entityTransaction.isActive()) {
                 entityTransaction.rollback();
             }
-            System.out.println("[❌] ERROR! No s'han pogut eliminar tots els registres d'alumnes. Motiu: " + e.getMessage());
+            System.out.println("[❌] ERROR! No s'han pogut eliminar tots els registres d'alumnes.");
         }
     }
 
@@ -222,7 +221,7 @@ public class StudentDAO extends DAOManager implements CRUDInterface<Student, Str
 
             return count > 0;
         } catch (Exception e) {
-            System.out.println("[❌] No s'ha pogut verificar la existència de l'alumne. Motiu: " + e.getMessage());
+            System.out.println("[❌] No s'ha pogut verificar la existència de l'alumne.");
             return false;
         }
     }
@@ -236,7 +235,7 @@ public class StudentDAO extends DAOManager implements CRUDInterface<Student, Str
 
             return count > 0;
         } catch (Exception e) {
-            System.out.println("[❌] No s'ha pogut verificar la existència d'un alumne. Motiu: " + e.getMessage());
+            System.out.println("[❌] No s'ha pogut verificar la existència d'un alumne.");
             return false;
         }
     }
@@ -255,7 +254,7 @@ public class StudentDAO extends DAOManager implements CRUDInterface<Student, Str
             if (entityTransaction != null && entityTransaction.isActive()) {
                 entityTransaction.rollback();
             }
-            System.out.println("[❌] ERROR! No s'han pogut llegir els estudiants sense projecte. Motiu: " + e.getMessage());
+            System.out.println("[❌] ERROR! No s'han pogut llegir els estudiants sense projecte.");
             return null;
         }
     }
@@ -267,7 +266,7 @@ public class StudentDAO extends DAOManager implements CRUDInterface<Student, Str
             query.setParameter("student", student);
             return query.getResultList();
         } catch (Exception e) {
-            System.out.println("[❌] ERROR! No se ha podido obtener las matrículas del alumno con NIA " + student.getNia() + ". Motivo: " + e.getMessage());
+            System.out.println("[❌] ERROR! No se ha podido obtener las matrículas del alumno con NIA " + student.getNia() + ".");
             return Collections.emptyList();
         }
     }

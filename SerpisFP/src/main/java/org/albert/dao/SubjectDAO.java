@@ -39,7 +39,7 @@ public class SubjectDAO extends DAOManager implements CRUDInterface<Subject, Int
             if (entityTransaction != null && entityTransaction.isActive()) {
                 entityTransaction.rollback();
             }
-            System.out.println("[❌] ERROR! No s'ha pogut afegir el nou mòdul correctament. Motiu: " + e.getMessage());
+            System.out.println("[❌] ERROR! No s'ha pogut afegir el nou mòdul correctament.");
         }
     }
 
@@ -55,7 +55,7 @@ public class SubjectDAO extends DAOManager implements CRUDInterface<Subject, Int
         try {
             return entityManager.find(Subject.class, primaryKey);
         } catch (Exception e) {
-            System.out.println("[❌] ERROR! No s'ha pogut llegir el mòdul amb CODMODULO " + primaryKey + ". Motiu: " + e.getMessage());
+            System.out.println("[❌] ERROR! No s'ha pogut llegir el mòdul amb CODMODULO " + primaryKey + ".");
             return null;
         }
     }
@@ -87,7 +87,7 @@ public class SubjectDAO extends DAOManager implements CRUDInterface<Subject, Int
             TypedQuery<Subject> typedQuery = entityManager.createQuery(criteriaQuery);
             return typedQuery.getResultList();
         } catch (Exception e) {
-            System.out.println("[❌] ERROR! No s'han pogut llegir tots els mòduls. Motiu: " + e.getMessage());
+            System.out.println("[❌] ERROR! No s'han pogut llegir tots els mòduls.");
             return null;
         }
     }
@@ -113,7 +113,7 @@ public class SubjectDAO extends DAOManager implements CRUDInterface<Subject, Int
             if (entityTransaction != null && entityTransaction.isActive()) {
                 entityTransaction.rollback();
             }
-            System.out.println("[❌] ERROR! No s'ha pogut actualitzar el mòdul amb CODMODULO " + primaryKey + ". Motiu: " + e.getMessage());
+            System.out.println("[❌] ERROR! No s'ha pogut actualitzar el mòdul amb CODMODULO " + primaryKey + ".");
         }
     }
 
@@ -155,10 +155,9 @@ public class SubjectDAO extends DAOManager implements CRUDInterface<Subject, Int
             if (entityTransaction != null && entityTransaction.isActive()) {
                 entityTransaction.rollback();
             }
-            System.out.println("[❌] ERROR! No s'ha pogut eliminar el mòdul amb CODMODULO " + primaryKey + ". Motiu: " + e.getMessage());
+            System.out.println("[❌] ERROR! No s'ha pogut eliminar el mòdul amb CODMODULO " + primaryKey + ".");
         }
     }
-
 
     @Override
     public void deleteEntitiesById(List<Integer> primaryKeys) {
@@ -180,7 +179,7 @@ public class SubjectDAO extends DAOManager implements CRUDInterface<Subject, Int
             if (entityTransaction != null && entityTransaction.isActive()) {
                 entityTransaction.rollback();
             }
-            System.out.println("[❌] ERROR! No s'han pogut eliminar tots els registres de mòduls. Motiu: " + e.getMessage());
+            System.out.println("[❌] ERROR! No s'han pogut eliminar tots els registres de mòduls.");
         }
     }
 
@@ -194,7 +193,7 @@ public class SubjectDAO extends DAOManager implements CRUDInterface<Subject, Int
 
             return count > 0;
         } catch (Exception e) {
-            System.out.println("[❌] No s'ha pogut verificar la existència del mòdul. Motiu: " + e.getMessage());
+            System.out.println("[❌] No s'ha pogut verificar la existència del mòdul.");
             return false;
         }
     }
@@ -208,7 +207,7 @@ public class SubjectDAO extends DAOManager implements CRUDInterface<Subject, Int
 
             return count > 0;
         } catch (Exception e) {
-            System.out.println("[❌] No s'ha pogut verificar la existència del mòdul. Motiu: " + e.getMessage());
+            System.out.println("[❌] No s'ha pogut verificar la existència del mòdul.");
             return false;
         }
     }

@@ -26,7 +26,7 @@ public class Group {
     @Column(name = "AULA", length = 10)
     private String classroom;
 
-    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "group")
     private List<Student> students;
 
     public Group(int groupCode, String description, String classroom) {
