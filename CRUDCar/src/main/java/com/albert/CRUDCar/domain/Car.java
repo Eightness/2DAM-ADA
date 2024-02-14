@@ -34,6 +34,6 @@ public class Car {
     private double price;
 
     @NotNull(message = "Type cannot be null")
-    @Column(name = "type")
+    @Column(name = "type", nullable = false)
     private Type type;
 }
