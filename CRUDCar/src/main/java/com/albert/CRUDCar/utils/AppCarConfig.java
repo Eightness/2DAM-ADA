@@ -13,11 +13,12 @@ public class AppCarConfig {
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .components(new Components())
-                .info(new Info().title("Cars API")
-                        .description("CRUD (Create, Read, Update, Delete)")
+                .info(new Info().title("Car CRUD API")
+                        .description("Demo API REST in Spring Boot")
                         .contact(new Contact()
-                                .name("Albert Lozano Blasco")
-                                .email("albertlb08@gmail.com"))
+                                .name("Albert Lozano")
+                                .email("albertlb08@gmail.com")
+                                .url("https://www.linkedin.com/in/albertlb08/"))
                         .version("1.0"));
     }
 }
